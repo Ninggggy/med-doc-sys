@@ -1,0 +1,72 @@
+# =========================
+# Backend data & generated artifacts
+# =========================
+agent_backend/data/
+agent_backend/test
+agent_backend/evaluate/evaluate_result/
+
+# =========================
+# Frontend build & deps
+# =========================
+agent_fronted/node_modules/
+agent_fronted/dist/
+agent_fronted/.cache/
+agent_fronted/.eslintcache
+deploy/agent-backend_linux_amd64_v2.tar
+
+# =========================
+# Python environments & cache
+# =========================
+.venv/
+venv/
+env/
+ENV/
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+build/
+dist/
+*.egg-info/
+
+# =========================
+# LLM secrets
+# =========================
+agent_backend/llm/temp/key/
+.env
+.env.*
+!.env.example
+deploy/.env
+deploy/.env.*
+!deploy/.env.example
+*.pem
+*.p12
+*.pfx
+*.key
+
+# =========================
+# Runtime databases & user-generated data
+# =========================
+*.db
+*.sqlite
+*.sqlite3
+
+# =========================
+# Logs
+# =========================
+*.log
+logs/
+log/
+
+# =========================
+# IDE / OS
+# =========================
+.DS_Store
+Thumbs.db
+.claude/settings.local.json

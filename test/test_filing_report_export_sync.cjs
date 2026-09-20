@@ -1,0 +1,39 @@
+const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict'),path=require('node:path');
+const vue=fs.readFileSync(path.join(__dirname,'../agent_fronted/src/views/filing-change-review/FilingChangeReviewSession.vue'),'utf8');
+const script=vue.match(/<script>([\s\S]*?)<\/script>/)[1].replace(/import[\s\S]*?from\s+['"][^'"]+['"];?/g,'').replace('export default','module.exports =');
+const deferred=()=>{let resolve,reject;const promise=new Promise((a,b)=>{resolve=a;reject=b});return {promise,resolve,reject}};
+let messages,downloads,reads,generated,revoked,download,readReport,readResult;
+const c={module:{exports:{}},StabilityLimitDetails:{},MarkdownIt:function(){},setTimeout,clearTimeout,
+ downloadFilingReportWord:(...x)=>download(...x),getFilingProjectReport:(...x)=>{reads.push(x);return readReport(...x)},getFilingRunResult:(...x)=>readResult(...x),
+ generateFilingRunReport:async()=>{generated++},URL:{createObjectURL:()=> 'blob:test',revokeObjectURL:()=>{revoked++}},
+ document:{body:{appendChild(){}},createElement:()=>({click(){downloads++},remove(){}})}};
+vm.runInNewContext(script,c);
+function setup(){
+ messages=[];downloads=0;reads=[];generated=0;revoked=0;
+ download=async()=>({blob:{},filename:'old.docx'});
+ readReport=async()=>({data:{report_id:'report-old',run_id:'old',report_content:'new report'}});
+ readResult=async()=>({data:{run_id:'old',review_report_markdown:'new report',report_generated_at:'new time',report_manual_revision:2,manual_confirmation:{comment:'server'}}});
+ const p={...c.module.exports.data(),projectId:'p',$set:(o,k,v)=>o[k]=v,$message:{error:x=>messages.push(x),warning:x=>messages.push(x)}};
+ for(const [k,f] of Object.entries(c.module.exports.methods))p[k]=f.bind(p);
+ p.reviewResult={run_id:'old',review_report_markdown:'old report',review_completed_at:'original time',manual_confirmation:{comment:'saved',revision:2}};
+ p.projectReport={report_id:'report-old',run_id:'old',report_content:'old report'};p.manualComment='unsaved';p.manualReviewer='editor';return p;
+}
+let passed=0;async function test(name,fn){await fn();passed++;console.log('PASS',name)}
+(async()=>{
+ await test('direct export waits for binary then reads same round without generation',async()=>{const p=setup(),d=deferred();download=()=>d.promise;const work=p.exportReportWord();assert.equal(reads.length,0);assert(p.exportingReport);await p.exportReportWord();d.resolve({blob:{},filename:'old.docx'});await work;assert.equal(downloads,1);assert.equal(generated,0);assert.equal(p.projectReport.report_content,p.reviewResult.review_report_markdown);assert.equal(p.reviewResult.report_generated_at,'new time');assert.equal(p.reviewResult.review_completed_at,'original time');assert.equal(p.manualComment,'unsaved');assert.equal(p.manualReviewer,'editor');assert.equal(p.reviewResult.manual_confirmation.comment,'saved');assert(!p.exportingReport);await new Promise(r=>setTimeout(r,5));assert.equal(revoked,1)});
+ await test('switch during export does not read or overwrite another round',async()=>{const p=setup(),d=deferred();download=()=>d.promise;const work=p.exportReportWord();p.beginDataRequest('selected-run');p.applyRunResult({run_id:'new',manual_confirmation:{comment:'new draft'}});p.projectReport={run_id:'new',report_content:'new round'};d.resolve({blob:{},filename:'old.docx'});await work;assert.equal(reads.length,0);assert.equal(p.projectReport.report_content,'new round');assert.equal(p.manualComment,'new draft');assert.equal(downloads,1)});
+ await test('switch away and back invalidates old export response',async()=>{const p=setup(),d=deferred();download=()=>d.promise;const work=p.exportReportWord();p.beginDataRequest('selected-run');p.beginDataRequest('selected-run');d.resolve({blob:{},filename:'old.docx'});await work;assert.equal(reads.length,0)});
+ await test('editing during report read is preserved',async()=>{const p=setup(),d=deferred();readResult=()=>d.promise;const work=p.exportReportWord();await new Promise(r=>setTimeout(r,0));p.manualComment='typed during sync';p.manualReviewer='typed reviewer';d.resolve({data:{run_id:'old',review_report_markdown:'new report',report_generated_at:'now'}});await work;assert.equal(p.manualComment,'typed during sync');assert.equal(p.manualReviewer,'typed reviewer')});
+ await test('download failure preserves data and unlocks button',async()=>{const p=setup();download=async()=>{throw Error('generation rolled back')};await p.exportReportWord();assert.equal(downloads,0);assert.equal(p.projectReport.report_content,'old report');assert.equal(p.reviewResult.manual_confirmation.comment,'saved');assert(!p.exportingReport);assert.match(messages[0],/generation rolled back/)});
+ await test('sync failure is separate from download failure and read retry does not generate',async()=>{const p=setup();readReport=async()=>{throw Error('read failed')};await p.exportReportWord();assert.equal(downloads,1);assert.equal(p.projectReport.report_content,'old report');assert.match(messages[0],/Word已下载.*预览尚未更新/);assert(!p.exportingReport);readReport=async()=>({data:{report_id:'report-old',run_id:'old',report_content:'new report'}});await p.loadReport();assert.equal(p.projectReport.report_content,'new report');assert.equal(generated,0)});
+ await test('mismatched report and result are not partially applied',async()=>{const p=setup();readResult=async()=>({data:{run_id:'old',review_report_markdown:'other generation'}});await p.exportReportWord();assert.equal(p.projectReport.report_content,'old report');assert.equal(p.reviewResult.review_report_markdown,'old report');assert.match(messages[0],/版本不一致/)});
+ await test('late report error cannot clear newly selected report',async()=>{const p=setup(),d=deferred();readReport=()=>d.promise;const work=p.loadReport();p.beginDataRequest('selected-run');p.applyRunResult({run_id:'new'});p.projectReport={run_id:'new',report_content:'keep'};d.reject(Error('old request failed'));await work;assert.equal(p.projectReport.report_content,'keep');assert.equal(messages.length,0)});
+ await test('manual regenerate runs once then updates report metadata without losing draft',async()=>{const p=setup();await p.regenerateReport();assert.equal(generated,1);assert.equal(p.reviewResult.report_generated_at,'new time');assert.equal(p.manualComment,'unsaved');assert(!p.generatingReport)});
+ await test('historical report without stored result body stays readable',async()=>{const p=setup();readResult=async()=>({data:{run_id:'old'}});await p.loadReport();assert.equal(p.projectReport.report_content,'new report')});
+ const api=fs.readFileSync(path.join(__dirname,'../agent_fronted/src/api/filingChangeReview.js'),'utf8').replace('import http from "./http";','').replace(/export /g,'');
+ let response;const a={http:{defaults:{timeout:1000}},fetch:async()=>response,AbortController,setTimeout,clearTimeout,Uint8Array};vm.runInNewContext(api,a);
+ await test('binary API keeps UTF8 filename',async()=>{response=new Response(new Uint8Array([80,75,3,4,1]),{headers:{'content-type':'application/vnd.openxmlformats-officedocument.wordprocessingml.document','content-disposition':"attachment; filename*=UTF-8''%E5%AE%A1%E8%AF%84.docx"}});const r=await a.downloadFilingReportWord('id','run');assert.equal(r.filename,'审评.docx')});
+ for(const status of [200,404,500])await test('JSON error is not downloaded: '+status,async()=>{response=new Response(JSON.stringify({code:500,message:'原报告已回滚'}),{status,headers:{'content-type':'application/json'}});await assert.rejects(a.downloadFilingReportWord('id','run'),/原报告已回滚/)});
+ await test('HTML success page is not downloaded as Word',async()=>{response=new Response('<html>error</html>');await assert.rejects(a.downloadFilingReportWord('id','run'),/未返回有效的Word/)});
+ console.log(`${passed} targeted tests passed`);
+})().catch(e=>{console.error(e);process.exitCode=1});

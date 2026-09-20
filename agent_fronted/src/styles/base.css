@@ -1,0 +1,79 @@
+﻿:root {
+  --bg: #f3f6fb;
+  --panel: #ffffff;
+  --line: #e6ebf2;
+  --text: #1f2d3d;
+  --sub: #6b7a90;
+  --brand: #1565c0;
+  --brand-2: #0d47a1;
+  --ok: #2e7d32;
+  --warn: #ed6c02;
+  --danger: #c62828;
+  --radius: 12px;
+  --shadow: 0 8px 28px rgba(16, 24, 40, 0.08);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#app {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: radial-gradient(1200px 400px at 90% -80px, #d8e8ff 0, transparent 70%), var(--bg);
+  color: var(--text);
+}
+
+body {
+  font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+
+.page-shell {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.page-title {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+  color: #17324d;
+}
+
+.page-desc {
+  margin-top: 4px;
+  color: var(--sub);
+  font-size: 13px;
+}
+
+.k-card {
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--line);
+}
+
+.k-card /deep/ .el-card__header {
+  border-bottom: 1px solid var(--line);
+  padding: 14px 16px;
+  font-weight: 600;
+  color: #17324d;
+}
+
+.k-card /deep/ .el-card__body {
+  padding: 16px;
+}
+
+.k-table /deep/ .el-table__header-wrapper th {
+  background: #f7faff;
+  color: #36506a;
+}

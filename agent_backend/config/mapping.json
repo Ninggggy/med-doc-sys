@@ -1,0 +1,32 @@
+{
+    "settings": {
+      "index": {
+        "number_of_shards": 2,
+        "number_of_replicas": 0,
+        "refresh_interval": "1000ms"
+      }
+    },
+    "mappings": {
+      "properties": {
+        "chunk_id": {
+          "type": "keyword"
+        },
+        "doc_id": {
+          "type": "keyword"
+        },
+        "text": {
+          "type": "text",
+          "analyzer": "standard"
+        },
+        "classification": {
+          "type": "keyword"
+        },
+        "affect_range": {
+          "type": "keyword"
+        },
+        "image_paths": {
+          "type": "keyword"
+        }
+      }
+    }
+}

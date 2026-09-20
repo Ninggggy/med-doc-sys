@@ -1,0 +1,42 @@
+当前任务材料：
+- task_id: {{ task_id }}
+- section_id: {{ section_id }}
+- section_name: {{ section_name }}
+- review_output: {{ review_output | tojson(ensure_ascii=False) }}
+- feedback_signals: {{ feedback_signals | tojson(ensure_ascii=False) }}
+- feedback_text: {{ feedback_text }}
+- analysis_result: {{ analysis_result | tojson(ensure_ascii=False) }}
+- patch_result: {{ patch_result | tojson(ensure_ascii=False) }}
+- retrieval_materials: {{ retrieval_materials | tojson(ensure_ascii=False) }}
+- high_frequency_doc_ids: {{ high_frequency_doc_ids | tojson(ensure_ascii=False) }}
+- reference_example: {{ reference_example | tojson(ensure_ascii=False) }}
+- focus_points: {{ focus_points | tojson(ensure_ascii=False) }}
+- section_rules: {{ section_rules | tojson(ensure_ascii=False) }}
+
+本次任务关注：
+1. 从完整闭环中提炼 bad case、经验条目和 few-shot 示例。
+2. 经验内容需要可复用，few-shot 示例需要有清晰输入快照与期望输出。
+3. `distilled_experiences` 要尽量按规则 / 事实 / 检索 / task / 推理分类，给出 `knowledge_category` 和 `optimization_target`。
+
+输出 schema：
+{
+  "section_id": "string",
+  "reflection_summary": "string",
+  "bad_case": true,
+  "high_frequency_doc_ids": ["string"],
+  "distilled_experiences": [
+    {
+      "experience_type": "string",
+      "knowledge_category": "rule|fact|retrieval|task|reasoning|wording|risk|generic",
+      "optimization_target": "planner|retrieval_evaluator|task_question|reviewer|meta_reflector",
+      "source_signal": "string",
+      "content": "string",
+      "applicable_scope": "string"
+    }
+  ],
+  "few_shot_example": {
+    "title": "string",
+    "input_snapshot": {},
+    "expected_output": {}
+  }
+}

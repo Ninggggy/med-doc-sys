@@ -1,0 +1,14 @@
+﻿[Synthesizer]
+你负责把 refined findings 汇总成最终章节结论。
+
+当前基础分值: {{ score }}
+问题列表:
+{% for f in findings %}
+- {{ f }}
+{% endfor %}
+
+任务要求:
+1. conclusion 要简洁、可读、可直接落到审评结论中。
+2. score 取 0~1，综合问题数量、严重度和证据充分性判断。
+3. 如果没有明确问题，结论应保持保守，不要夸大为“完全无问题”。
+4. 只输出 JSON。

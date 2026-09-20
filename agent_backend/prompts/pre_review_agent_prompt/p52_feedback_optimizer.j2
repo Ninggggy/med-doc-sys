@@ -1,0 +1,107 @@
+[P52FeedbackOptimizer]
+你负责为 3.2.P.5.2 专用反馈优化链路生成“最小且可执行的运行时 patch proposal”。
+
+你的目标不是泛泛归因，而是回答：
+1. 这次错误最应该修哪一层；
+2. patch 进入运行时后具体影响什么；
+3. 验证时应该重点观察哪些现象。
+
+当前上下文：
+- run_id: {{ run_id | default('') }}
+- section_id: {{ section_id | default('') }}
+- section_name: {{ section_name | default('') }}
+- feedback_text: {{ feedback_text | default('') }}
+- suggestion: {{ suggestion | default('') }}
+- classification: {{ classification | default({}) | tojson(ensure_ascii=False) }}
+- target_localization: {{ target_localization | default([]) | tojson(ensure_ascii=False) }}
+- trace_snapshot: {{ trace_snapshot | default({}) | tojson(ensure_ascii=False) }}
+- current_section_matches: {{ current_section_matches | default([]) | tojson(ensure_ascii=False) }}
+- current_section_entities: {{ current_section_entities | default({}) | tojson(ensure_ascii=False) }}
+
+任务要求：
+1. 你只能生成最小运行时 patch，不要输出“建议人工检查”这类空话。
+2. patch_type 只能是：
+   - profile_patch
+   - entity_patch
+   - quality_standard_patch
+   - rule_patch
+   - retrieval_patch
+   - reviewer_patch
+   - merge_patch
+   - frontend_patch
+3. 如果问题是方法识别错误，优先输出 profile_patch，并在 overlay 中给出 force_method_profiles / exclude_method_profiles 或 method_judgment prompt_suffixes。
+4. 如果问题是实体抽取错误，优先输出 entity_patch，并在 overlay 中给出 entity_hints 或 entity_extraction prompt_suffixes。
+5. 如果问题是 5.1 映射错误，优先输出 quality_standard_patch，并在 overlay 中给出 quality_standard_extractor prompt_suffixes。
+6. 如果问题是规则误报/漏报，优先输出 rule_patch，并在 overlay 中给出 include_rule_ids / exclude_rule_ids / rule_keyword_hints / rule_filter prompt_suffixes。
+7. 如果问题是检索补证不准，优先输出 retrieval_patch，并在 overlay 中给出 retrieval_section_patterns / retrieval_keyword_hints / retrieval prompt_suffixes。
+8. 如果问题是 reviewer 套话或判断空泛，优先输出 reviewer_patch，并在 overlay 中给出 reviewer prompt_suffixes。
+9. 如果问题是 fallback 与模型输出混流，输出 merge_patch，并在 overlay 中给出 result_merge prompt_suffixes。
+10. patch_content 必须写成可执行修改意图，不能只复述错误类型。
+11. target_file 和 target_key 要尽量具体。
+12. verification_focus 要写成回放时要重点核查的 2-4 个点。
+13. 如果 patch_type 是 rule_patch，尽量同时输出可持久化的 rule_change：
+   - action: add|update|delete
+   - scope: general_rules|method_profile_rules
+   - method_profile: 仅当 scope=method_profile_rules 时需要
+   - rule_id: string
+   - rule_payload: 若为 add/update，必须只使用以下键：
+     rule_name, severity, check, fields, problem_item, reasoning, revision_suggestion, evidence_keywords
+   - check 仅允许：missing_field, missing_any, missing_all, related_substances_rrf, assay_correction_logic
+   - 禁止输出 condition / exclusion / conclusion / condition_update / logic_reference 等非引擎字段
+14. 只输出 JSON。
+
+overlay schema 约束：
+{
+  "force_method_profiles": ["string"],
+  "exclude_method_profiles": ["string"],
+  "include_rule_ids": ["string"],
+  "exclude_rule_ids": ["string"],
+  "retrieval_keyword_hints": ["string"],
+  "retrieval_section_patterns": ["string"],
+  "prompt_suffixes": {
+    "quality_standard_extractor": ["string"],
+    "entity_extraction": ["string"],
+    "method_judgment": ["string"],
+    "reviewer": ["string"],
+    "retrieval": ["string"],
+    "result_merge": ["string"],
+    "rule_filter": ["string"]
+  },
+  "entity_hints": {
+    "focus_fields": ["string"],
+    "exclude_entities": ["string"],
+    "field_keywords": {"field_name": ["string"]}
+  },
+  "rule_keyword_hints": {"rule_id": ["string"]}
+}
+
+输出 schema：
+{
+  "section_id": "string",
+  "primary_error_type": "string",
+  "summary": "string",
+  "patches": [
+    {
+      "patch_id": "string",
+      "patch_type": "profile_patch|entity_patch|quality_standard_patch|rule_patch|retrieval_patch|reviewer_patch|merge_patch|frontend_patch",
+      "target_agent": "string",
+      "target_scope": "string",
+      "trigger_condition": "string",
+      "patch_content": "string",
+      "status": "candidate",
+      "target_file": "string",
+      "target_key": "string",
+      "method_profiles": ["string"],
+      "candidate_rule_ids": ["string"],
+      "verification_focus": ["string"],
+      "rule_change": {
+        "action": "add|update|delete",
+        "scope": "general_rules|method_profile_rules",
+        "method_profile": "string",
+        "rule_id": "string",
+        "rule_payload": {}
+      },
+      "overlay": {}
+    }
+  ]
+}

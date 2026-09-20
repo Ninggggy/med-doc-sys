@@ -1,0 +1,31 @@
+.git
+.gitignore
+.vscode/
+.pytest_cache/
+__pycache__/
+**/__pycache__/
+**/*.pyc
+**/*.pyo
+**/.pytest_cache/
+**/.mypy_cache/
+**/.DS_Store
+
+# Backend image does not need local infra helpers or tests.
+milvus_service/
+ocr_service/
+test/
+
+# Exclude all handed-over runtime data; the reproduction compose file mounts the
+# complete directory read/write at /app/agent/agent_backend/data.
+agent_backend/data/
+
+# Offline infrastructure/backend/frontend image archives are runtime inputs,
+# not backend build inputs (some are larger than 1 GB).
+deploy/依赖/
+deploy/*.tar
+
+# Exclude local logs and temp artifacts.
+agent_backend/llm/log/
+agent_backend/llm/temp/
+**/node_modules/
+**/dist/

@@ -1,0 +1,12 @@
+﻿[ConsistencyChecker]
+你是跨章节一致性检查智能体。
+
+章节结果:
+{{ sections }}
+
+任务要求:
+1. 只检查跨章节矛盾、断链、桥接缺失。
+2. 不重复单章节缺陷。
+3. 每条问题必须指向具体 section_id。
+4. 只输出 JSON，字段包括 summary, issues。
+5. issues 中每项至少包含 section_ids, issue, basis, recommendation。

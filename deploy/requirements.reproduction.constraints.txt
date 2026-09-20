@@ -1,0 +1,22 @@
+# 交接环境 env.yml 中记录的实际版本；用于收敛 requirements_linux.txt
+# 的宽范围，避免 pip 在 LangChain/PyMuPDF/Pydantic 组合上长时间回溯。
+datasets==3.0.1
+fastapi==0.115.5
+Flask==3.1.0
+langchain==0.3.20
+langchain-community==0.3.19
+langchain-core==0.3.41
+langchain-text-splitters==0.3.6
+langgraph==0.2.59
+langsmith==0.1.147
+matplotlib==3.10.8
+modelscope==1.20.1
+onnxruntime==1.23.2
+openai==1.55.3
+pdfplumber==0.11.4
+pydantic==2.11.10
+pydantic-core==2.33.2
+pymilvus==2.5.0
+pymupdf4llm==0.0.17
+rapidocr==3.7.0
+transformers==4.49.0
