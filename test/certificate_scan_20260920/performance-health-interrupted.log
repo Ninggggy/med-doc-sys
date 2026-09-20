@@ -1,0 +1,55 @@
+{"concurrency": 1, "iteration": 1, "wall_seconds": 24.846353093977086, "results": [{"seconds": 12.324927330948412, "errors": [], "stages": [{"stage": "deskew", "seconds": 1.0867678220383823}, {"stage": "ocr_http", "preprocessing": "standard", "seconds": 4.707990678027272}, {"stage": "ocr_http", "preprocessing": "original_gray", "seconds": 0.6999177830293775}], "statuses": ["success", "success"], "ocr_calls": 2, "page_diagnostics": [{"page": 1, "status": "success", "errors": []}, {"page": 2, "status": "success", "errors": []}], "recovery": [[], [{"bbox_pdf": [332.0, 114.0, 356.6666564941406, 139.0], "status": "recovered", "trigger": "ocr_coverage", "uncovered_bbox_pdf": [341.0, 123.0, 347.6666666666667, 132.0], "recovery_dpi": 216, "candidates": [{"text": "B", "bbox": [341.0, 123.33333333333333, 347.3333333333333, 132.0], "source": "ocr", "confidence": 93.0}], "accepted_count": 1}]]}], "health_samples": 267, "health_p95": 0.06687823007814586, "health_max": 1.2971326070837677, "before": {"rss": 156844032, "processes": [{"pid": 524, "rss": 149598208, "cpu_seconds": 0.0, "threads": 2}, {"pid": 542, "rss": 7245824, "cpu_seconds": 0.02, "threads": 2}]}, "peak_rss": 491233280, "after": {"rss": 484876288, "processes": [{"pid": 524, "rss": 154734592, "cpu_seconds": 0.0, "threads": 4}, {"pid": 542, "rss": 39165952, "cpu_seconds": 2.15, "threads": 2}, {"pid": 545, "rss": 290975744, "cpu_seconds": 20.330000000000002, "threads": 12}]}}
+{"concurrency": 1, "iteration": 2, "wall_seconds": 9.516302296076901, "results": [{"seconds": 9.47509490896482, "errors": [], "stages": [{"stage": "deskew", "seconds": 0.5557719300268218}, {"stage": "ocr_http", "preprocessing": "standard", "seconds": 4.697433938039467}, {"stage": "ocr_http", "preprocessing": "original_gray", "seconds": 0.6722676600329578}], "statuses": ["success", "success"], "ocr_calls": 2, "page_diagnostics": [{"page": 1, "status": "success", "errors": []}, {"page": 2, "status": "success", "errors": []}], "recovery": [[], [{"bbox_pdf": [332.0, 114.0, 356.6666564941406, 139.0], "status": "recovered", "trigger": "ocr_coverage", "uncovered_bbox_pdf": [341.0, 123.0, 347.6666666666667, 132.0], "recovery_dpi": 216, "candidates": [{"text": "B", "bbox": [341.0, 123.33333333333333, 347.3333333333333, 132.0], "source": "ocr", "confidence": 93.0}], "accepted_count": 1}]]}], "health_samples": 130, "health_p95": 0.033308729995042086, "health_max": 0.06720237189438194, "before": {"rss": 484970496, "processes": [{"pid": 524, "rss": 154828800, "cpu_seconds": 0.0, "threads": 4}, {"pid": 542, "rss": 39165952, "cpu_seconds": 2.15, "threads": 2}, {"pid": 545, "rss": 290975744, "cpu_seconds": 20.330000000000002, "threads": 12}]}, "peak_rss": 544460800, "after": {"rss": 544460800, "processes": [{"pid": 524, "rss": 154836992, "cpu_seconds": 0.0, "threads": 4}, {"pid": 542, "rss": 39165952, "cpu_seconds": 2.15, "threads": 2}, {"pid": 545, "rss": 350457856, "cpu_seconds": 25.08, "threads": 12}]}}
+{"concurrency": 1, "iteration": 3, "wall_seconds": 9.858786433003843, "results": [{"seconds": 9.824875657097436, "errors": [], "stages": [{"stage": "deskew", "seconds": 0.5898965169908479}, {"stage": "ocr_http", "preprocessing": "standard", "seconds": 4.767210155026987}, {"stage": "ocr_http", "preprocessing": "original_gray", "seconds": 0.7063102709362283}], "statuses": ["success", "success"], "ocr_calls": 2, "page_diagnostics": [{"page": 1, "status": "success", "errors": []}, {"page": 2, "status": "success", "errors": []}], "recovery": [[], [{"bbox_pdf": [332.0, 114.0, 356.6666564941406, 139.0], "status": "recovered", "trigger": "ocr_coverage", "uncovered_bbox_pdf": [341.0, 123.0, 347.6666666666667, 132.0], "recovery_dpi": 216, "candidates": [{"text": "B", "bbox": [341.0, 123.33333333333333, 347.3333333333333, 132.0], "source": "ocr", "confidence": 93.0}], "accepted_count": 1}]]}], "health_samples": 133, "health_p95": 0.02976043801754713, "health_max": 0.0721716940170154, "before": {"rss": 544464896, "processes": [{"pid": 524, "rss": 154841088, "cpu_seconds": 0.0, "threads": 4}, {"pid": 542, "rss": 39165952, "cpu_seconds": 2.15, "threads": 2}, {"pid": 545, "rss": 350457856, "cpu_seconds": 25.08, "threads": 12}]}, "peak_rss": 562057216, "after": {"rss": 562057216, "processes": [{"pid": 524, "rss": 154845184, "cpu_seconds": 0.0, "threads": 4}, {"pid": 542, "rss": 39165952, "cpu_seconds": 2.15, "threads": 2}, {"pid": 545, "rss": 368046080, "cpu_seconds": 30.07, "threads": 12}]}}
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/urllib3/connectionpool.py", line 534, in _make_request
+    response = conn.getresponse()
+  File "/usr/local/lib/python3.10/site-packages/urllib3/connection.py", line 571, in getresponse
+    httplib_response = super().getresponse()
+  File "/usr/local/lib/python3.10/http/client.py", line 1395, in getresponse
+    response.begin()
+  File "/usr/local/lib/python3.10/http/client.py", line 323, in begin
+    version, status, reason = self._read_status()
+  File "/usr/local/lib/python3.10/http/client.py", line 284, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+  File "/usr/local/lib/python3.10/socket.py", line 717, in readinto
+    return self._sock.recv_into(b)
+TimeoutError: timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/requests/adapters.py", line 644, in send
+    resp = conn.urlopen(
+  File "/usr/local/lib/python3.10/site-packages/urllib3/connectionpool.py", line 842, in urlopen
+    retries = retries.increment(
+  File "/usr/local/lib/python3.10/site-packages/urllib3/util/retry.py", line 498, in increment
+    raise reraise(type(error), error, _stacktrace)
+  File "/usr/local/lib/python3.10/site-packages/urllib3/util/util.py", line 39, in reraise
+    raise value
+  File "/usr/local/lib/python3.10/site-packages/urllib3/connectionpool.py", line 788, in urlopen
+    response = self._make_request(
+  File "/usr/local/lib/python3.10/site-packages/urllib3/connectionpool.py", line 536, in _make_request
+    self._raise_timeout(err=e, url=url, timeout_value=read_timeout)
+  File "/usr/local/lib/python3.10/site-packages/urllib3/connectionpool.py", line 367, in _raise_timeout
+    raise ReadTimeoutError(
+urllib3.exceptions.ReadTimeoutError: HTTPConnectionPool(host='127.0.0.1', port=8003): Read timed out. (read timeout=3)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/app/agent/test/probe_integrity_pdf_performance.py", line 131, in <module>
+    main()
+  File "/app/agent/test/probe_integrity_pdf_performance.py", line 110, in main
+    response = requests.get(url + '/health', timeout=3)
+  File "/usr/local/lib/python3.10/site-packages/requests/api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+  File "/usr/local/lib/python3.10/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/usr/local/lib/python3.10/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/usr/local/lib/python3.10/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/usr/local/lib/python3.10/site-packages/requests/adapters.py", line 690, in send
+    raise ReadTimeout(e, request=request)
+requests.exceptions.ReadTimeout: HTTPConnectionPool(host='127.0.0.1', port=8003): Read timed out. (read timeout=3)

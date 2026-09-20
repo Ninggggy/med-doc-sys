@@ -1,0 +1,164 @@
+[
+  {
+    "name": "0-12",
+    "expected": "生产范围质量标准",
+    "size": 12,
+    "scale": 1,
+    "actual": "质量标准",
+    "passed": false,
+    "seconds": 1.580610551056452
+  },
+  {
+    "name": "0-12",
+    "expected": "生产范围质量标准",
+    "size": 12,
+    "scale": 0.5,
+    "actual": "生产范围质量标准",
+    "passed": true,
+    "seconds": 1.5584737970493734
+  },
+  {
+    "name": "0-22",
+    "expected": "生产范围质量标准",
+    "size": 22,
+    "scale": 1,
+    "actual": "质量标准",
+    "passed": false,
+    "seconds": 1.6292574140243232
+  },
+  {
+    "name": "0-22",
+    "expected": "生产范围质量标准",
+    "size": 22,
+    "scale": 0.5,
+    "actual": "生产范围质量标准",
+    "passed": true,
+    "seconds": 1.618262941017747
+  },
+  {
+    "name": "0-28",
+    "expected": "生产范围质量标准",
+    "size": 28,
+    "scale": 1,
+    "actual": "质量标准",
+    "passed": false,
+    "seconds": 1.4178095950046554
+  },
+  {
+    "name": "0-28",
+    "expected": "生产范围质量标准",
+    "size": 28,
+    "scale": 0.5,
+    "actual": "生产范围质量标准",
+    "passed": true,
+    "seconds": 1.7121240749256685
+  },
+  {
+    "name": "1-12",
+    "expected": "药品名称不得使用",
+    "size": 12,
+    "scale": 1,
+    "actual": "药品名称不得使用",
+    "passed": true,
+    "seconds": 1.7226810429710895
+  },
+  {
+    "name": "1-12",
+    "expected": "药品名称不得使用",
+    "size": 12,
+    "scale": 0.5,
+    "actual": "药品名称不得使用",
+    "passed": true,
+    "seconds": 1.7557186549529433
+  },
+  {
+    "name": "1-22",
+    "expected": "药品名称不得使用",
+    "size": 22,
+    "scale": 1,
+    "actual": "约品名称不得使用",
+    "passed": false,
+    "seconds": 2.0062558830250055
+  },
+  {
+    "name": "1-22",
+    "expected": "药品名称不得使用",
+    "size": 22,
+    "scale": 0.5,
+    "actual": "药品名称不得使用",
+    "passed": true,
+    "seconds": 1.929486925015226
+  },
+  {
+    "name": "1-28",
+    "expected": "药品名称不得使用",
+    "size": 28,
+    "scale": 1,
+    "actual": "约品名称不得使用",
+    "passed": false,
+    "seconds": 2.301825913018547
+  },
+  {
+    "name": "1-28",
+    "expected": "药品名称不得使用",
+    "size": 28,
+    "scale": 0.5,
+    "actual": "药品名称不得使用",
+    "passed": true,
+    "seconds": 3.020555089926347
+  },
+  {
+    "name": "2-12",
+    "expected": "Readable sampleRestricted supply",
+    "size": 12,
+    "scale": 1,
+    "actual": "ReadablesampleRestrictedsupply",
+    "passed": true,
+    "seconds": 5.22171462199185
+  },
+  {
+    "name": "2-12",
+    "expected": "Readable sampleRestricted supply",
+    "size": 12,
+    "scale": 0.5,
+    "actual": "ReadablesampleRestrictedsupply",
+    "passed": true,
+    "seconds": 4.188633665908128
+  },
+  {
+    "name": "2-22",
+    "expected": "Readable sampleRestricted supply",
+    "size": 22,
+    "scale": 1,
+    "actual": "ReadablesampleRestrictedsupply",
+    "passed": true,
+    "seconds": 5.4654818010749295
+  },
+  {
+    "name": "2-22",
+    "expected": "Readable sampleRestricted supply",
+    "size": 22,
+    "scale": 0.5,
+    "actual": "ReadablesampleRestrictedsupply",
+    "passed": true,
+    "seconds": 5.194015357992612
+  },
+  {
+    "name": "2-28",
+    "expected": "Readable sampleRestricted supply",
+    "size": 28,
+    "scale": 1,
+    "actual": "ReadablesampleRestrictedsupply",
+    "passed": true,
+    "seconds": 5.707096492056735
+  },
+  {
+    "name": "2-28",
+    "expected": "Readable sampleRestricted supply",
+    "size": 28,
+    "scale": 0.5,
+    "actual": "ReadablesampleRestrictedsupply",
+    "passed": true,
+    "seconds": 10.354230775963515
+  }
+]

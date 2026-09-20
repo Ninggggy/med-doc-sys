@@ -1,0 +1,2896 @@
+{
+  "architecture": "x86_64",
+  "cpu_count": 6,
+  "pymupdf": "1.24.14",
+  "pages": 2,
+  "bytes": 6753780,
+  "sample": "one native and one 1500x1500 scanned merged-cell table",
+  "resource_scope": "parent and parser children only; OCR server separate",
+  "rounds": [
+    {
+      "concurrency": 1,
+      "iteration": 1,
+      "wall_seconds": 17.653666610014625,
+      "results": [
+        {
+          "seconds": 11.497909460915253,
+          "errors": [],
+          "stages": [
+            {
+              "stage": "deskew",
+              "seconds": 0.8529399520484731
+            },
+            {
+              "stage": "ocr_http",
+              "preprocessing": "standard",
+              "seconds": 4.503916778950952
+            },
+            {
+              "stage": "ocr_http",
+              "preprocessing": "original_gray",
+              "seconds": 1.4959793329471722
+            }
+          ],
+          "statuses": [
+            "success",
+            "success"
+          ],
+          "ocr_calls": 2,
+          "page_diagnostics": [
+            {
+              "page": 1,
+              "status": "success",
+              "errors": []
+            },
+            {
+              "page": 2,
+              "status": "success",
+              "errors": []
+            }
+          ],
+          "recovery": [
+            [],
+            [
+              {
+                "bbox_pdf": [
+                  332.0,
+                  114.0,
+                  356.66668701171875,
+                  139.0
+                ],
+                "status": "recovered",
+                "trigger": "ocr_coverage",
+                "uncovered_bbox_pdf": [
+                  341.0,
+                  123.0,
+                  347.6666666666667,
+                  132.0
+                ],
+                "recovery_dpi": 216,
+                "requested_bbox_pdf": [
+                  332.0,
+                  114.0,
+                  356.6666564941406,
+                  139.0
+                ],
+                "pixel_window": [
+                  996,
+                  342,
+                  1070,
+                  417
+                ],
+                "segmentation_psm": 6,
+                "segmentation_reason": "line_count_uncertain",
+                "image_line_support": [],
+                "candidates": [
+                  {
+                    "text": "B",
+                    "bbox": [
+                      341.0,
+                      123.33333333333333,
+                      347.3333333333333,
+                      132.0
+                    ],
+                    "source": "ocr",
+                    "confidence": 93.0
+                  }
+                ],
+                "candidate_lines": [
+                  {
+                    "_ordered_words": [
+                      {
+                        "text": "B",
+                        "bbox": [
+                          341.0,
+                          123.33333333333333,
+                          347.3333333333333,
+                          132.0
+                        ],
+                        "source": "ocr",
+                        "confidence": 93.0
+                      }
+                    ]
+                  }
+                ],
+                "accepted_count": 1
+              }
+            ]
+          ]
+        }
+      ],
+      "health_samples": 231,
+      "health_p95": 0.026561041013337672,
+      "health_errors": [],
+      "health_max": 0.2605694599915296,
+      "before": {
+        "rss": 155291648,
+        "processes": [
+          {
+            "pid": 1943,
+            "rss": 149045248,
+            "cpu_seconds": 0.0,
+            "threads": 2
+          },
+          {
+            "pid": 1946,
+            "rss": 6246400,
+            "cpu_seconds": 0.0,
+            "threads": 2
+          }
+        ]
+      },
+      "peak_rss": 491298816,
+      "after": {
+        "rss": 485085184,
+        "processes": [
+          {
+            "pid": 1943,
+            "rss": 154107904,
+            "cpu_seconds": 0.0,
+            "threads": 4
+          },
+          {
+            "pid": 1946,
+            "rss": 39133184,
+            "cpu_seconds": 1.61,
+            "threads": 2
+          },
+          {
+            "pid": 1949,
+            "rss": 291844096,
+            "cpu_seconds": 13.450000000000001,
+            "threads": 12
+          }
+        ]
+      }
+    },
+    {
+      "concurrency": 1,
+      "iteration": 2,
+      "wall_seconds": 15.593034866033122,
+      "results": [
+        {
+          "seconds": 15.563074407051317,
+          "errors": [],
+          "stages": [
+            {
+              "stage": "deskew",
+              "seconds": 0.6603968068957329
+            },
+            {
+              "stage": "ocr_http",
+              "preprocessing": "standard",
+              "seconds": 8.118214527959935
+            },
+            {
+              "stage": "ocr_http",
+              "preprocessing": "original_gray",
+              "seconds": 1.091700304998085
+            }
+          ],
+          "statuses": [
+            "success",
+            "success"
+          ],
+          "ocr_calls": 2,
+          "page_diagnostics": [
+            {
+              "page": 1,
+              "status": "success",
+              "errors": []
+            },
+            {
+              "page": 2,
+              "status": "success",
+              "errors": []
+            }
+          ],
+          "recovery": [
+            [],
+            [
+              {
+                "bbox_pdf": [
+                  332.0,
+                  114.0,
+                  356.66668701171875,
+                  139.0
+                ],
+                "status": "recovered",
+                "trigger": "ocr_coverage",
+                "uncovered_bbox_pdf": [
+                  341.0,
+                  123.0,
+                  347.6666666666667,
+                  132.0
+                ],
+                "recovery_dpi": 216,
+                "requested_bbox_pdf": [
+                  332.0,
+                  114.0,
+                  356.6666564941406,
+                  139.0
+                ],
+                "pixel_window": [
+                  996,
+                  342,
+                  1070,
+                  417
+                ],
+                "segmentation_psm": 6,
+                "segmentation_reason": "line_count_uncertain",
+                "image_line_support": [],
+                "candidates": [
+                  {
+                    "text": "B",
+                    "bbox": [
+                      341.0,
+                      123.33333333333333,
+                      347.3333333333333,
+                      132.0
+                    ],
+                    "source": "ocr",
+                    "confidence": 93.0
+                  }
+                ],
+                "candidate_lines": [
+                  {
+                    "_ordered_words": [
+                      {
+                        "text": "B",
+                        "bbox": [
+                          341.0,
+                          123.33333333333333,
+                          347.3333333333333,
+                          132.0
+                        ],
+                        "source": "ocr",
+                        "confidence": 93.0
+                      }
+                    ]
+                  }
+                ],
+                "accepted_count": 1
+              }
+            ]
+          ]
+        }
+      ],
+      "health_samples": 145,
+      "health_p95": 0.1072930459631607,
+      "health_errors": [],
+      "health_max": 0.915540941990912,
+      "before": {
+        "rss": 485183488,
+        "processes": [
+          {
+            "pid": 1943,
+            "rss": 154206208,
+            "cpu_seconds": 0.0,
+            "threads": 4
+          },
+          {
+            "pid": 1946,
+            "rss": 39133184,
+            "cpu_seconds": 1.61,
+            "threads": 2
+          },
+          {
+            "pid": 1949,
+            "rss": 291844096,
+            "cpu_seconds": 13.450000000000001,
+            "threads": 12
+          }
+        ]
+      },
+      "peak_rss": 544657408,
+      "after": {
+        "rss": 544661504,
+        "processes": [
+          {
+            "pid": 1943,
+            "rss": 154218496,
+            "cpu_seconds": 0.0,
+            "threads": 4
+          },
+          {
+            "pid": 1946,
+            "rss": 39133184,
+            "cpu_seconds": 1.61,
+            "threads": 2
+          },
+          {
+            "pid": 1949,
+            "rss": 351309824,
+            "cpu_seconds": 20.63,
+            "threads": 12
+          }
+        ]
+      }
+    },
+    {
+      "concurrency": 1,
+      "iteration": 3,
+      "wall_seconds": 13.554766038898379,
+      "results": [
+        {
+          "seconds": 13.495972367934883,
+          "errors": [],
+          "stages": [
+            {
+              "stage": "deskew",
+              "seconds": 0.7696849219501019
+            },
+            {
+              "stage": "ocr_http",
+              "preprocessing": "standard",
+              "seconds": 7.515960572985932
+            },
+            {
+              "stage": "ocr_http",
+              "preprocessing": "original_gray",
+              "seconds": 1.1442669311072677
+            }
+          ],
+          "statuses": [
+            "success",
+            "success"
+          ],
+          "ocr_calls": 2,
+          "page_diagnostics": [
+            {
+              "page": 1,
+              "status": "success",
+              "errors": []
+            },
+            {
+              "page": 2,
+              "status": "success",
+              "errors": []
+            }
+          ],
+          "recovery": [
+            [],
+            [
+              {
+                "bbox_pdf": [
+                  332.0,
+                  114.0,
+                  356.66668701171875,
+                  139.0
+                ],
+                "status": "recovered",
+                "trigger": "ocr_coverage",
+                "uncovered_bbox_pdf": [
+                  341.0,
+                  123.0,
+                  347.6666666666667,
+                  132.0
+                ],
+                "recovery_dpi": 216,
+                "requested_bbox_pdf": [
+                  332.0,
+                  114.0,
+                  356.6666564941406,
+                  139.0
+                ],
+                "pixel_window": [
+                  996,
+                  342,
+                  1070,
+                  417
+                ],
+                "segmentation_psm": 6,
+                "segmentation_reason": "line_count_uncertain",
+                "image_line_support": [],
+                "candidates": [
+                  {
+                    "text": "B",
+                    "bbox": [
+                      341.0,
+                      123.33333333333333,
+                      347.3333333333333,
+                      132.0
+                    ],
+                    "source": "ocr",
+                    "confidence": 93.0
+                  }
+                ],
+                "candidate_lines": [
+                  {
+                    "_ordered_words": [
+                      {
+                        "text": "B",
+                        "bbox": [
+                          341.0,
+                          123.33333333333333,
+                          347.3333333333333,
+                          132.0
+                        ],
+                        "source": "ocr",
+                        "confidence": 93.0
+                      }
+                    ]
+                  }
+                ],
+                "accepted_count": 1
+              }
+            ]
+          ]
+        }
+      ],
+      "health_samples": 144,
+      "health_p95": 0.0779510389547795,
+      "health_errors": [],
+      "health_max": 0.12911354191601276,
+      "before": {
+        "rss": 544665600,
+        "processes": [
+          {
+            "pid": 1943,
+            "rss": 154222592,
+            "cpu_seconds": 0.0,
+            "threads": 4
+          },
+          {
+            "pid": 1946,
+            "rss": 39133184,
+            "cpu_seconds": 1.61,
+            "threads": 2
+          },
+          {
+            "pid": 1949,
+            "rss": 351309824,
+            "cpu_seconds": 20.63,
+            "threads": 12
+          }
+        ]
+      },
+      "peak_rss": 562278400,
+      "after": {
+        "rss": 562278400,
+        "processes": [
+          {
+            "pid": 1943,
+            "rss": 154230784,
+            "cpu_seconds": 0.0,
+            "threads": 4
+          },
+          {
+            "pid": 1946,
+            "rss": 39133184,
+            "cpu_seconds": 1.61,
+            "threads": 2
+          },
+          {
+            "pid": 1949,
+            "rss": 368914432,
+            "cpu_seconds": 26.24,
+            "threads": 12
+          }
+        ]
+      }
+    },
+    {
+      "concurrency": 2,
+      "iteration": 1,
+      "wall_seconds": 31.497047486016527,
+      "results": [
+        {
+          "seconds": 21.140643705031835,
+          "errors": [],
+          "stages": [
+            {
+              "stage": "deskew",
+              "seconds": 1.3820411789929494
+            },
+            {
+              "stage": "ocr_http",
+              "preprocessing": "standard",
+              "seconds": 4.97878420795314
+            },
+            {
+              "stage": "ocr_http",
+              "preprocessing": "original_gray",
+              "seconds": 8.469780739978887
+            }
+          ],
+          "statuses": [
+            "success",
+            "success"
+          ],
+          "ocr_calls": 2,
+          "page_diagnostics": [
+            {
+              "page": 1,
+              "status": "success",
+              "errors": []
+            },
+            {
+              "page": 2,
+              "status": "success",
+              "errors": []
+            }
+          ],
+          "recovery": [
+            [],
+            [
+              {
+                "bbox_pdf": [
+                  332.0,
+                  114.0,
+                  356.66668701171875,
+                  139.0
+                ],
+                "status": "recovered",
+                "trigger": "ocr_coverage",
+                "uncovered_bbox_pdf": [
+                  341.0,
+                  123.0,
+                  347.6666666666667,
+                  132.0
+                ],
+                "recovery_dpi": 216,
+                "requested_bbox_pdf": [
+                  332.0,
+                  114.0,
+                  356.6666564941406,
+                  139.0
+                ],
+                "pixel_window": [
+                  996,
+                  342,
+                  1070,
+                  417
+                ],
+                "segmentation_psm": 6,
+                "segmentation_reason": "line_count_uncertain",
+                "image_line_support": [],
+                "candidates": [
+                  {
+                    "text": "B",
+                    "bbox": [
+                      341.0,
+                      123.33333333333333,
+                      347.3333333333333,
+                      132.0
+                    ],
+                    "source": "ocr",
+                    "confidence": 93.0
+                  }
+                ],
+                "candidate_lines": [
+                  {
+                    "_ordered_words": [
+                      {
+                        "text": "B",
+                        "bbox": [
+                          341.0,
+                          123.33333333333333,
+                          347.3333333333333,
+                          132.0
+                        ],
+                        "source": "ocr",
+                        "confidence": 93.0
+                      }
+                    ]
+                  }
+                ],
+                "accepted_count": 1
+              }
+            ]
+          ]
+        },
+        {
+          "seconds": 22.002347763977014,
+          "errors": [],
+          "stages": [
+            {
+              "stage": "deskew",
+              "seconds": 1.399391594924964
+            },
+            {
+              "stage": "ocr_http",
+              "preprocessing": "standard",
+              "seconds": 12.362448156927712
+            },
+            {
+              "stage": "ocr_http",
+              "preprocessing": "original_gray",
+              "seconds": 1.6431996010942385
+            }
+          ],
+          "statuses": [
+            "success",
+            "success"
+          ],
+          "ocr_calls": 2,
+          "page_diagnostics": [
+            {
+              "page": 1,
+              "status": "success",
+              "errors": []
+            },
+            {
+              "page": 2,
+              "status": "success",
+              "errors": []
+            }
+          ],
+          "recovery": [
+            [],
+            [
+              {
+                "bbox_pdf": [
+                  332.0,
+                  114.0,
+                  356.66668701171875,
+                  139.0
+                ],
+                "status": "recovered",
+                "trigger": "ocr_coverage",
+                "uncovered_bbox_pdf": [
+                  341.0,
+                  123.0,
+                  347.6666666666667,
+                  132.0
+                ],
+                "recovery_dpi": 216,
+                "requested_bbox_pdf": [
+                  332.0,
+                  114.0,
+                  356.6666564941406,
+                  139.0
+                ],
+                "pixel_window": [
+                  996,
+                  342,
+                  1070,
+                  417
+                ],
+                "segmentation_psm": 6,
+                "segmentation_reason": "line_count_uncertain",
+                "image_line_support": [],
+                "candidates": [
+                  {
+                    "text": "B",
+                    "bbox": [
+                      341.0,
+                      123.33333333333333,
+                      347.3333333333333,
+                      132.0
+                    ],
+                    "source": "ocr",
+                    "confidence": 93.0
+                  }
+                ],
+                "candidate_lines": [
+                  {
+                    "_ordered_words": [
+                      {
+                        "text": "B",
+                        "bbox": [
+                          341.0,
+                          123.33333333333333,
+                          347.3333333333333,
+                          132.0
+                        ],
+                        "source": "ocr",
+                        "confidence": 93.0
+                      }
+                    ]
+                  }
+                ],
+                "accepted_count": 1
+              }
+            ]
+          ]
+        }
+      ],
+      "health_samples": 354,
+      "health_p95": 0.06164309801533818,
+      "health_errors": [],
+      "health_max": 0.3954762340290472,
+      "before": {
+        "rss": 193363968,
+        "processes": [
+          {
+            "pid": 1943,
+            "rss": 154226688,
+            "cpu_seconds": 0.0,
+            "threads": 2
+          },
+          {
+            "pid": 1946,
+            "rss": 39137280,
+            "cpu_seconds": 1.62,
+            "threads": 2
+          }
+        ]
+      },
+      "peak_rss": 793808896,
+      "after": {
+        "rss": 777093120,
+        "processes": [
+          {
+            "pid": 1943,
+            "rss": 154738688,
+            "cpu_seconds": 0.0,
+            "threads": 4
+          },
+          {
+            "pid": 1946,
+            "rss": 39137280,
+            "cpu_seconds": 1.62,
+            "threads": 2
+          },
+          {
+            "pid": 1977,
+            "rss": 291581952,
+            "cpu_seconds": 17.880000000000003,
+            "threads": 12
+          },
+          {
+            "pid": 1982,
+            "rss": 291635200,
+            "cpu_seconds": 18.37,
+            "threads": 12
+          }
+        ]
+      }
+    },
+    {
+      "concurrency": 2,
+      "iteration": 2,
+      "wall_seconds": 25.090994651895016,
+      "results": [
+        {
+          "seconds": 23.626357804983854,
+          "errors": [],
+          "stages": [
+            {
+              "stage": "deskew",
+              "seconds": 1.1020119020249695
+            },
+            {
+              "stage": "ocr_http",
+              "preprocessing": "standard",
+              "seconds": 8.473033761954866
+            },
+            {
+              "stage": "ocr_http",
+              "preprocessing": "original_gray",
+              "seconds": 8.431307025020942
+            }
+          ],
+          "statuses": [
+            "success",
+            "success"
+          ],
+          "ocr_calls": 2,
+          "page_diagnostics": [
+            {
+              "page": 1,
+              "status": "success",
+              "errors": []
+            },
+            {
+              "page": 2,
+              "status": "success",
+              "errors": []
+            }
+          ],
+          "recovery": [
+            [],
+            [
+              {
+                "bbox_pdf": [
+                  332.0,
+                  114.0,
+                  356.66668701171875,
+                  139.0
+                ],
+                "status": "recovered",
+                "trigger": "ocr_coverage",
+                "uncovered_bbox_pdf": [
+                  341.0,
+                  123.0,
+                  347.6666666666667,
+                  132.0
+                ],
+                "recovery_dpi": 216,
+                "requested_bbox_pdf": [
+                  332.0,
+                  114.0,
+                  356.6666564941406,
+                  139.0
+                ],
+                "pixel_window": [
+                  996,
+                  342,
+                  1070,
+                  417
+                ],
+                "segmentation_psm": 6,
+                "segmentation_reason": "line_count_uncertain",
+                "image_line_support": [],
+                "candidates": [
+                  {
+                    "text": "B",
+                    "bbox": [
+                      341.0,
+                      123.33333333333333,
+                      347.3333333333333,
+                      132.0
+                    ],
+                    "source": "ocr",
+                    "confidence": 93.0
+                  }
+                ],
+                "candidate_lines": [
+                  {
+                    "_ordered_words": [
+                      {
+                        "text": "B",
+                        "bbox": [
+                          341.0,
+                          123.33333333333333,
+                          347.3333333333333,
+                          132.0
+                        ],
+                        "source": "ocr",
+                        "confidence": 93.0
+                      }
+                    ]
+                  }
+                ],
+                "accepted_count": 1
+              }
+            ]
+          ]
+        },
+        {
+          "seconds": 25.02286311495118,
+          "errors": [],
+          "stages": [
+            {
+              "stage": "deskew",
+              "seconds": 1.1151489650364965
+            },
+            {
+              "stage": "ocr_http",
+              "preprocessing": "standard",
+              "seconds": 15.918714858940803
+            },
+            {
+              "stage": "ocr_http",
+              "preprocessing": "original_gray",
+              "seconds": 2.897096943925135
+            }
+          ],
+          "statuses": [
+            "success",
+            "success"
+          ],
+          "ocr_calls": 2,
+          "page_diagnostics": [
+            {
+              "page": 1,
+              "status": "success",
+              "errors": []
+            },
+            {
+              "page": 2,
+              "status": "success",
+              "errors": []
+            }
+          ],
+          "recovery": [
+            [],
+            [
+              {
+                "bbox_pdf": [
+                  332.0,
+                  114.0,
+                  356.66668701171875,
+                  139.0
+                ],
+                "status": "recovered",
+                "trigger": "ocr_coverage",
+                "uncovered_bbox_pdf": [
+                  341.0,
+                  123.0,
+                  347.6666666666667,
+                  132.0
+                ],
+                "recovery_dpi": 216,
+                "requested_bbox_pdf": [
+                  332.0,
+                  114.0,
+                  356.6666564941406,
+                  139.0
+                ],
+                "pixel_window": [
+                  996,
+                  342,
+                  1070,
+                  417
+                ],
+                "segmentation_psm": 6,
+                "segmentation_reason": "line_count_uncertain",
+                "image_line_support": [],
+                "candidates": [
+                  {
+                    "text": "B",
+                    "bbox": [
+                      341.0,
+                      123.33333333333333,
+                      347.3333333333333,
+                      132.0
+                    ],
+                    "source": "ocr",
+                    "confidence": 93.0
+                  }
+                ],
+                "candidate_lines": [
+                  {
+                    "_ordered_words": [
+                      {
+                        "text": "B",
+                        "bbox": [
+                          341.0,
+                          123.33333333333333,
+                          347.3333333333333,
+                          132.0
+                        ],
+                        "source": "ocr",
+                        "confidence": 93.0
+                      }
+                    ]
+                  }
+                ],
+                "accepted_count": 1
+              }
+            ]
+          ]
+        }
+      ],
+      "health_samples": 250,
+      "health_p95": 0.07298981200437993,
+      "health_errors": [],
+      "health_max": 0.2933609050232917,
+      "before": {
+        "rss": 777166848,
+        "processes": [
+          {
+            "pid": 1943,
+            "rss": 154812416,
+            "cpu_seconds": 0.0,
+            "threads": 4
+          },
+          {
+            "pid": 1946,
+            "rss": 39137280,
+            "cpu_seconds": 1.62,
+            "threads": 2
+          },
+          {
+            "pid": 1977,
+            "rss": 291581952,
+            "cpu_seconds": 17.880000000000003,
+            "threads": 12
+          },
+          {
+            "pid": 1982,
+            "rss": 291635200,
+            "cpu_seconds": 18.37,
+            "threads": 12
+          }
+        ]
+      },
+      "peak_rss": 896118784,
+      "after": {
+        "rss": 896118784,
+        "processes": [
+          {
+            "pid": 1943,
+            "rss": 154828800,
+            "cpu_seconds": 0.0,
+            "threads": 4
+          },
+          {
+            "pid": 1946,
+            "rss": 39137280,
+            "cpu_seconds": 1.62,
+            "threads": 2
+          },
+          {
+            "pid": 1977,
+            "rss": 351039488,
+            "cpu_seconds": 25.48,
+            "threads": 12
+          },
+          {
+            "pid": 1982,
+            "rss": 351113216,
+            "cpu_seconds": 25.490000000000002,
+            "threads": 12
+          }
+        ]
+      }
+    },
+    {
+      "concurrency": 2,
+      "iteration": 3,
+      "wall_seconds": 24.86301027389709,
+      "results": [
+        {
+          "seconds": 24.802089917007834,
+          "errors": [],
+          "stages": [
+            {
+              "stage": "deskew",
+              "seconds": 1.517530367942527
+            },
+            {
+              "stage": "ocr_http",
+              "preprocessing": "standard",
+              "seconds": 15.709690429037437
+            },
+            {
+              "stage": "ocr_http",
+              "preprocessing": "original_gray",
+              "seconds": 1.756785118021071
+            }
+          ],
+          "statuses": [
+            "success",
+            "success"
+          ],
+          "ocr_calls": 2,
+          "page_diagnostics": [
+            {
+              "page": 1,
+              "status": "success",
+              "errors": []
+            },
+            {
+              "page": 2,
+              "status": "success",
+              "errors": []
+            }
+          ],
+          "recovery": [
+            [],
+            [
+              {
+                "bbox_pdf": [
+                  332.0,
+                  114.0,
+                  356.66668701171875,
+                  139.0
+                ],
+                "status": "recovered",
+                "trigger": "ocr_coverage",
+                "uncovered_bbox_pdf": [
+                  341.0,
+                  123.0,
+                  347.6666666666667,
+                  132.0
+                ],
+                "recovery_dpi": 216,
+                "requested_bbox_pdf": [
+                  332.0,
+                  114.0,
+                  356.6666564941406,
+                  139.0
+                ],
+                "pixel_window": [
+                  996,
+                  342,
+                  1070,
+                  417
+                ],
+                "segmentation_psm": 6,
+                "segmentation_reason": "line_count_uncertain",
+                "image_line_support": [],
+                "candidates": [
+                  {
+                    "text": "B",
+                    "bbox": [
+                      341.0,
+                      123.33333333333333,
+                      347.3333333333333,
+                      132.0
+                    ],
+                    "source": "ocr",
+                    "confidence": 93.0
+                  }
+                ],
+                "candidate_lines": [
+                  {
+                    "_ordered_words": [
+                      {
+                        "text": "B",
+                        "bbox": [
+                          341.0,
+                          123.33333333333333,
+                          347.3333333333333,
+                          132.0
+                        ],
+                        "source": "ocr",
+                        "confidence": 93.0
+                      }
+                    ]
+                  }
+                ],
+                "accepted_count": 1
+              }
+            ]
+          ]
+        },
+        {
+          "seconds": 23.582023557974026,
+          "errors": [],
+          "stages": [
+            {
+              "stage": "deskew",
+              "seconds": 1.3808306700084358
+            },
+            {
+              "stage": "ocr_http",
+              "preprocessing": "standard",
+              "seconds": 9.333440381917171
+            },
+            {
+              "stage": "ocr_http",
+              "preprocessing": "original_gray",
+              "seconds": 6.697657205048017
+            }
+          ],
+          "statuses": [
+            "success",
+            "success"
+          ],
+          "ocr_calls": 2,
+          "page_diagnostics": [
+            {
+              "page": 1,
+              "status": "success",
+              "errors": []
+            },
+            {
+              "page": 2,
+              "status": "success",
+              "errors": []
+            }
+          ],
+          "recovery": [
+            [],
+            [
+              {
+                "bbox_pdf": [
+                  332.0,
+                  114.0,
+                  356.66668701171875,
+                  139.0
+                ],
+                "status": "recovered",
+                "trigger": "ocr_coverage",
+                "uncovered_bbox_pdf": [
+                  341.0,
+                  123.0,
+                  347.6666666666667,
+                  132.0
+                ],
+                "recovery_dpi": 216,
+                "requested_bbox_pdf": [
+                  332.0,
+                  114.0,
+                  356.6666564941406,
+                  139.0
+                ],
+                "pixel_window": [
+                  996,
+                  342,
+                  1070,
+                  417
+                ],
+                "segmentation_psm": 6,
+                "segmentation_reason": "line_count_uncertain",
+                "image_line_support": [],
+                "candidates": [
+                  {
+                    "text": "B",
+                    "bbox": [
+                      341.0,
+                      123.33333333333333,
+                      347.3333333333333,
+                      132.0
+                    ],
+                    "source": "ocr",
+                    "confidence": 93.0
+                  }
+                ],
+                "candidate_lines": [
+                  {
+                    "_ordered_words": [
+                      {
+                        "text": "B",
+                        "bbox": [
+                          341.0,
+                          123.33333333333333,
+                          347.3333333333333,
+                          132.0
+                        ],
+                        "source": "ocr",
+                        "confidence": 93.0
+                      }
+                    ]
+                  }
+                ],
+                "accepted_count": 1
+              }
+            ]
+          ]
+        }
+      ],
+      "health_samples": 250,
+      "health_p95": 0.07190365402493626,
+      "health_errors": [],
+      "health_max": 0.15060149901546538,
+      "before": {
+        "rss": 896118784,
+        "processes": [
+          {
+            "pid": 1943,
+            "rss": 154828800,
+            "cpu_seconds": 0.0,
+            "threads": 4
+          },
+          {
+            "pid": 1946,
+            "rss": 39137280,
+            "cpu_seconds": 1.62,
+            "threads": 2
+          },
+          {
+            "pid": 1977,
+            "rss": 351039488,
+            "cpu_seconds": 25.48,
+            "threads": 12
+          },
+          {
+            "pid": 1982,
+            "rss": 351113216,
+            "cpu_seconds": 25.490000000000002,
+            "threads": 12
+          }
+        ]
+      },
+      "peak_rss": 931295232,
+      "after": {
+        "rss": 931295232,
+        "processes": [
+          {
+            "pid": 1943,
+            "rss": 154832896,
+            "cpu_seconds": 0.0,
+            "threads": 4
+          },
+          {
+            "pid": 1946,
+            "rss": 39137280,
+            "cpu_seconds": 1.62,
+            "threads": 2
+          },
+          {
+            "pid": 1977,
+            "rss": 368627712,
+            "cpu_seconds": 33.6,
+            "threads": 12
+          },
+          {
+            "pid": 1982,
+            "rss": 368697344,
+            "cpu_seconds": 33.73,
+            "threads": 12
+          }
+        ]
+      }
+    },
+    {
+      "concurrency": 4,
+      "iteration": 1,
+      "wall_seconds": 62.12312490702607,
+      "results": [
+        {
+          "seconds": 50.01757078396622,
+          "errors": [],
+          "stages": [
+            {
+              "stage": "deskew",
+              "seconds": 1.5431780020007864
+            },
+            {
+              "stage": "ocr_http",
+              "preprocessing": "standard",
+              "seconds": 35.37288318295032
+            },
+            {
+              "stage": "ocr_http",
+              "preprocessing": "original_gray",
+              "seconds": 5.608231463935226
+            }
+          ],
+          "statuses": [
+            "success",
+            "success"
+          ],
+          "ocr_calls": 2,
+          "page_diagnostics": [
+            {
+              "page": 1,
+              "status": "success",
+              "errors": []
+            },
+            {
+              "page": 2,
+              "status": "success",
+              "errors": []
+            }
+          ],
+          "recovery": [
+            [],
+            [
+              {
+                "bbox_pdf": [
+                  332.0,
+                  114.0,
+                  356.66668701171875,
+                  139.0
+                ],
+                "status": "recovered",
+                "trigger": "ocr_coverage",
+                "uncovered_bbox_pdf": [
+                  341.0,
+                  123.0,
+                  347.6666666666667,
+                  132.0
+                ],
+                "recovery_dpi": 216,
+                "requested_bbox_pdf": [
+                  332.0,
+                  114.0,
+                  356.6666564941406,
+                  139.0
+                ],
+                "pixel_window": [
+                  996,
+                  342,
+                  1070,
+                  417
+                ],
+                "segmentation_psm": 6,
+                "segmentation_reason": "line_count_uncertain",
+                "image_line_support": [],
+                "candidates": [
+                  {
+                    "text": "B",
+                    "bbox": [
+                      341.0,
+                      123.33333333333333,
+                      347.3333333333333,
+                      132.0
+                    ],
+                    "source": "ocr",
+                    "confidence": 93.0
+                  }
+                ],
+                "candidate_lines": [
+                  {
+                    "_ordered_words": [
+                      {
+                        "text": "B",
+                        "bbox": [
+                          341.0,
+                          123.33333333333333,
+                          347.3333333333333,
+                          132.0
+                        ],
+                        "source": "ocr",
+                        "confidence": 93.0
+                      }
+                    ]
+                  }
+                ],
+                "accepted_count": 1
+              }
+            ]
+          ]
+        },
+        {
+          "seconds": 46.30517687299289,
+          "errors": [],
+          "stages": [
+            {
+              "stage": "deskew",
+              "seconds": 1.5879372969502583
+            },
+            {
+              "stage": "ocr_http",
+              "preprocessing": "standard",
+              "seconds": 5.0419154920382425
+            },
+            {
+              "stage": "ocr_http",
+              "preprocessing": "original_gray",
+              "seconds": 31.692813187022693
+            }
+          ],
+          "statuses": [
+            "success",
+            "success"
+          ],
+          "ocr_calls": 2,
+          "page_diagnostics": [
+            {
+              "page": 1,
+              "status": "success",
+              "errors": []
+            },
+            {
+              "page": 2,
+              "status": "success",
+              "errors": []
+            }
+          ],
+          "recovery": [
+            [],
+            [
+              {
+                "bbox_pdf": [
+                  332.0,
+                  114.0,
+                  356.66668701171875,
+                  139.0
+                ],
+                "status": "recovered",
+                "trigger": "ocr_coverage",
+                "uncovered_bbox_pdf": [
+                  341.0,
+                  123.0,
+                  347.6666666666667,
+                  132.0
+                ],
+                "recovery_dpi": 216,
+                "requested_bbox_pdf": [
+                  332.0,
+                  114.0,
+                  356.6666564941406,
+                  139.0
+                ],
+                "pixel_window": [
+                  996,
+                  342,
+                  1070,
+                  417
+                ],
+                "segmentation_psm": 6,
+                "segmentation_reason": "line_count_uncertain",
+                "image_line_support": [],
+                "candidates": [
+                  {
+                    "text": "B",
+                    "bbox": [
+                      341.0,
+                      123.33333333333333,
+                      347.3333333333333,
+                      132.0
+                    ],
+                    "source": "ocr",
+                    "confidence": 93.0
+                  }
+                ],
+                "candidate_lines": [
+                  {
+                    "_ordered_words": [
+                      {
+                        "text": "B",
+                        "bbox": [
+                          341.0,
+                          123.33333333333333,
+                          347.3333333333333,
+                          132.0
+                        ],
+                        "source": "ocr",
+                        "confidence": 93.0
+                      }
+                    ]
+                  }
+                ],
+                "accepted_count": 1
+              }
+            ]
+          ]
+        },
+        {
+          "seconds": 49.270743537927046,
+          "errors": [],
+          "stages": [
+            {
+              "stage": "deskew",
+              "seconds": 1.6136176120489836
+            },
+            {
+              "stage": "ocr_http",
+              "preprocessing": "standard",
+              "seconds": 25.807029049028642
+            },
+            {
+              "stage": "ocr_http",
+              "preprocessing": "original_gray",
+              "seconds": 14.46901834604796
+            }
+          ],
+          "statuses": [
+            "success",
+            "success"
+          ],
+          "ocr_calls": 2,
+          "page_diagnostics": [
+            {
+              "page": 1,
+              "status": "success",
+              "errors": []
+            },
+            {
+              "page": 2,
+              "status": "success",
+              "errors": []
+            }
+          ],
+          "recovery": [
+            [],
+            [
+              {
+                "bbox_pdf": [
+                  332.0,
+                  114.0,
+                  356.66668701171875,
+                  139.0
+                ],
+                "status": "recovered",
+                "trigger": "ocr_coverage",
+                "uncovered_bbox_pdf": [
+                  341.0,
+                  123.0,
+                  347.6666666666667,
+                  132.0
+                ],
+                "recovery_dpi": 216,
+                "requested_bbox_pdf": [
+                  332.0,
+                  114.0,
+                  356.6666564941406,
+                  139.0
+                ],
+                "pixel_window": [
+                  996,
+                  342,
+                  1070,
+                  417
+                ],
+                "segmentation_psm": 6,
+                "segmentation_reason": "line_count_uncertain",
+                "image_line_support": [],
+                "candidates": [
+                  {
+                    "text": "B",
+                    "bbox": [
+                      341.0,
+                      123.33333333333333,
+                      347.3333333333333,
+                      132.0
+                    ],
+                    "source": "ocr",
+                    "confidence": 93.0
+                  }
+                ],
+                "candidate_lines": [
+                  {
+                    "_ordered_words": [
+                      {
+                        "text": "B",
+                        "bbox": [
+                          341.0,
+                          123.33333333333333,
+                          347.3333333333333,
+                          132.0
+                        ],
+                        "source": "ocr",
+                        "confidence": 93.0
+                      }
+                    ]
+                  }
+                ],
+                "accepted_count": 1
+              }
+            ]
+          ]
+        },
+        {
+          "seconds": 47.66728390904609,
+          "errors": [],
+          "stages": [
+            {
+              "stage": "deskew",
+              "seconds": 1.6013693360146135
+            },
+            {
+              "stage": "ocr_http",
+              "preprocessing": "standard",
+              "seconds": 15.123423578916118
+            },
+            {
+              "stage": "ocr_http",
+              "preprocessing": "original_gray",
+              "seconds": 22.71391740301624
+            }
+          ],
+          "statuses": [
+            "success",
+            "success"
+          ],
+          "ocr_calls": 2,
+          "page_diagnostics": [
+            {
+              "page": 1,
+              "status": "success",
+              "errors": []
+            },
+            {
+              "page": 2,
+              "status": "success",
+              "errors": []
+            }
+          ],
+          "recovery": [
+            [],
+            [
+              {
+                "bbox_pdf": [
+                  332.0,
+                  114.0,
+                  356.66668701171875,
+                  139.0
+                ],
+                "status": "recovered",
+                "trigger": "ocr_coverage",
+                "uncovered_bbox_pdf": [
+                  341.0,
+                  123.0,
+                  347.6666666666667,
+                  132.0
+                ],
+                "recovery_dpi": 216,
+                "requested_bbox_pdf": [
+                  332.0,
+                  114.0,
+                  356.6666564941406,
+                  139.0
+                ],
+                "pixel_window": [
+                  996,
+                  342,
+                  1070,
+                  417
+                ],
+                "segmentation_psm": 6,
+                "segmentation_reason": "line_count_uncertain",
+                "image_line_support": [],
+                "candidates": [
+                  {
+                    "text": "B",
+                    "bbox": [
+                      341.0,
+                      123.33333333333333,
+                      347.3333333333333,
+                      132.0
+                    ],
+                    "source": "ocr",
+                    "confidence": 93.0
+                  }
+                ],
+                "candidate_lines": [
+                  {
+                    "_ordered_words": [
+                      {
+                        "text": "B",
+                        "bbox": [
+                          341.0,
+                          123.33333333333333,
+                          347.3333333333333,
+                          132.0
+                        ],
+                        "source": "ocr",
+                        "confidence": 93.0
+                      }
+                    ]
+                  }
+                ],
+                "accepted_count": 1
+              }
+            ]
+          ]
+        }
+      ],
+      "health_samples": 510,
+      "health_p95": 0.11531146301422268,
+      "health_errors": [],
+      "health_max": 0.5797130450373515,
+      "before": {
+        "rss": 193929216,
+        "processes": [
+          {
+            "pid": 1943,
+            "rss": 154791936,
+            "cpu_seconds": 0.0,
+            "threads": 2
+          },
+          {
+            "pid": 1946,
+            "rss": 39137280,
+            "cpu_seconds": 1.62,
+            "threads": 2
+          }
+        ]
+      },
+      "peak_rss": 1395617792,
+      "after": {
+        "rss": 1362116608,
+        "processes": [
+          {
+            "pid": 1943,
+            "rss": 155619328,
+            "cpu_seconds": 0.0,
+            "threads": 4
+          },
+          {
+            "pid": 1946,
+            "rss": 39137280,
+            "cpu_seconds": 1.62,
+            "threads": 2
+          },
+          {
+            "pid": 2011,
+            "rss": 291831808,
+            "cpu_seconds": 20.619999999999997,
+            "threads": 12
+          },
+          {
+            "pid": 2016,
+            "rss": 291844096,
+            "cpu_seconds": 20.680000000000003,
+            "threads": 12
+          },
+          {
+            "pid": 2019,
+            "rss": 291848192,
+            "cpu_seconds": 21.900000000000002,
+            "threads": 12
+          },
+          {
+            "pid": 2022,
+            "rss": 291835904,
+            "cpu_seconds": 21.240000000000002,
+            "threads": 12
+          }
+        ]
+      }
+    },
+    {
+      "concurrency": 4,
+      "iteration": 2,
+      "wall_seconds": 31.893825305975042,
+      "results": [
+        {
+          "seconds": 31.81701337301638,
+          "errors": [],
+          "stages": [
+            {
+              "stage": "deskew",
+              "seconds": 1.224573726998642
+            },
+            {
+              "stage": "ocr_http",
+              "preprocessing": "standard",
+              "seconds": 20.910021804040298
+            },
+            {
+              "stage": "ocr_http",
+              "preprocessing": "original_gray",
+              "seconds": 4.0806179660139605
+            }
+          ],
+          "statuses": [
+            "success",
+            "success"
+          ],
+          "ocr_calls": 2,
+          "page_diagnostics": [
+            {
+              "page": 1,
+              "status": "success",
+              "errors": []
+            },
+            {
+              "page": 2,
+              "status": "success",
+              "errors": []
+            }
+          ],
+          "recovery": [
+            [],
+            [
+              {
+                "bbox_pdf": [
+                  332.0,
+                  114.0,
+                  356.66668701171875,
+                  139.0
+                ],
+                "status": "recovered",
+                "trigger": "ocr_coverage",
+                "uncovered_bbox_pdf": [
+                  341.0,
+                  123.0,
+                  347.6666666666667,
+                  132.0
+                ],
+                "recovery_dpi": 216,
+                "requested_bbox_pdf": [
+                  332.0,
+                  114.0,
+                  356.6666564941406,
+                  139.0
+                ],
+                "pixel_window": [
+                  996,
+                  342,
+                  1070,
+                  417
+                ],
+                "segmentation_psm": 6,
+                "segmentation_reason": "line_count_uncertain",
+                "image_line_support": [],
+                "candidates": [
+                  {
+                    "text": "B",
+                    "bbox": [
+                      341.0,
+                      123.33333333333333,
+                      347.3333333333333,
+                      132.0
+                    ],
+                    "source": "ocr",
+                    "confidence": 93.0
+                  }
+                ],
+                "candidate_lines": [
+                  {
+                    "_ordered_words": [
+                      {
+                        "text": "B",
+                        "bbox": [
+                          341.0,
+                          123.33333333333333,
+                          347.3333333333333,
+                          132.0
+                        ],
+                        "source": "ocr",
+                        "confidence": 93.0
+                      }
+                    ]
+                  }
+                ],
+                "accepted_count": 1
+              }
+            ]
+          ]
+        },
+        {
+          "seconds": 30.947657332057133,
+          "errors": [],
+          "stages": [
+            {
+              "stage": "deskew",
+              "seconds": 1.250884769950062
+            },
+            {
+              "stage": "ocr_http",
+              "preprocessing": "standard",
+              "seconds": 15.80933623504825
+            },
+            {
+              "stage": "ocr_http",
+              "preprocessing": "original_gray",
+              "seconds": 8.24409865506459
+            }
+          ],
+          "statuses": [
+            "success",
+            "success"
+          ],
+          "ocr_calls": 2,
+          "page_diagnostics": [
+            {
+              "page": 1,
+              "status": "success",
+              "errors": []
+            },
+            {
+              "page": 2,
+              "status": "success",
+              "errors": []
+            }
+          ],
+          "recovery": [
+            [],
+            [
+              {
+                "bbox_pdf": [
+                  332.0,
+                  114.0,
+                  356.66668701171875,
+                  139.0
+                ],
+                "status": "recovered",
+                "trigger": "ocr_coverage",
+                "uncovered_bbox_pdf": [
+                  341.0,
+                  123.0,
+                  347.6666666666667,
+                  132.0
+                ],
+                "recovery_dpi": 216,
+                "requested_bbox_pdf": [
+                  332.0,
+                  114.0,
+                  356.6666564941406,
+                  139.0
+                ],
+                "pixel_window": [
+                  996,
+                  342,
+                  1070,
+                  417
+                ],
+                "segmentation_psm": 6,
+                "segmentation_reason": "line_count_uncertain",
+                "image_line_support": [],
+                "candidates": [
+                  {
+                    "text": "B",
+                    "bbox": [
+                      341.0,
+                      123.33333333333333,
+                      347.3333333333333,
+                      132.0
+                    ],
+                    "source": "ocr",
+                    "confidence": 93.0
+                  }
+                ],
+                "candidate_lines": [
+                  {
+                    "_ordered_words": [
+                      {
+                        "text": "B",
+                        "bbox": [
+                          341.0,
+                          123.33333333333333,
+                          347.3333333333333,
+                          132.0
+                        ],
+                        "source": "ocr",
+                        "confidence": 93.0
+                      }
+                    ]
+                  }
+                ],
+                "accepted_count": 1
+              }
+            ]
+          ]
+        },
+        {
+          "seconds": 28.69774758198764,
+          "errors": [],
+          "stages": [
+            {
+              "stage": "deskew",
+              "seconds": 1.219360088929534
+            },
+            {
+              "stage": "ocr_http",
+              "preprocessing": "standard",
+              "seconds": 5.630445968941785
+            },
+            {
+              "stage": "ocr_http",
+              "preprocessing": "original_gray",
+              "seconds": 16.34182283701375
+            }
+          ],
+          "statuses": [
+            "success",
+            "success"
+          ],
+          "ocr_calls": 2,
+          "page_diagnostics": [
+            {
+              "page": 1,
+              "status": "success",
+              "errors": []
+            },
+            {
+              "page": 2,
+              "status": "success",
+              "errors": []
+            }
+          ],
+          "recovery": [
+            [],
+            [
+              {
+                "bbox_pdf": [
+                  332.0,
+                  114.0,
+                  356.66668701171875,
+                  139.0
+                ],
+                "status": "recovered",
+                "trigger": "ocr_coverage",
+                "uncovered_bbox_pdf": [
+                  341.0,
+                  123.0,
+                  347.6666666666667,
+                  132.0
+                ],
+                "recovery_dpi": 216,
+                "requested_bbox_pdf": [
+                  332.0,
+                  114.0,
+                  356.6666564941406,
+                  139.0
+                ],
+                "pixel_window": [
+                  996,
+                  342,
+                  1070,
+                  417
+                ],
+                "segmentation_psm": 6,
+                "segmentation_reason": "line_count_uncertain",
+                "image_line_support": [],
+                "candidates": [
+                  {
+                    "text": "B",
+                    "bbox": [
+                      341.0,
+                      123.33333333333333,
+                      347.3333333333333,
+                      132.0
+                    ],
+                    "source": "ocr",
+                    "confidence": 93.0
+                  }
+                ],
+                "candidate_lines": [
+                  {
+                    "_ordered_words": [
+                      {
+                        "text": "B",
+                        "bbox": [
+                          341.0,
+                          123.33333333333333,
+                          347.3333333333333,
+                          132.0
+                        ],
+                        "source": "ocr",
+                        "confidence": 93.0
+                      }
+                    ]
+                  }
+                ],
+                "accepted_count": 1
+              }
+            ]
+          ]
+        },
+        {
+          "seconds": 29.852296941098757,
+          "errors": [],
+          "stages": [
+            {
+              "stage": "deskew",
+              "seconds": 1.1616887639975175
+            },
+            {
+              "stage": "ocr_http",
+              "preprocessing": "standard",
+              "seconds": 10.58137338096276
+            },
+            {
+              "stage": "ocr_http",
+              "preprocessing": "original_gray",
+              "seconds": 12.35636631201487
+            }
+          ],
+          "statuses": [
+            "success",
+            "success"
+          ],
+          "ocr_calls": 2,
+          "page_diagnostics": [
+            {
+              "page": 1,
+              "status": "success",
+              "errors": []
+            },
+            {
+              "page": 2,
+              "status": "success",
+              "errors": []
+            }
+          ],
+          "recovery": [
+            [],
+            [
+              {
+                "bbox_pdf": [
+                  332.0,
+                  114.0,
+                  356.66668701171875,
+                  139.0
+                ],
+                "status": "recovered",
+                "trigger": "ocr_coverage",
+                "uncovered_bbox_pdf": [
+                  341.0,
+                  123.0,
+                  347.6666666666667,
+                  132.0
+                ],
+                "recovery_dpi": 216,
+                "requested_bbox_pdf": [
+                  332.0,
+                  114.0,
+                  356.6666564941406,
+                  139.0
+                ],
+                "pixel_window": [
+                  996,
+                  342,
+                  1070,
+                  417
+                ],
+                "segmentation_psm": 6,
+                "segmentation_reason": "line_count_uncertain",
+                "image_line_support": [],
+                "candidates": [
+                  {
+                    "text": "B",
+                    "bbox": [
+                      341.0,
+                      123.33333333333333,
+                      347.3333333333333,
+                      132.0
+                    ],
+                    "source": "ocr",
+                    "confidence": 93.0
+                  }
+                ],
+                "candidate_lines": [
+                  {
+                    "_ordered_words": [
+                      {
+                        "text": "B",
+                        "bbox": [
+                          341.0,
+                          123.33333333333333,
+                          347.3333333333333,
+                          132.0
+                        ],
+                        "source": "ocr",
+                        "confidence": 93.0
+                      }
+                    ]
+                  }
+                ],
+                "accepted_count": 1
+              }
+            ]
+          ]
+        }
+      ],
+      "health_samples": 370,
+      "health_p95": 0.04637800098862499,
+      "health_errors": [],
+      "health_max": 0.11044680105987936,
+      "before": {
+        "rss": 1362313216,
+        "processes": [
+          {
+            "pid": 1943,
+            "rss": 155815936,
+            "cpu_seconds": 0.0,
+            "threads": 4
+          },
+          {
+            "pid": 1946,
+            "rss": 39137280,
+            "cpu_seconds": 1.62,
+            "threads": 2
+          },
+          {
+            "pid": 2011,
+            "rss": 291831808,
+            "cpu_seconds": 20.619999999999997,
+            "threads": 12
+          },
+          {
+            "pid": 2016,
+            "rss": 291844096,
+            "cpu_seconds": 20.680000000000003,
+            "threads": 12
+          },
+          {
+            "pid": 2019,
+            "rss": 291848192,
+            "cpu_seconds": 21.900000000000002,
+            "threads": 12
+          },
+          {
+            "pid": 2022,
+            "rss": 291835904,
+            "cpu_seconds": 21.240000000000002,
+            "threads": 12
+          }
+        ]
+      },
+      "peak_rss": 1600172032,
+      "after": {
+        "rss": 1600172032,
+        "processes": [
+          {
+            "pid": 1943,
+            "rss": 155824128,
+            "cpu_seconds": 0.0,
+            "threads": 4
+          },
+          {
+            "pid": 1946,
+            "rss": 39137280,
+            "cpu_seconds": 1.62,
+            "threads": 2
+          },
+          {
+            "pid": 2011,
+            "rss": 351293440,
+            "cpu_seconds": 27.96,
+            "threads": 12
+          },
+          {
+            "pid": 2016,
+            "rss": 351313920,
+            "cpu_seconds": 27.99,
+            "threads": 12
+          },
+          {
+            "pid": 2019,
+            "rss": 351305728,
+            "cpu_seconds": 29.18,
+            "threads": 12
+          },
+          {
+            "pid": 2022,
+            "rss": 351297536,
+            "cpu_seconds": 28.46,
+            "threads": 12
+          }
+        ]
+      }
+    },
+    {
+      "concurrency": 4,
+      "iteration": 3,
+      "wall_seconds": 31.81366835103836,
+      "results": [
+        {
+          "seconds": 31.776505237910897,
+          "errors": [],
+          "stages": [
+            {
+              "stage": "deskew",
+              "seconds": 1.0640302780084312
+            },
+            {
+              "stage": "ocr_http",
+              "preprocessing": "standard",
+              "seconds": 21.42709878203459
+            },
+            {
+              "stage": "ocr_http",
+              "preprocessing": "original_gray",
+              "seconds": 3.7727628010325134
+            }
+          ],
+          "statuses": [
+            "success",
+            "success"
+          ],
+          "ocr_calls": 2,
+          "page_diagnostics": [
+            {
+              "page": 1,
+              "status": "success",
+              "errors": []
+            },
+            {
+              "page": 2,
+              "status": "success",
+              "errors": []
+            }
+          ],
+          "recovery": [
+            [],
+            [
+              {
+                "bbox_pdf": [
+                  332.0,
+                  114.0,
+                  356.66668701171875,
+                  139.0
+                ],
+                "status": "recovered",
+                "trigger": "ocr_coverage",
+                "uncovered_bbox_pdf": [
+                  341.0,
+                  123.0,
+                  347.6666666666667,
+                  132.0
+                ],
+                "recovery_dpi": 216,
+                "requested_bbox_pdf": [
+                  332.0,
+                  114.0,
+                  356.6666564941406,
+                  139.0
+                ],
+                "pixel_window": [
+                  996,
+                  342,
+                  1070,
+                  417
+                ],
+                "segmentation_psm": 6,
+                "segmentation_reason": "line_count_uncertain",
+                "image_line_support": [],
+                "candidates": [
+                  {
+                    "text": "B",
+                    "bbox": [
+                      341.0,
+                      123.33333333333333,
+                      347.3333333333333,
+                      132.0
+                    ],
+                    "source": "ocr",
+                    "confidence": 93.0
+                  }
+                ],
+                "candidate_lines": [
+                  {
+                    "_ordered_words": [
+                      {
+                        "text": "B",
+                        "bbox": [
+                          341.0,
+                          123.33333333333333,
+                          347.3333333333333,
+                          132.0
+                        ],
+                        "source": "ocr",
+                        "confidence": 93.0
+                      }
+                    ]
+                  }
+                ],
+                "accepted_count": 1
+              }
+            ]
+          ]
+        },
+        {
+          "seconds": 30.969552341033705,
+          "errors": [],
+          "stages": [
+            {
+              "stage": "deskew",
+              "seconds": 1.0458102870034054
+            },
+            {
+              "stage": "ocr_http",
+              "preprocessing": "standard",
+              "seconds": 16.224500383948907
+            },
+            {
+              "stage": "ocr_http",
+              "preprocessing": "original_gray",
+              "seconds": 7.938423419953324
+            }
+          ],
+          "statuses": [
+            "success",
+            "success"
+          ],
+          "ocr_calls": 2,
+          "page_diagnostics": [
+            {
+              "page": 1,
+              "status": "success",
+              "errors": []
+            },
+            {
+              "page": 2,
+              "status": "success",
+              "errors": []
+            }
+          ],
+          "recovery": [
+            [],
+            [
+              {
+                "bbox_pdf": [
+                  332.0,
+                  114.0,
+                  356.66668701171875,
+                  139.0
+                ],
+                "status": "recovered",
+                "trigger": "ocr_coverage",
+                "uncovered_bbox_pdf": [
+                  341.0,
+                  123.0,
+                  347.6666666666667,
+                  132.0
+                ],
+                "recovery_dpi": 216,
+                "requested_bbox_pdf": [
+                  332.0,
+                  114.0,
+                  356.6666564941406,
+                  139.0
+                ],
+                "pixel_window": [
+                  996,
+                  342,
+                  1070,
+                  417
+                ],
+                "segmentation_psm": 6,
+                "segmentation_reason": "line_count_uncertain",
+                "image_line_support": [],
+                "candidates": [
+                  {
+                    "text": "B",
+                    "bbox": [
+                      341.0,
+                      123.33333333333333,
+                      347.3333333333333,
+                      132.0
+                    ],
+                    "source": "ocr",
+                    "confidence": 93.0
+                  }
+                ],
+                "candidate_lines": [
+                  {
+                    "_ordered_words": [
+                      {
+                        "text": "B",
+                        "bbox": [
+                          341.0,
+                          123.33333333333333,
+                          347.3333333333333,
+                          132.0
+                        ],
+                        "source": "ocr",
+                        "confidence": 93.0
+                      }
+                    ]
+                  }
+                ],
+                "accepted_count": 1
+              }
+            ]
+          ]
+        },
+        {
+          "seconds": 28.79307087592315,
+          "errors": [],
+          "stages": [
+            {
+              "stage": "deskew",
+              "seconds": 1.0997787259984761
+            },
+            {
+              "stage": "ocr_http",
+              "preprocessing": "standard",
+              "seconds": 5.583486502058804
+            },
+            {
+              "stage": "ocr_http",
+              "preprocessing": "original_gray",
+              "seconds": 16.404768908047117
+            }
+          ],
+          "statuses": [
+            "success",
+            "success"
+          ],
+          "ocr_calls": 2,
+          "page_diagnostics": [
+            {
+              "page": 1,
+              "status": "success",
+              "errors": []
+            },
+            {
+              "page": 2,
+              "status": "success",
+              "errors": []
+            }
+          ],
+          "recovery": [
+            [],
+            [
+              {
+                "bbox_pdf": [
+                  332.0,
+                  114.0,
+                  356.66668701171875,
+                  139.0
+                ],
+                "status": "recovered",
+                "trigger": "ocr_coverage",
+                "uncovered_bbox_pdf": [
+                  341.0,
+                  123.0,
+                  347.6666666666667,
+                  132.0
+                ],
+                "recovery_dpi": 216,
+                "requested_bbox_pdf": [
+                  332.0,
+                  114.0,
+                  356.6666564941406,
+                  139.0
+                ],
+                "pixel_window": [
+                  996,
+                  342,
+                  1070,
+                  417
+                ],
+                "segmentation_psm": 6,
+                "segmentation_reason": "line_count_uncertain",
+                "image_line_support": [],
+                "candidates": [
+                  {
+                    "text": "B",
+                    "bbox": [
+                      341.0,
+                      123.33333333333333,
+                      347.3333333333333,
+                      132.0
+                    ],
+                    "source": "ocr",
+                    "confidence": 93.0
+                  }
+                ],
+                "candidate_lines": [
+                  {
+                    "_ordered_words": [
+                      {
+                        "text": "B",
+                        "bbox": [
+                          341.0,
+                          123.33333333333333,
+                          347.3333333333333,
+                          132.0
+                        ],
+                        "source": "ocr",
+                        "confidence": 93.0
+                      }
+                    ]
+                  }
+                ],
+                "accepted_count": 1
+              }
+            ]
+          ]
+        },
+        {
+          "seconds": 29.973412583000027,
+          "errors": [],
+          "stages": [
+            {
+              "stage": "deskew",
+              "seconds": 1.0631822859868407
+            },
+            {
+              "stage": "ocr_http",
+              "preprocessing": "standard",
+              "seconds": 11.071058742003515
+            },
+            {
+              "stage": "ocr_http",
+              "preprocessing": "original_gray",
+              "seconds": 11.997106969007291
+            }
+          ],
+          "statuses": [
+            "success",
+            "success"
+          ],
+          "ocr_calls": 2,
+          "page_diagnostics": [
+            {
+              "page": 1,
+              "status": "success",
+              "errors": []
+            },
+            {
+              "page": 2,
+              "status": "success",
+              "errors": []
+            }
+          ],
+          "recovery": [
+            [],
+            [
+              {
+                "bbox_pdf": [
+                  332.0,
+                  114.0,
+                  356.66668701171875,
+                  139.0
+                ],
+                "status": "recovered",
+                "trigger": "ocr_coverage",
+                "uncovered_bbox_pdf": [
+                  341.0,
+                  123.0,
+                  347.6666666666667,
+                  132.0
+                ],
+                "recovery_dpi": 216,
+                "requested_bbox_pdf": [
+                  332.0,
+                  114.0,
+                  356.6666564941406,
+                  139.0
+                ],
+                "pixel_window": [
+                  996,
+                  342,
+                  1070,
+                  417
+                ],
+                "segmentation_psm": 6,
+                "segmentation_reason": "line_count_uncertain",
+                "image_line_support": [],
+                "candidates": [
+                  {
+                    "text": "B",
+                    "bbox": [
+                      341.0,
+                      123.33333333333333,
+                      347.3333333333333,
+                      132.0
+                    ],
+                    "source": "ocr",
+                    "confidence": 93.0
+                  }
+                ],
+                "candidate_lines": [
+                  {
+                    "_ordered_words": [
+                      {
+                        "text": "B",
+                        "bbox": [
+                          341.0,
+                          123.33333333333333,
+                          347.3333333333333,
+                          132.0
+                        ],
+                        "source": "ocr",
+                        "confidence": 93.0
+                      }
+                    ]
+                  }
+                ],
+                "accepted_count": 1
+              }
+            ]
+          ]
+        }
+      ],
+      "health_samples": 369,
+      "health_p95": 0.04255218093749136,
+      "health_errors": [],
+      "health_max": 0.10418092797044665,
+      "before": {
+        "rss": 1600172032,
+        "processes": [
+          {
+            "pid": 1943,
+            "rss": 155824128,
+            "cpu_seconds": 0.0,
+            "threads": 4
+          },
+          {
+            "pid": 1946,
+            "rss": 39137280,
+            "cpu_seconds": 1.62,
+            "threads": 2
+          },
+          {
+            "pid": 2011,
+            "rss": 351293440,
+            "cpu_seconds": 27.96,
+            "threads": 12
+          },
+          {
+            "pid": 2016,
+            "rss": 351313920,
+            "cpu_seconds": 27.99,
+            "threads": 12
+          },
+          {
+            "pid": 2019,
+            "rss": 351305728,
+            "cpu_seconds": 29.18,
+            "threads": 12
+          },
+          {
+            "pid": 2022,
+            "rss": 351297536,
+            "cpu_seconds": 28.46,
+            "threads": 12
+          }
+        ]
+      },
+      "peak_rss": 1670508544,
+      "after": {
+        "rss": 1670508544,
+        "processes": [
+          {
+            "pid": 1943,
+            "rss": 155824128,
+            "cpu_seconds": 0.0,
+            "threads": 4
+          },
+          {
+            "pid": 1946,
+            "rss": 39137280,
+            "cpu_seconds": 1.62,
+            "threads": 2
+          },
+          {
+            "pid": 2011,
+            "rss": 368881664,
+            "cpu_seconds": 35.23,
+            "threads": 12
+          },
+          {
+            "pid": 2016,
+            "rss": 368889856,
+            "cpu_seconds": 34.970000000000006,
+            "threads": 12
+          },
+          {
+            "pid": 2019,
+            "rss": 368893952,
+            "cpu_seconds": 36.5,
+            "threads": 12
+          },
+          {
+            "pid": 2022,
+            "rss": 368881664,
+            "cpu_seconds": 35.83,
+            "threads": 12
+          }
+        ]
+      }
+    }
+  ],
+  "after_pool_close": [
+    {
+      "concurrency": 1,
+      "rss": 193359872,
+      "processes": [
+        {
+          "pid": 1943,
+          "rss": 154226688,
+          "cpu_seconds": 0.0,
+          "threads": 2
+        },
+        {
+          "pid": 1946,
+          "rss": 39133184,
+          "cpu_seconds": 1.62,
+          "threads": 2
+        }
+      ]
+    },
+    {
+      "concurrency": 2,
+      "rss": 193929216,
+      "processes": [
+        {
+          "pid": 1943,
+          "rss": 154791936,
+          "cpu_seconds": 0.0,
+          "threads": 2
+        },
+        {
+          "pid": 1946,
+          "rss": 39137280,
+          "cpu_seconds": 1.62,
+          "threads": 2
+        }
+      ]
+    },
+    {
+      "concurrency": 4,
+      "rss": 194920448,
+      "processes": [
+        {
+          "pid": 1943,
+          "rss": 155783168,
+          "cpu_seconds": 0.0,
+          "threads": 2
+        },
+        {
+          "pid": 1946,
+          "rss": 39137280,
+          "cpu_seconds": 1.62,
+          "threads": 2
+        }
+      ]
+    }
+  ]
+}

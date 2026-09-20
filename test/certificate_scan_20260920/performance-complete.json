@@ -1,0 +1,2224 @@
+{
+  "architecture": "x86_64",
+  "cpu_count": 6,
+  "pymupdf": "1.24.14",
+  "pages": 2,
+  "bytes": 6753780,
+  "sample": "one native and one 1500x1500 scanned merged-cell table",
+  "resource_scope": "parent and parser children only; OCR server separate",
+  "rounds": [
+    {
+      "concurrency": 1,
+      "iteration": 1,
+      "wall_seconds": 16.725862318999134,
+      "results": [
+        {
+          "seconds": 10.428171009989455,
+          "errors": [],
+          "stages": [
+            {
+              "stage": "deskew",
+              "seconds": 1.0307157400529832
+            },
+            {
+              "stage": "ocr_http",
+              "preprocessing": "standard",
+              "seconds": 4.110750053077936
+            },
+            {
+              "stage": "ocr_http",
+              "preprocessing": "original_gray",
+              "seconds": 0.6907822650391608
+            }
+          ],
+          "statuses": [
+            "success",
+            "success"
+          ],
+          "ocr_calls": 2,
+          "page_diagnostics": [
+            {
+              "page": 1,
+              "status": "success",
+              "errors": []
+            },
+            {
+              "page": 2,
+              "status": "success",
+              "errors": []
+            }
+          ],
+          "recovery": [
+            [],
+            [
+              {
+                "bbox_pdf": [
+                  332.0,
+                  114.0,
+                  356.6666564941406,
+                  139.0
+                ],
+                "status": "recovered",
+                "trigger": "ocr_coverage",
+                "uncovered_bbox_pdf": [
+                  341.0,
+                  123.0,
+                  347.6666666666667,
+                  132.0
+                ],
+                "recovery_dpi": 216,
+                "candidates": [
+                  {
+                    "text": "B",
+                    "bbox": [
+                      341.0,
+                      123.33333333333333,
+                      347.3333333333333,
+                      132.0
+                    ],
+                    "source": "ocr",
+                    "confidence": 93.0
+                  }
+                ],
+                "accepted_count": 1
+              }
+            ]
+          ]
+        }
+      ],
+      "health_samples": 228,
+      "health_p95": 0.026491628028452396,
+      "health_errors": [],
+      "health_max": 0.0957308269571513,
+      "before": {
+        "rss": 156192768,
+        "processes": [
+          {
+            "pid": 632,
+            "rss": 149598208,
+            "cpu_seconds": 0.0,
+            "threads": 2
+          },
+          {
+            "pid": 635,
+            "rss": 6594560,
+            "cpu_seconds": 0.0,
+            "threads": 2
+          }
+        ]
+      },
+      "peak_rss": 490676224,
+      "after": {
+        "rss": 484397056,
+        "processes": [
+          {
+            "pid": 632,
+            "rss": 154664960,
+            "cpu_seconds": 0.0,
+            "threads": 4
+          },
+          {
+            "pid": 635,
+            "rss": 39165952,
+            "cpu_seconds": 1.1500000000000001,
+            "threads": 2
+          },
+          {
+            "pid": 638,
+            "rss": 290566144,
+            "cpu_seconds": 13.85,
+            "threads": 12
+          }
+        ]
+      }
+    },
+    {
+      "concurrency": 1,
+      "iteration": 2,
+      "wall_seconds": 10.162082031951286,
+      "results": [
+        {
+          "seconds": 10.089810480014421,
+          "errors": [],
+          "stages": [
+            {
+              "stage": "deskew",
+              "seconds": 0.6669745770050213
+            },
+            {
+              "stage": "ocr_http",
+              "preprocessing": "standard",
+              "seconds": 4.617380275041796
+            },
+            {
+              "stage": "ocr_http",
+              "preprocessing": "original_gray",
+              "seconds": 1.0749447819544002
+            }
+          ],
+          "statuses": [
+            "success",
+            "success"
+          ],
+          "ocr_calls": 2,
+          "page_diagnostics": [
+            {
+              "page": 1,
+              "status": "success",
+              "errors": []
+            },
+            {
+              "page": 2,
+              "status": "success",
+              "errors": []
+            }
+          ],
+          "recovery": [
+            [],
+            [
+              {
+                "bbox_pdf": [
+                  332.0,
+                  114.0,
+                  356.6666564941406,
+                  139.0
+                ],
+                "status": "recovered",
+                "trigger": "ocr_coverage",
+                "uncovered_bbox_pdf": [
+                  341.0,
+                  123.0,
+                  347.6666666666667,
+                  132.0
+                ],
+                "recovery_dpi": 216,
+                "candidates": [
+                  {
+                    "text": "B",
+                    "bbox": [
+                      341.0,
+                      123.33333333333333,
+                      347.3333333333333,
+                      132.0
+                    ],
+                    "source": "ocr",
+                    "confidence": 93.0
+                  }
+                ],
+                "accepted_count": 1
+              }
+            ]
+          ]
+        }
+      ],
+      "health_samples": 133,
+      "health_p95": 0.03924419602844864,
+      "health_errors": [],
+      "health_max": 0.10932275908999145,
+      "before": {
+        "rss": 484495360,
+        "processes": [
+          {
+            "pid": 632,
+            "rss": 154763264,
+            "cpu_seconds": 0.0,
+            "threads": 4
+          },
+          {
+            "pid": 635,
+            "rss": 39165952,
+            "cpu_seconds": 1.1500000000000001,
+            "threads": 2
+          },
+          {
+            "pid": 638,
+            "rss": 290566144,
+            "cpu_seconds": 13.85,
+            "threads": 12
+          }
+        ]
+      },
+      "peak_rss": 544198656,
+      "after": {
+        "rss": 544198656,
+        "processes": [
+          {
+            "pid": 632,
+            "rss": 154779648,
+            "cpu_seconds": 0.0,
+            "threads": 4
+          },
+          {
+            "pid": 635,
+            "rss": 39165952,
+            "cpu_seconds": 1.1500000000000001,
+            "threads": 2
+          },
+          {
+            "pid": 638,
+            "rss": 350253056,
+            "cpu_seconds": 18.96,
+            "threads": 12
+          }
+        ]
+      }
+    },
+    {
+      "concurrency": 1,
+      "iteration": 3,
+      "wall_seconds": 9.375841233995743,
+      "results": [
+        {
+          "seconds": 9.324757399968803,
+          "errors": [],
+          "stages": [
+            {
+              "stage": "deskew",
+              "seconds": 0.7054662120062858
+            },
+            {
+              "stage": "ocr_http",
+              "preprocessing": "standard",
+              "seconds": 4.074164933059365
+            },
+            {
+              "stage": "ocr_http",
+              "preprocessing": "original_gray",
+              "seconds": 0.8955322990659624
+            }
+          ],
+          "statuses": [
+            "success",
+            "success"
+          ],
+          "ocr_calls": 2,
+          "page_diagnostics": [
+            {
+              "page": 1,
+              "status": "success",
+              "errors": []
+            },
+            {
+              "page": 2,
+              "status": "success",
+              "errors": []
+            }
+          ],
+          "recovery": [
+            [],
+            [
+              {
+                "bbox_pdf": [
+                  332.0,
+                  114.0,
+                  356.6666564941406,
+                  139.0
+                ],
+                "status": "recovered",
+                "trigger": "ocr_coverage",
+                "uncovered_bbox_pdf": [
+                  341.0,
+                  123.0,
+                  347.6666666666667,
+                  132.0
+                ],
+                "recovery_dpi": 216,
+                "candidates": [
+                  {
+                    "text": "B",
+                    "bbox": [
+                      341.0,
+                      123.33333333333333,
+                      347.3333333333333,
+                      132.0
+                    ],
+                    "source": "ocr",
+                    "confidence": 93.0
+                  }
+                ],
+                "accepted_count": 1
+              }
+            ]
+          ]
+        }
+      ],
+      "health_samples": 128,
+      "health_p95": 0.026484733098186553,
+      "health_errors": [],
+      "health_max": 0.05453625007066876,
+      "before": {
+        "rss": 544202752,
+        "processes": [
+          {
+            "pid": 632,
+            "rss": 154783744,
+            "cpu_seconds": 0.0,
+            "threads": 4
+          },
+          {
+            "pid": 635,
+            "rss": 39165952,
+            "cpu_seconds": 1.1500000000000001,
+            "threads": 2
+          },
+          {
+            "pid": 638,
+            "rss": 350253056,
+            "cpu_seconds": 18.96,
+            "threads": 12
+          }
+        ]
+      },
+      "peak_rss": 561827840,
+      "after": {
+        "rss": 561827840,
+        "processes": [
+          {
+            "pid": 632,
+            "rss": 154787840,
+            "cpu_seconds": 0.0,
+            "threads": 4
+          },
+          {
+            "pid": 635,
+            "rss": 39165952,
+            "cpu_seconds": 1.1500000000000001,
+            "threads": 2
+          },
+          {
+            "pid": 638,
+            "rss": 367874048,
+            "cpu_seconds": 24.08,
+            "threads": 12
+          }
+        ]
+      }
+    },
+    {
+      "concurrency": 2,
+      "iteration": 1,
+      "wall_seconds": 31.71081885905005,
+      "results": [
+        {
+          "seconds": 24.11333395494148,
+          "errors": [],
+          "stages": [
+            {
+              "stage": "deskew",
+              "seconds": 1.0262023799587041
+            },
+            {
+              "stage": "ocr_http",
+              "preprocessing": "standard",
+              "seconds": 11.813787461956963
+            },
+            {
+              "stage": "ocr_http",
+              "preprocessing": "original_gray",
+              "seconds": 4.8564390919636935
+            }
+          ],
+          "statuses": [
+            "success",
+            "success"
+          ],
+          "ocr_calls": 2,
+          "page_diagnostics": [
+            {
+              "page": 1,
+              "status": "success",
+              "errors": []
+            },
+            {
+              "page": 2,
+              "status": "success",
+              "errors": []
+            }
+          ],
+          "recovery": [
+            [],
+            [
+              {
+                "bbox_pdf": [
+                  332.0,
+                  114.0,
+                  356.6666564941406,
+                  139.0
+                ],
+                "status": "recovered",
+                "trigger": "ocr_coverage",
+                "uncovered_bbox_pdf": [
+                  341.0,
+                  123.0,
+                  347.6666666666667,
+                  132.0
+                ],
+                "recovery_dpi": 216,
+                "candidates": [
+                  {
+                    "text": "B",
+                    "bbox": [
+                      341.0,
+                      123.33333333333333,
+                      347.3333333333333,
+                      132.0
+                    ],
+                    "source": "ocr",
+                    "confidence": 93.0
+                  }
+                ],
+                "accepted_count": 1
+              }
+            ]
+          ]
+        },
+        {
+          "seconds": 25.626895108027384,
+          "errors": [],
+          "stages": [
+            {
+              "stage": "deskew",
+              "seconds": 0.9987665319349617
+            },
+            {
+              "stage": "ocr_http",
+              "preprocessing": "standard",
+              "seconds": 16.699802435934544
+            },
+            {
+              "stage": "ocr_http",
+              "preprocessing": "original_gray",
+              "seconds": 1.451283241971396
+            }
+          ],
+          "statuses": [
+            "success",
+            "success"
+          ],
+          "ocr_calls": 2,
+          "page_diagnostics": [
+            {
+              "page": 1,
+              "status": "success",
+              "errors": []
+            },
+            {
+              "page": 2,
+              "status": "success",
+              "errors": []
+            }
+          ],
+          "recovery": [
+            [],
+            [
+              {
+                "bbox_pdf": [
+                  332.0,
+                  114.0,
+                  356.6666564941406,
+                  139.0
+                ],
+                "status": "recovered",
+                "trigger": "ocr_coverage",
+                "uncovered_bbox_pdf": [
+                  341.0,
+                  123.0,
+                  347.6666666666667,
+                  132.0
+                ],
+                "recovery_dpi": 216,
+                "candidates": [
+                  {
+                    "text": "B",
+                    "bbox": [
+                      341.0,
+                      123.33333333333333,
+                      347.3333333333333,
+                      132.0
+                    ],
+                    "source": "ocr",
+                    "confidence": 93.0
+                  }
+                ],
+                "accepted_count": 1
+              }
+            ]
+          ]
+        }
+      ],
+      "health_samples": 313,
+      "health_p95": 0.09410156903322786,
+      "health_errors": [],
+      "health_max": 0.8524851839756593,
+      "before": {
+        "rss": 193941504,
+        "processes": [
+          {
+            "pid": 632,
+            "rss": 154775552,
+            "cpu_seconds": 0.0,
+            "threads": 2
+          },
+          {
+            "pid": 635,
+            "rss": 39165952,
+            "cpu_seconds": 1.1500000000000001,
+            "threads": 2
+          }
+        ]
+      },
+      "peak_rss": 792088576,
+      "after": {
+        "rss": 775192576,
+        "processes": [
+          {
+            "pid": 632,
+            "rss": 155238400,
+            "cpu_seconds": 0.0,
+            "threads": 4
+          },
+          {
+            "pid": 635,
+            "rss": 39165952,
+            "cpu_seconds": 1.1500000000000001,
+            "threads": 2
+          },
+          {
+            "pid": 653,
+            "rss": 290381824,
+            "cpu_seconds": 15.169999999999998,
+            "threads": 12
+          },
+          {
+            "pid": 658,
+            "rss": 290406400,
+            "cpu_seconds": 14.65,
+            "threads": 12
+          }
+        ]
+      }
+    },
+    {
+      "concurrency": 2,
+      "iteration": 2,
+      "wall_seconds": 14.597030770033598,
+      "results": [
+        {
+          "seconds": 14.53380307101179,
+          "errors": [],
+          "stages": [
+            {
+              "stage": "deskew",
+              "seconds": 0.8579908709507436
+            },
+            {
+              "stage": "ocr_http",
+              "preprocessing": "standard",
+              "seconds": 8.450767870992422
+            },
+            {
+              "stage": "ocr_http",
+              "preprocessing": "original_gray",
+              "seconds": 1.1441172669874504
+            }
+          ],
+          "statuses": [
+            "success",
+            "success"
+          ],
+          "ocr_calls": 2,
+          "page_diagnostics": [
+            {
+              "page": 1,
+              "status": "success",
+              "errors": []
+            },
+            {
+              "page": 2,
+              "status": "success",
+              "errors": []
+            }
+          ],
+          "recovery": [
+            [],
+            [
+              {
+                "bbox_pdf": [
+                  332.0,
+                  114.0,
+                  356.6666564941406,
+                  139.0
+                ],
+                "status": "recovered",
+                "trigger": "ocr_coverage",
+                "uncovered_bbox_pdf": [
+                  341.0,
+                  123.0,
+                  347.6666666666667,
+                  132.0
+                ],
+                "recovery_dpi": 216,
+                "candidates": [
+                  {
+                    "text": "B",
+                    "bbox": [
+                      341.0,
+                      123.33333333333333,
+                      347.3333333333333,
+                      132.0
+                    ],
+                    "source": "ocr",
+                    "confidence": 93.0
+                  }
+                ],
+                "accepted_count": 1
+              }
+            ]
+          ]
+        },
+        {
+          "seconds": 13.896199843962677,
+          "errors": [],
+          "stages": [
+            {
+              "stage": "deskew",
+              "seconds": 0.8552929050056264
+            },
+            {
+              "stage": "ocr_http",
+              "preprocessing": "standard",
+              "seconds": 4.025310238008387
+            },
+            {
+              "stage": "ocr_http",
+              "preprocessing": "original_gray",
+              "seconds": 4.929009099956602
+            }
+          ],
+          "statuses": [
+            "success",
+            "success"
+          ],
+          "ocr_calls": 2,
+          "page_diagnostics": [
+            {
+              "page": 1,
+              "status": "success",
+              "errors": []
+            },
+            {
+              "page": 2,
+              "status": "success",
+              "errors": []
+            }
+          ],
+          "recovery": [
+            [],
+            [
+              {
+                "bbox_pdf": [
+                  332.0,
+                  114.0,
+                  356.6666564941406,
+                  139.0
+                ],
+                "status": "recovered",
+                "trigger": "ocr_coverage",
+                "uncovered_bbox_pdf": [
+                  341.0,
+                  123.0,
+                  347.6666666666667,
+                  132.0
+                ],
+                "recovery_dpi": 216,
+                "candidates": [
+                  {
+                    "text": "B",
+                    "bbox": [
+                      341.0,
+                      123.33333333333333,
+                      347.3333333333333,
+                      132.0
+                    ],
+                    "source": "ocr",
+                    "confidence": 93.0
+                  }
+                ],
+                "accepted_count": 1
+              }
+            ]
+          ]
+        }
+      ],
+      "health_samples": 191,
+      "health_p95": 0.03282118996139616,
+      "health_errors": [],
+      "health_max": 0.0738108690129593,
+      "before": {
+        "rss": 775245824,
+        "processes": [
+          {
+            "pid": 632,
+            "rss": 155291648,
+            "cpu_seconds": 0.0,
+            "threads": 4
+          },
+          {
+            "pid": 635,
+            "rss": 39165952,
+            "cpu_seconds": 1.1500000000000001,
+            "threads": 2
+          },
+          {
+            "pid": 653,
+            "rss": 290381824,
+            "cpu_seconds": 15.169999999999998,
+            "threads": 12
+          },
+          {
+            "pid": 658,
+            "rss": 290406400,
+            "cpu_seconds": 14.65,
+            "threads": 12
+          }
+        ]
+      },
+      "peak_rss": 894648320,
+      "after": {
+        "rss": 894652416,
+        "processes": [
+          {
+            "pid": 632,
+            "rss": 155295744,
+            "cpu_seconds": 0.0,
+            "threads": 4
+          },
+          {
+            "pid": 635,
+            "rss": 39165952,
+            "cpu_seconds": 1.1500000000000001,
+            "threads": 2
+          },
+          {
+            "pid": 653,
+            "rss": 350064640,
+            "cpu_seconds": 20.75,
+            "threads": 12
+          },
+          {
+            "pid": 658,
+            "rss": 350126080,
+            "cpu_seconds": 20.279999999999998,
+            "threads": 12
+          }
+        ]
+      }
+    },
+    {
+      "concurrency": 2,
+      "iteration": 3,
+      "wall_seconds": 22.996198464999907,
+      "results": [
+        {
+          "seconds": 22.946232654969208,
+          "errors": [],
+          "stages": [
+            {
+              "stage": "deskew",
+              "seconds": 0.651959651033394
+            },
+            {
+              "stage": "ocr_http",
+              "preprocessing": "standard",
+              "seconds": 13.70163661299739
+            },
+            {
+              "stage": "ocr_http",
+              "preprocessing": "original_gray",
+              "seconds": 1.7010893819388002
+            }
+          ],
+          "statuses": [
+            "success",
+            "success"
+          ],
+          "ocr_calls": 2,
+          "page_diagnostics": [
+            {
+              "page": 1,
+              "status": "success",
+              "errors": []
+            },
+            {
+              "page": 2,
+              "status": "success",
+              "errors": []
+            }
+          ],
+          "recovery": [
+            [],
+            [
+              {
+                "bbox_pdf": [
+                  332.0,
+                  114.0,
+                  356.6666564941406,
+                  139.0
+                ],
+                "status": "recovered",
+                "trigger": "ocr_coverage",
+                "uncovered_bbox_pdf": [
+                  341.0,
+                  123.0,
+                  347.6666666666667,
+                  132.0
+                ],
+                "recovery_dpi": 216,
+                "candidates": [
+                  {
+                    "text": "B",
+                    "bbox": [
+                      341.0,
+                      123.33333333333333,
+                      347.3333333333333,
+                      132.0
+                    ],
+                    "source": "ocr",
+                    "confidence": 93.0
+                  }
+                ],
+                "accepted_count": 1
+              }
+            ]
+          ]
+        },
+        {
+          "seconds": 22.089227154967375,
+          "errors": [],
+          "stages": [
+            {
+              "stage": "deskew",
+              "seconds": 0.6559942499734461
+            },
+            {
+              "stage": "ocr_http",
+              "preprocessing": "standard",
+              "seconds": 7.021131395944394
+            },
+            {
+              "stage": "ocr_http",
+              "preprocessing": "original_gray",
+              "seconds": 7.365405067917891
+            }
+          ],
+          "statuses": [
+            "success",
+            "success"
+          ],
+          "ocr_calls": 2,
+          "page_diagnostics": [
+            {
+              "page": 1,
+              "status": "success",
+              "errors": []
+            },
+            {
+              "page": 2,
+              "status": "success",
+              "errors": []
+            }
+          ],
+          "recovery": [
+            [],
+            [
+              {
+                "bbox_pdf": [
+                  332.0,
+                  114.0,
+                  356.6666564941406,
+                  139.0
+                ],
+                "status": "recovered",
+                "trigger": "ocr_coverage",
+                "uncovered_bbox_pdf": [
+                  341.0,
+                  123.0,
+                  347.6666666666667,
+                  132.0
+                ],
+                "recovery_dpi": 216,
+                "candidates": [
+                  {
+                    "text": "B",
+                    "bbox": [
+                      341.0,
+                      123.33333333333333,
+                      347.3333333333333,
+                      132.0
+                    ],
+                    "source": "ocr",
+                    "confidence": 93.0
+                  }
+                ],
+                "accepted_count": 1
+              }
+            ]
+          ]
+        }
+      ],
+      "health_samples": 224,
+      "health_p95": 0.07373405701946467,
+      "health_errors": [],
+      "health_max": 0.38941304793115705,
+      "before": {
+        "rss": 894652416,
+        "processes": [
+          {
+            "pid": 632,
+            "rss": 155295744,
+            "cpu_seconds": 0.0,
+            "threads": 4
+          },
+          {
+            "pid": 635,
+            "rss": 39165952,
+            "cpu_seconds": 1.1500000000000001,
+            "threads": 2
+          },
+          {
+            "pid": 653,
+            "rss": 350064640,
+            "cpu_seconds": 20.75,
+            "threads": 12
+          },
+          {
+            "pid": 658,
+            "rss": 350126080,
+            "cpu_seconds": 20.279999999999998,
+            "threads": 12
+          }
+        ]
+      },
+      "peak_rss": 929865728,
+      "after": {
+        "rss": 929865728,
+        "processes": [
+          {
+            "pid": 632,
+            "rss": 155303936,
+            "cpu_seconds": 0.0,
+            "threads": 4
+          },
+          {
+            "pid": 635,
+            "rss": 39165952,
+            "cpu_seconds": 1.1500000000000001,
+            "threads": 2
+          },
+          {
+            "pid": 653,
+            "rss": 367661056,
+            "cpu_seconds": 28.82,
+            "threads": 12
+          },
+          {
+            "pid": 658,
+            "rss": 367734784,
+            "cpu_seconds": 28.529999999999998,
+            "threads": 12
+          }
+        ]
+      }
+    },
+    {
+      "concurrency": 4,
+      "iteration": 1,
+      "wall_seconds": 43.155912725953385,
+      "results": [
+        {
+          "seconds": 28.20732375292573,
+          "errors": [],
+          "stages": [
+            {
+              "stage": "deskew",
+              "seconds": 2.0689945159247145
+            },
+            {
+              "stage": "ocr_http",
+              "preprocessing": "standard",
+              "seconds": 4.701777794049121
+            },
+            {
+              "stage": "ocr_http",
+              "preprocessing": "original_gray",
+              "seconds": 13.157294288044795
+            }
+          ],
+          "statuses": [
+            "success",
+            "success"
+          ],
+          "ocr_calls": 2,
+          "page_diagnostics": [
+            {
+              "page": 1,
+              "status": "success",
+              "errors": []
+            },
+            {
+              "page": 2,
+              "status": "success",
+              "errors": []
+            }
+          ],
+          "recovery": [
+            [],
+            [
+              {
+                "bbox_pdf": [
+                  332.0,
+                  114.0,
+                  356.6666564941406,
+                  139.0
+                ],
+                "status": "recovered",
+                "trigger": "ocr_coverage",
+                "uncovered_bbox_pdf": [
+                  341.0,
+                  123.0,
+                  347.6666666666667,
+                  132.0
+                ],
+                "recovery_dpi": 216,
+                "candidates": [
+                  {
+                    "text": "B",
+                    "bbox": [
+                      341.0,
+                      123.33333333333333,
+                      347.3333333333333,
+                      132.0
+                    ],
+                    "source": "ocr",
+                    "confidence": 93.0
+                  }
+                ],
+                "accepted_count": 1
+              }
+            ]
+          ]
+        },
+        {
+          "seconds": 29.042479650932364,
+          "errors": [],
+          "stages": [
+            {
+              "stage": "deskew",
+              "seconds": 2.049370217951946
+            },
+            {
+              "stage": "ocr_http",
+              "preprocessing": "standard",
+              "seconds": 8.597184362937696
+            },
+            {
+              "stage": "ocr_http",
+              "preprocessing": "original_gray",
+              "seconds": 9.90562867897097
+            }
+          ],
+          "statuses": [
+            "success",
+            "success"
+          ],
+          "ocr_calls": 2,
+          "page_diagnostics": [
+            {
+              "page": 1,
+              "status": "success",
+              "errors": []
+            },
+            {
+              "page": 2,
+              "status": "success",
+              "errors": []
+            }
+          ],
+          "recovery": [
+            [],
+            [
+              {
+                "bbox_pdf": [
+                  332.0,
+                  114.0,
+                  356.6666564941406,
+                  139.0
+                ],
+                "status": "recovered",
+                "trigger": "ocr_coverage",
+                "uncovered_bbox_pdf": [
+                  341.0,
+                  123.0,
+                  347.6666666666667,
+                  132.0
+                ],
+                "recovery_dpi": 216,
+                "candidates": [
+                  {
+                    "text": "B",
+                    "bbox": [
+                      341.0,
+                      123.33333333333333,
+                      347.3333333333333,
+                      132.0
+                    ],
+                    "source": "ocr",
+                    "confidence": 93.0
+                  }
+                ],
+                "accepted_count": 1
+              }
+            ]
+          ]
+        },
+        {
+          "seconds": 29.78908771299757,
+          "errors": [],
+          "stages": [
+            {
+              "stage": "deskew",
+              "seconds": 1.9891841789940372
+            },
+            {
+              "stage": "ocr_http",
+              "preprocessing": "standard",
+              "seconds": 13.082468530046754
+            },
+            {
+              "stage": "ocr_http",
+              "preprocessing": "original_gray",
+              "seconds": 6.315347198978998
+            }
+          ],
+          "statuses": [
+            "success",
+            "success"
+          ],
+          "ocr_calls": 2,
+          "page_diagnostics": [
+            {
+              "page": 1,
+              "status": "success",
+              "errors": []
+            },
+            {
+              "page": 2,
+              "status": "success",
+              "errors": []
+            }
+          ],
+          "recovery": [
+            [],
+            [
+              {
+                "bbox_pdf": [
+                  332.0,
+                  114.0,
+                  356.6666564941406,
+                  139.0
+                ],
+                "status": "recovered",
+                "trigger": "ocr_coverage",
+                "uncovered_bbox_pdf": [
+                  341.0,
+                  123.0,
+                  347.6666666666667,
+                  132.0
+                ],
+                "recovery_dpi": 216,
+                "candidates": [
+                  {
+                    "text": "B",
+                    "bbox": [
+                      341.0,
+                      123.33333333333333,
+                      347.3333333333333,
+                      132.0
+                    ],
+                    "source": "ocr",
+                    "confidence": 93.0
+                  }
+                ],
+                "accepted_count": 1
+              }
+            ]
+          ]
+        },
+        {
+          "seconds": 30.238355882000178,
+          "errors": [],
+          "stages": [
+            {
+              "stage": "deskew",
+              "seconds": 1.900652521988377
+            },
+            {
+              "stage": "ocr_http",
+              "preprocessing": "standard",
+              "seconds": 17.017093650996685
+            },
+            {
+              "stage": "ocr_http",
+              "preprocessing": "original_gray",
+              "seconds": 3.1624193199677393
+            }
+          ],
+          "statuses": [
+            "success",
+            "success"
+          ],
+          "ocr_calls": 2,
+          "page_diagnostics": [
+            {
+              "page": 1,
+              "status": "success",
+              "errors": []
+            },
+            {
+              "page": 2,
+              "status": "success",
+              "errors": []
+            }
+          ],
+          "recovery": [
+            [],
+            [
+              {
+                "bbox_pdf": [
+                  332.0,
+                  114.0,
+                  356.6666564941406,
+                  139.0
+                ],
+                "status": "recovered",
+                "trigger": "ocr_coverage",
+                "uncovered_bbox_pdf": [
+                  341.0,
+                  123.0,
+                  347.6666666666667,
+                  132.0
+                ],
+                "recovery_dpi": 216,
+                "candidates": [
+                  {
+                    "text": "B",
+                    "bbox": [
+                      341.0,
+                      123.33333333333333,
+                      347.3333333333333,
+                      132.0
+                    ],
+                    "source": "ocr",
+                    "confidence": 93.0
+                  }
+                ],
+                "accepted_count": 1
+              }
+            ]
+          ]
+        }
+      ],
+      "health_samples": 453,
+      "health_p95": 0.0688176880357787,
+      "health_errors": [],
+      "health_max": 0.1681293979054317,
+      "before": {
+        "rss": 194428928,
+        "processes": [
+          {
+            "pid": 632,
+            "rss": 155262976,
+            "cpu_seconds": 0.0,
+            "threads": 2
+          },
+          {
+            "pid": 635,
+            "rss": 39165952,
+            "cpu_seconds": 1.1600000000000001,
+            "threads": 2
+          }
+        ]
+      },
+      "peak_rss": 1365102592,
+      "after": {
+        "rss": 1356140544,
+        "processes": [
+          {
+            "pid": 632,
+            "rss": 156028928,
+            "cpu_seconds": 0.0,
+            "threads": 4
+          },
+          {
+            "pid": 635,
+            "rss": 39165952,
+            "cpu_seconds": 1.1600000000000001,
+            "threads": 2
+          },
+          {
+            "pid": 701,
+            "rss": 290242560,
+            "cpu_seconds": 22.98,
+            "threads": 12
+          },
+          {
+            "pid": 706,
+            "rss": 290234368,
+            "cpu_seconds": 22.78,
+            "threads": 12
+          },
+          {
+            "pid": 709,
+            "rss": 290238464,
+            "cpu_seconds": 22.63,
+            "threads": 12
+          },
+          {
+            "pid": 712,
+            "rss": 290230272,
+            "cpu_seconds": 22.67,
+            "threads": 12
+          }
+        ]
+      }
+    },
+    {
+      "concurrency": 4,
+      "iteration": 2,
+      "wall_seconds": 31.298014022991993,
+      "results": [
+        {
+          "seconds": 30.533774206996895,
+          "errors": [],
+          "stages": [
+            {
+              "stage": "deskew",
+              "seconds": 1.1373889530077577
+            },
+            {
+              "stage": "ocr_http",
+              "preprocessing": "standard",
+              "seconds": 16.698990387027152
+            },
+            {
+              "stage": "ocr_http",
+              "preprocessing": "original_gray",
+              "seconds": 7.258226181962527
+            }
+          ],
+          "statuses": [
+            "success",
+            "success"
+          ],
+          "ocr_calls": 2,
+          "page_diagnostics": [
+            {
+              "page": 1,
+              "status": "success",
+              "errors": []
+            },
+            {
+              "page": 2,
+              "status": "success",
+              "errors": []
+            }
+          ],
+          "recovery": [
+            [],
+            [
+              {
+                "bbox_pdf": [
+                  332.0,
+                  114.0,
+                  356.6666564941406,
+                  139.0
+                ],
+                "status": "recovered",
+                "trigger": "ocr_coverage",
+                "uncovered_bbox_pdf": [
+                  341.0,
+                  123.0,
+                  347.6666666666667,
+                  132.0
+                ],
+                "recovery_dpi": 216,
+                "candidates": [
+                  {
+                    "text": "B",
+                    "bbox": [
+                      341.0,
+                      123.33333333333333,
+                      347.3333333333333,
+                      132.0
+                    ],
+                    "source": "ocr",
+                    "confidence": 93.0
+                  }
+                ],
+                "accepted_count": 1
+              }
+            ]
+          ]
+        },
+        {
+          "seconds": 28.147100602043793,
+          "errors": [],
+          "stages": [
+            {
+              "stage": "deskew",
+              "seconds": 1.103342268965207
+            },
+            {
+              "stage": "ocr_http",
+              "preprocessing": "standard",
+              "seconds": 4.7558929619845
+            },
+            {
+              "stage": "ocr_http",
+              "preprocessing": "original_gray",
+              "seconds": 16.746235996950418
+            }
+          ],
+          "statuses": [
+            "success",
+            "success"
+          ],
+          "ocr_calls": 2,
+          "page_diagnostics": [
+            {
+              "page": 1,
+              "status": "success",
+              "errors": []
+            },
+            {
+              "page": 2,
+              "status": "success",
+              "errors": []
+            }
+          ],
+          "recovery": [
+            [],
+            [
+              {
+                "bbox_pdf": [
+                  332.0,
+                  114.0,
+                  356.6666564941406,
+                  139.0
+                ],
+                "status": "recovered",
+                "trigger": "ocr_coverage",
+                "uncovered_bbox_pdf": [
+                  341.0,
+                  123.0,
+                  347.6666666666667,
+                  132.0
+                ],
+                "recovery_dpi": 216,
+                "candidates": [
+                  {
+                    "text": "B",
+                    "bbox": [
+                      341.0,
+                      123.33333333333333,
+                      347.3333333333333,
+                      132.0
+                    ],
+                    "source": "ocr",
+                    "confidence": 93.0
+                  }
+                ],
+                "accepted_count": 1
+              }
+            ]
+          ]
+        },
+        {
+          "seconds": 29.446337539004162,
+          "errors": [],
+          "stages": [
+            {
+              "stage": "deskew",
+              "seconds": 1.0853711949894205
+            },
+            {
+              "stage": "ocr_http",
+              "preprocessing": "standard",
+              "seconds": 10.739360993960872
+            },
+            {
+              "stage": "ocr_http",
+              "preprocessing": "original_gray",
+              "seconds": 11.586025747004896
+            }
+          ],
+          "statuses": [
+            "success",
+            "success"
+          ],
+          "ocr_calls": 2,
+          "page_diagnostics": [
+            {
+              "page": 1,
+              "status": "success",
+              "errors": []
+            },
+            {
+              "page": 2,
+              "status": "success",
+              "errors": []
+            }
+          ],
+          "recovery": [
+            [],
+            [
+              {
+                "bbox_pdf": [
+                  332.0,
+                  114.0,
+                  356.6666564941406,
+                  139.0
+                ],
+                "status": "recovered",
+                "trigger": "ocr_coverage",
+                "uncovered_bbox_pdf": [
+                  341.0,
+                  123.0,
+                  347.6666666666667,
+                  132.0
+                ],
+                "recovery_dpi": 216,
+                "candidates": [
+                  {
+                    "text": "B",
+                    "bbox": [
+                      341.0,
+                      123.33333333333333,
+                      347.3333333333333,
+                      132.0
+                    ],
+                    "source": "ocr",
+                    "confidence": 93.0
+                  }
+                ],
+                "accepted_count": 1
+              }
+            ]
+          ]
+        },
+        {
+          "seconds": 31.235846558003686,
+          "errors": [],
+          "stages": [
+            {
+              "stage": "deskew",
+              "seconds": 1.0490105079952627
+            },
+            {
+              "stage": "ocr_http",
+              "preprocessing": "standard",
+              "seconds": 20.839666399057023
+            },
+            {
+              "stage": "ocr_http",
+              "preprocessing": "original_gray",
+              "seconds": 4.1699623230379075
+            }
+          ],
+          "statuses": [
+            "success",
+            "success"
+          ],
+          "ocr_calls": 2,
+          "page_diagnostics": [
+            {
+              "page": 1,
+              "status": "success",
+              "errors": []
+            },
+            {
+              "page": 2,
+              "status": "success",
+              "errors": []
+            }
+          ],
+          "recovery": [
+            [],
+            [
+              {
+                "bbox_pdf": [
+                  332.0,
+                  114.0,
+                  356.6666564941406,
+                  139.0
+                ],
+                "status": "recovered",
+                "trigger": "ocr_coverage",
+                "uncovered_bbox_pdf": [
+                  341.0,
+                  123.0,
+                  347.6666666666667,
+                  132.0
+                ],
+                "recovery_dpi": 216,
+                "candidates": [
+                  {
+                    "text": "B",
+                    "bbox": [
+                      341.0,
+                      123.33333333333333,
+                      347.3333333333333,
+                      132.0
+                    ],
+                    "source": "ocr",
+                    "confidence": 93.0
+                  }
+                ],
+                "accepted_count": 1
+              }
+            ]
+          ]
+        }
+      ],
+      "health_samples": 341,
+      "health_p95": 0.0608169169863686,
+      "health_errors": [],
+      "health_max": 0.15942625096067786,
+      "before": {
+        "rss": 1356283904,
+        "processes": [
+          {
+            "pid": 632,
+            "rss": 156172288,
+            "cpu_seconds": 0.0,
+            "threads": 4
+          },
+          {
+            "pid": 635,
+            "rss": 39165952,
+            "cpu_seconds": 1.1600000000000001,
+            "threads": 2
+          },
+          {
+            "pid": 701,
+            "rss": 290242560,
+            "cpu_seconds": 22.98,
+            "threads": 12
+          },
+          {
+            "pid": 706,
+            "rss": 290234368,
+            "cpu_seconds": 22.78,
+            "threads": 12
+          },
+          {
+            "pid": 709,
+            "rss": 290238464,
+            "cpu_seconds": 22.63,
+            "threads": 12
+          },
+          {
+            "pid": 712,
+            "rss": 290230272,
+            "cpu_seconds": 22.67,
+            "threads": 12
+          }
+        ]
+      },
+      "peak_rss": 1594159104,
+      "after": {
+        "rss": 1594159104,
+        "processes": [
+          {
+            "pid": 632,
+            "rss": 156184576,
+            "cpu_seconds": 0.0,
+            "threads": 4
+          },
+          {
+            "pid": 635,
+            "rss": 39165952,
+            "cpu_seconds": 1.1600000000000001,
+            "threads": 2
+          },
+          {
+            "pid": 701,
+            "rss": 349691904,
+            "cpu_seconds": 30.169999999999998,
+            "threads": 12
+          },
+          {
+            "pid": 706,
+            "rss": 349708288,
+            "cpu_seconds": 30.18,
+            "threads": 12
+          },
+          {
+            "pid": 709,
+            "rss": 349728768,
+            "cpu_seconds": 29.44,
+            "threads": 12
+          },
+          {
+            "pid": 712,
+            "rss": 349679616,
+            "cpu_seconds": 30.63,
+            "threads": 12
+          }
+        ]
+      }
+    },
+    {
+      "concurrency": 4,
+      "iteration": 3,
+      "wall_seconds": 38.954499006969854,
+      "results": [
+        {
+          "seconds": 37.163236672990024,
+          "errors": [],
+          "stages": [
+            {
+              "stage": "deskew",
+              "seconds": 1.3477772030746564
+            },
+            {
+              "stage": "ocr_http",
+              "preprocessing": "standard",
+              "seconds": 18.366195913986303
+            },
+            {
+              "stage": "ocr_http",
+              "preprocessing": "original_gray",
+              "seconds": 11.239900708082132
+            }
+          ],
+          "statuses": [
+            "success",
+            "success"
+          ],
+          "ocr_calls": 2,
+          "page_diagnostics": [
+            {
+              "page": 1,
+              "status": "success",
+              "errors": []
+            },
+            {
+              "page": 2,
+              "status": "success",
+              "errors": []
+            }
+          ],
+          "recovery": [
+            [],
+            [
+              {
+                "bbox_pdf": [
+                  332.0,
+                  114.0,
+                  356.6666564941406,
+                  139.0
+                ],
+                "status": "recovered",
+                "trigger": "ocr_coverage",
+                "uncovered_bbox_pdf": [
+                  341.0,
+                  123.0,
+                  347.6666666666667,
+                  132.0
+                ],
+                "recovery_dpi": 216,
+                "candidates": [
+                  {
+                    "text": "B",
+                    "bbox": [
+                      341.0,
+                      123.33333333333333,
+                      347.3333333333333,
+                      132.0
+                    ],
+                    "source": "ocr",
+                    "confidence": 93.0
+                  }
+                ],
+                "accepted_count": 1
+              }
+            ]
+          ]
+        },
+        {
+          "seconds": 35.61677319300361,
+          "errors": [],
+          "stages": [
+            {
+              "stage": "deskew",
+              "seconds": 1.3270500809885561
+            },
+            {
+              "stage": "ocr_http",
+              "preprocessing": "standard",
+              "seconds": 13.473234249046072
+            },
+            {
+              "stage": "ocr_http",
+              "preprocessing": "original_gray",
+              "seconds": 14.759997533052228
+            }
+          ],
+          "statuses": [
+            "success",
+            "success"
+          ],
+          "ocr_calls": 2,
+          "page_diagnostics": [
+            {
+              "page": 1,
+              "status": "success",
+              "errors": []
+            },
+            {
+              "page": 2,
+              "status": "success",
+              "errors": []
+            }
+          ],
+          "recovery": [
+            [],
+            [
+              {
+                "bbox_pdf": [
+                  332.0,
+                  114.0,
+                  356.6666564941406,
+                  139.0
+                ],
+                "status": "recovered",
+                "trigger": "ocr_coverage",
+                "uncovered_bbox_pdf": [
+                  341.0,
+                  123.0,
+                  347.6666666666667,
+                  132.0
+                ],
+                "recovery_dpi": 216,
+                "candidates": [
+                  {
+                    "text": "B",
+                    "bbox": [
+                      341.0,
+                      123.33333333333333,
+                      347.3333333333333,
+                      132.0
+                    ],
+                    "source": "ocr",
+                    "confidence": 93.0
+                  }
+                ],
+                "accepted_count": 1
+              }
+            ]
+          ]
+        },
+        {
+          "seconds": 34.2365395569941,
+          "errors": [],
+          "stages": [
+            {
+              "stage": "deskew",
+              "seconds": 1.320081258076243
+            },
+            {
+              "stage": "ocr_http",
+              "preprocessing": "standard",
+              "seconds": 6.856423023040406
+            },
+            {
+              "stage": "ocr_http",
+              "preprocessing": "original_gray",
+              "seconds": 19.90853281202726
+            }
+          ],
+          "statuses": [
+            "success",
+            "success"
+          ],
+          "ocr_calls": 2,
+          "page_diagnostics": [
+            {
+              "page": 1,
+              "status": "success",
+              "errors": []
+            },
+            {
+              "page": 2,
+              "status": "success",
+              "errors": []
+            }
+          ],
+          "recovery": [
+            [],
+            [
+              {
+                "bbox_pdf": [
+                  332.0,
+                  114.0,
+                  356.6666564941406,
+                  139.0
+                ],
+                "status": "recovered",
+                "trigger": "ocr_coverage",
+                "uncovered_bbox_pdf": [
+                  341.0,
+                  123.0,
+                  347.6666666666667,
+                  132.0
+                ],
+                "recovery_dpi": 216,
+                "candidates": [
+                  {
+                    "text": "B",
+                    "bbox": [
+                      341.0,
+                      123.33333333333333,
+                      347.3333333333333,
+                      132.0
+                    ],
+                    "source": "ocr",
+                    "confidence": 93.0
+                  }
+                ],
+                "accepted_count": 1
+              }
+            ]
+          ]
+        },
+        {
+          "seconds": 38.862567606032826,
+          "errors": [],
+          "stages": [
+            {
+              "stage": "deskew",
+              "seconds": 1.3368570089805871
+            },
+            {
+              "stage": "ocr_http",
+              "preprocessing": "standard",
+              "seconds": 25.868353729019873
+            },
+            {
+              "stage": "ocr_http",
+              "preprocessing": "original_gray",
+              "seconds": 4.980305628967471
+            }
+          ],
+          "statuses": [
+            "success",
+            "success"
+          ],
+          "ocr_calls": 2,
+          "page_diagnostics": [
+            {
+              "page": 1,
+              "status": "success",
+              "errors": []
+            },
+            {
+              "page": 2,
+              "status": "success",
+              "errors": []
+            }
+          ],
+          "recovery": [
+            [],
+            [
+              {
+                "bbox_pdf": [
+                  332.0,
+                  114.0,
+                  356.6666564941406,
+                  139.0
+                ],
+                "status": "recovered",
+                "trigger": "ocr_coverage",
+                "uncovered_bbox_pdf": [
+                  341.0,
+                  123.0,
+                  347.6666666666667,
+                  132.0
+                ],
+                "recovery_dpi": 216,
+                "candidates": [
+                  {
+                    "text": "B",
+                    "bbox": [
+                      341.0,
+                      123.33333333333333,
+                      347.3333333333333,
+                      132.0
+                    ],
+                    "source": "ocr",
+                    "confidence": 93.0
+                  }
+                ],
+                "accepted_count": 1
+              }
+            ]
+          ]
+        }
+      ],
+      "health_samples": 359,
+      "health_p95": 0.11495242291130126,
+      "health_errors": [],
+      "health_max": 0.2722311809193343,
+      "before": {
+        "rss": 1594159104,
+        "processes": [
+          {
+            "pid": 632,
+            "rss": 156184576,
+            "cpu_seconds": 0.0,
+            "threads": 4
+          },
+          {
+            "pid": 635,
+            "rss": 39165952,
+            "cpu_seconds": 1.1600000000000001,
+            "threads": 2
+          },
+          {
+            "pid": 701,
+            "rss": 349691904,
+            "cpu_seconds": 30.169999999999998,
+            "threads": 12
+          },
+          {
+            "pid": 706,
+            "rss": 349708288,
+            "cpu_seconds": 30.18,
+            "threads": 12
+          },
+          {
+            "pid": 709,
+            "rss": 349728768,
+            "cpu_seconds": 29.44,
+            "threads": 12
+          },
+          {
+            "pid": 712,
+            "rss": 349679616,
+            "cpu_seconds": 30.63,
+            "threads": 12
+          }
+        ]
+      },
+      "peak_rss": 1664720896,
+      "after": {
+        "rss": 1664720896,
+        "processes": [
+          {
+            "pid": 632,
+            "rss": 156184576,
+            "cpu_seconds": 0.0,
+            "threads": 4
+          },
+          {
+            "pid": 635,
+            "rss": 39165952,
+            "cpu_seconds": 1.1600000000000001,
+            "threads": 2
+          },
+          {
+            "pid": 701,
+            "rss": 367304704,
+            "cpu_seconds": 38.38,
+            "threads": 12
+          },
+          {
+            "pid": 706,
+            "rss": 367353856,
+            "cpu_seconds": 38.53,
+            "threads": 12
+          },
+          {
+            "pid": 709,
+            "rss": 367403008,
+            "cpu_seconds": 38.17,
+            "threads": 12
+          },
+          {
+            "pid": 712,
+            "rss": 367308800,
+            "cpu_seconds": 38.79,
+            "threads": 12
+          }
+        ]
+      }
+    }
+  ],
+  "after_pool_close": [
+    {
+      "concurrency": 1,
+      "rss": 193941504,
+      "processes": [
+        {
+          "pid": 632,
+          "rss": 154775552,
+          "cpu_seconds": 0.0,
+          "threads": 2
+        },
+        {
+          "pid": 635,
+          "rss": 39165952,
+          "cpu_seconds": 1.1500000000000001,
+          "threads": 2
+        }
+      ]
+    },
+    {
+      "concurrency": 2,
+      "rss": 194428928,
+      "processes": [
+        {
+          "pid": 632,
+          "rss": 155262976,
+          "cpu_seconds": 0.0,
+          "threads": 2
+        },
+        {
+          "pid": 635,
+          "rss": 39165952,
+          "cpu_seconds": 1.1600000000000001,
+          "threads": 2
+        }
+      ]
+    },
+    {
+      "concurrency": 4,
+      "rss": 195309568,
+      "processes": [
+        {
+          "pid": 632,
+          "rss": 156143616,
+          "cpu_seconds": 0.0,
+          "threads": 2
+        },
+        {
+          "pid": 635,
+          "rss": 39165952,
+          "cpu_seconds": 1.1600000000000001,
+          "threads": 2
+        }
+      ]
+    }
+  ]
+}

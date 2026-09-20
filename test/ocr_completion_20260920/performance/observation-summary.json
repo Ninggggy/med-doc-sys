@@ -1,0 +1,27 @@
+{
+  "events": {
+    "start": 1,
+    "resources": 19343,
+    "request_enter": 42,
+    "execution_start": 42,
+    "engine_start": 85,
+    "engine_end": 85,
+    "execution_end": 42,
+    "request_end": 42
+  },
+  "max_queue_seconds": 29.809996519004926,
+  "peak_server_rss_kb": 310676,
+  "peak_engine_processes": 1,
+  "last_event": {
+    "event": "resources",
+    "time": 882462.300056361,
+    "request": null,
+    "server": {
+      "VmRSS": "310676 kB",
+      "Threads": "16"
+    },
+    "engines": {},
+    "admitted": 0
+  },
+  "note": "HTTP request与Tesseract进程分别计数；主识别与数值复核共用请求上下文，无正文日志"
+}

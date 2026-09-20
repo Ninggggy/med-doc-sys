@@ -1,0 +1,293 @@
+[
+  {
+    "document": 1,
+    "page": 1,
+    "bbox_pdf": [
+      447.3333435058594,
+      260.3333435058594,
+      626.6666870117188,
+      283.3333435058594
+    ],
+    "expected": "注册资本陆仟万元整",
+    "actual": "注册资本陆什万元整",
+    "words": [
+      {
+        "text": "注",
+        "bbox": [
+          455.3333333333333,
+          267.3333333333333,
+          467.3333333333333,
+          279.3333333333333
+        ],
+        "source": "ocr",
+        "confidence": 91.0
+      },
+      {
+        "text": "册",
+        "bbox": [
+          476.6666666666667,
+          268.0,
+          488.6666666666667,
+          279.3333333333333
+        ],
+        "source": "ocr",
+        "confidence": 91.0
+      },
+      {
+        "text": "资",
+        "bbox": [
+          498.6666666666667,
+          267.3333333333333,
+          510.0,
+          280.0
+        ],
+        "source": "ocr",
+        "confidence": 91.0
+      },
+      {
+        "text": "本",
+        "bbox": [
+          526.0,
+          267.3333333333333,
+          531.3333333333334,
+          279.3333333333333
+        ],
+        "source": "ocr",
+        "confidence": 81.0
+      },
+      {
+        "text": "陆",
+        "bbox": [
+          546.6666666666666,
+          266.6666666666667,
+          560.6666666666666,
+          278.0
+        ],
+        "source": "ocr",
+        "confidence": 81.0
+      },
+      {
+        "text": "什",
+        "bbox": [
+          560.0,
+          264.0,
+          571.3333333333334,
+          283.3333333333333
+        ],
+        "source": "ocr",
+        "confidence": 79.0
+      },
+      {
+        "text": "万",
+        "bbox": [
+          570.6666666666666,
+          267.3333333333333,
+          578.0,
+          278.0
+        ],
+        "source": "ocr",
+        "confidence": 96.0
+      },
+      {
+        "text": "元",
+        "bbox": [
+          582.6666666666666,
+          267.3333333333333,
+          589.3333333333334,
+          278.0
+        ],
+        "source": "ocr",
+        "confidence": 93.0
+      },
+      {
+        "text": "整",
+        "bbox": [
+          594.6666666666666,
+          266.6666666666667,
+          600.6666666666666,
+          278.0
+        ],
+        "source": "ocr",
+        "confidence": 88.0
+      }
+    ],
+    "input_size": [
+      269,
+      35
+    ]
+  },
+  {
+    "document": 2,
+    "page": 3,
+    "bbox_pdf": [
+      463.0,
+      221.33334350585938,
+      605.0,
+      243.33334350585938
+    ],
+    "expected": "搽剂生产线3",
+    "actual": "PRAIAPH3",
+    "words": [
+      {
+        "text": "PRAIA",
+        "bbox": [
+          514.0,
+          227.66666666666666,
+          536.6666666666666,
+          241.33333333333334
+        ],
+        "source": "ocr",
+        "confidence": 54.0,
+        "numeric_verification": {
+          "word_indices": [
+            4,
+            5,
+            6
+          ],
+          "bbox_pixel": [
+            152,
+            14,
+            318,
+            61
+          ],
+          "primary": "PRAIA PH 3",
+          "secondary": "PR AEP He 3",
+          "status": "numeric_uncertain",
+          "reason_code": "numeric_candidates_disagree",
+          "secondary_image_scale": 1.0,
+          "bbox_pdf": [
+            513.6666666666666,
+            226.0,
+            569.0,
+            241.66666666666666
+          ],
+          "page": 3,
+          "source": "ocr"
+        }
+      },
+      {
+        "text": "PH",
+        "bbox": [
+          541.0,
+          229.0,
+          553.6666666666666,
+          237.33333333333334
+        ],
+        "source": "ocr",
+        "confidence": 33.0,
+        "numeric_verification": {
+          "word_indices": [
+            4,
+            5,
+            6
+          ],
+          "bbox_pixel": [
+            152,
+            14,
+            318,
+            61
+          ],
+          "primary": "PRAIA PH 3",
+          "secondary": "PR AEP He 3",
+          "status": "numeric_uncertain",
+          "reason_code": "numeric_candidates_disagree",
+          "secondary_image_scale": 1.0,
+          "bbox_pdf": [
+            513.6666666666666,
+            226.0,
+            569.0,
+            241.66666666666666
+          ],
+          "page": 3,
+          "source": "ocr"
+        }
+      },
+      {
+        "text": "3",
+        "bbox": [
+          558.6666666666666,
+          230.33333333333334,
+          562.6666666666666,
+          236.66666666666666
+        ],
+        "source": "ocr",
+        "confidence": 84.0,
+        "numeric_verification": {
+          "word_indices": [
+            4,
+            5,
+            6
+          ],
+          "bbox_pixel": [
+            152,
+            14,
+            318,
+            61
+          ],
+          "primary": "PRAIA PH 3",
+          "secondary": "PR AEP He 3",
+          "status": "numeric_uncertain",
+          "reason_code": "numeric_candidates_disagree",
+          "secondary_image_scale": 1.0,
+          "bbox_pdf": [
+            513.6666666666666,
+            226.0,
+            569.0,
+            241.66666666666666
+          ],
+          "page": 3,
+          "source": "ocr"
+        }
+      }
+    ],
+    "input_size": null
+  },
+  {
+    "document": 3,
+    "page": 3,
+    "bbox_pdf": [
+      566.3333740234375,
+      664.0,
+      735.3333740234375,
+      685.6666870117188
+    ],
+    "expected": "间苯三酚生产线",
+    "actual": "alaeAeee",
+    "words": [
+      {
+        "text": "alae",
+        "bbox": [
+          615.3333333333334,
+          668.6666666666666,
+          639.0,
+          683.6666666666666
+        ],
+        "source": "ocr",
+        "confidence": 0.0
+      },
+      {
+        "text": "Ae",
+        "bbox": [
+          646.3333333333334,
+          670.3333333333334,
+          664.0,
+          679.3333333333334
+        ],
+        "source": "ocr",
+        "confidence": 19.0
+      },
+      {
+        "text": "ee",
+        "bbox": [
+          667.3333333333334,
+          670.3333333333334,
+          687.3333333333334,
+          679.3333333333334
+        ],
+        "source": "ocr",
+        "confidence": 43.0
+      }
+    ],
+    "input_size": null
+  }
+]

@@ -1,0 +1,1407 @@
+{
+  "old_calls": 2,
+  "new_calls": 1,
+  "mode": "actual_original_crops_real_ocr_controlled_recovery_jobs",
+  "attempts": [
+    {
+      "bbox_pdf": [
+        134.6666717529297,
+        173.6666717529297,
+        296.66668701171875,
+        195.6666717529297
+      ],
+      "status": "unresolved",
+      "trigger": "ocr_coverage",
+      "uncovered_bbox_pdf": [
+        134.88888549804688,
+        173.88888549804688,
+        296.4444580078125,
+        195.5
+      ],
+      "recovery_dpi": 216,
+      "requested_bbox_pdf": [
+        134.88888549804688,
+        173.88888549804688,
+        296.4444580078125,
+        195.5
+      ],
+      "pixel_window": [
+        404,
+        521,
+        890,
+        587
+      ],
+      "segmentation_psm": 7,
+      "segmentation_reason": "text_lines",
+      "image_line_support": [],
+      "candidates": [
+        {
+          "text": "浙江",
+          "bbox": [
+            139.0,
+            179.66666666666666,
+            155.33333333333334,
+            187.33333333333334
+          ],
+          "source": "ocr",
+          "confidence": 96.0
+        },
+        {
+          "text": "省",
+          "bbox": [
+            159.33333333333334,
+            179.66666666666666,
+            164.0,
+            187.66666666666666
+          ],
+          "source": "ocr",
+          "confidence": 96.0
+        },
+        {
+          "text": "金华",
+          "bbox": [
+            168.33333333333334,
+            179.66666666666666,
+            186.0,
+            187.66666666666666
+          ],
+          "source": "ocr",
+          "confidence": 93.0
+        },
+        {
+          "text": "市",
+          "bbox": [
+            186.0,
+            178.33333333333334,
+            194.33333333333334,
+            191.66666666666666
+          ],
+          "source": "ocr",
+          "confidence": 93.0
+        },
+        {
+          "text": "婺",
+          "bbox": [
+            194.33333333333334,
+            179.66666666666666,
+            203.66666666666666,
+            187.66666666666666
+          ],
+          "source": "ocr",
+          "confidence": 0.0
+        },
+        {
+          "text": "城区",
+          "bbox": [
+            203.33333333333334,
+            178.33333333333334,
+            218.66666666666666,
+            191.66666666666666
+          ],
+          "source": "ocr",
+          "confidence": 93.0
+        },
+        {
+          "text": "汤",
+          "bbox": [
+            218.33333333333334,
+            180.0,
+            224.0,
+            187.66666666666666
+          ],
+          "source": "ocr",
+          "confidence": 92.0
+        },
+        {
+          "text": "溪",
+          "bbox": [
+            227.66666666666666,
+            179.66666666666666,
+            237.66666666666666,
+            187.66666666666666
+          ],
+          "source": "ocr",
+          "confidence": 92.0
+        },
+        {
+          "text": "镇",
+          "bbox": [
+            242.0,
+            179.66666666666666,
+            246.0,
+            187.66666666666666
+          ],
+          "source": "ocr",
+          "confidence": 92.0,
+          "numeric_verification": {
+            "word_indices": [
+              12,
+              13,
+              14,
+              15,
+              16,
+              17
+            ],
+            "bbox_pixel": [
+              321,
+              5,
+              486,
+              64
+            ],
+            "primary": "镇 永 湖 街 788 号",
+            "secondary": "",
+            "status": "numeric_uncertain",
+            "reason_code": "numeric_candidates_disagree",
+            "secondary_image_scale": 1.0,
+            "bbox_pdf": [
+              241.66666666666666,
+              175.33333333333334,
+              296.6666666666667,
+              195.0
+            ],
+            "page": 3,
+            "source": "ocr"
+          }
+        },
+        {
+          "text": "永",
+          "bbox": [
+            246.0,
+            178.33333333333334,
+            253.66666666666666,
+            191.66666666666666
+          ],
+          "source": "ocr",
+          "confidence": 80.0,
+          "numeric_verification": {
+            "word_indices": [
+              12,
+              13,
+              14,
+              15,
+              16,
+              17
+            ],
+            "bbox_pixel": [
+              321,
+              5,
+              486,
+              64
+            ],
+            "primary": "镇 永 湖 街 788 号",
+            "secondary": "",
+            "status": "numeric_uncertain",
+            "reason_code": "numeric_candidates_disagree",
+            "secondary_image_scale": 1.0,
+            "bbox_pdf": [
+              241.66666666666666,
+              175.33333333333334,
+              296.6666666666667,
+              195.0
+            ],
+            "page": 3,
+            "source": "ocr"
+          }
+        },
+        {
+          "text": "湖",
+          "bbox": [
+            253.33333333333334,
+            179.66666666666666,
+            263.6666666666667,
+            187.66666666666666
+          ],
+          "source": "ocr",
+          "confidence": 84.0,
+          "numeric_verification": {
+            "word_indices": [
+              12,
+              13,
+              14,
+              15,
+              16,
+              17
+            ],
+            "bbox_pixel": [
+              321,
+              5,
+              486,
+              64
+            ],
+            "primary": "镇 永 湖 街 788 号",
+            "secondary": "",
+            "status": "numeric_uncertain",
+            "reason_code": "numeric_candidates_disagree",
+            "secondary_image_scale": 1.0,
+            "bbox_pdf": [
+              241.66666666666666,
+              175.33333333333334,
+              296.6666666666667,
+              195.0
+            ],
+            "page": 3,
+            "source": "ocr"
+          }
+        },
+        {
+          "text": "街",
+          "bbox": [
+            263.3333333333333,
+            178.33333333333334,
+            271.0,
+            191.66666666666666
+          ],
+          "source": "ocr",
+          "confidence": 92.0,
+          "numeric_verification": {
+            "word_indices": [
+              12,
+              13,
+              14,
+              15,
+              16,
+              17
+            ],
+            "bbox_pixel": [
+              321,
+              5,
+              486,
+              64
+            ],
+            "primary": "镇 永 湖 街 788 号",
+            "secondary": "",
+            "status": "numeric_uncertain",
+            "reason_code": "numeric_candidates_disagree",
+            "secondary_image_scale": 1.0,
+            "bbox_pdf": [
+              241.66666666666666,
+              175.33333333333334,
+              296.6666666666667,
+              195.0
+            ],
+            "page": 3,
+            "source": "ocr"
+          }
+        },
+        {
+          "text": "788",
+          "bbox": [
+            270.0,
+            180.66666666666666,
+            282.0,
+            186.66666666666666
+          ],
+          "source": "ocr",
+          "confidence": 81.0,
+          "numeric_verification": {
+            "word_indices": [
+              12,
+              13,
+              14,
+              15,
+              16,
+              17
+            ],
+            "bbox_pixel": [
+              321,
+              5,
+              486,
+              64
+            ],
+            "primary": "镇 永 湖 街 788 号",
+            "secondary": "",
+            "status": "numeric_uncertain",
+            "reason_code": "numeric_candidates_disagree",
+            "secondary_image_scale": 1.0,
+            "bbox_pdf": [
+              241.66666666666666,
+              175.33333333333334,
+              296.6666666666667,
+              195.0
+            ],
+            "page": 3,
+            "source": "ocr"
+          }
+        },
+        {
+          "text": "号",
+          "bbox": [
+            285.0,
+            179.66666666666666,
+            292.0,
+            187.66666666666666
+          ],
+          "source": "ocr",
+          "confidence": 96.0,
+          "numeric_verification": {
+            "word_indices": [
+              12,
+              13,
+              14,
+              15,
+              16,
+              17
+            ],
+            "bbox_pixel": [
+              321,
+              5,
+              486,
+              64
+            ],
+            "primary": "镇 永 湖 街 788 号",
+            "secondary": "",
+            "status": "numeric_uncertain",
+            "reason_code": "numeric_candidates_disagree",
+            "secondary_image_scale": 1.0,
+            "bbox_pdf": [
+              241.66666666666666,
+              175.33333333333334,
+              296.6666666666667,
+              195.0
+            ],
+            "page": 3,
+            "source": "ocr"
+          }
+        }
+      ],
+      "candidate_lines": [
+        {
+          "_ordered_words": [
+            {
+              "text": "浙江",
+              "bbox": [
+                139.0,
+                179.66666666666666,
+                155.33333333333334,
+                187.33333333333334
+              ],
+              "source": "ocr",
+              "confidence": 96.0
+            },
+            {
+              "text": "省",
+              "bbox": [
+                159.33333333333334,
+                179.66666666666666,
+                164.0,
+                187.66666666666666
+              ],
+              "source": "ocr",
+              "confidence": 96.0
+            },
+            {
+              "text": "金华",
+              "bbox": [
+                168.33333333333334,
+                179.66666666666666,
+                186.0,
+                187.66666666666666
+              ],
+              "source": "ocr",
+              "confidence": 93.0
+            },
+            {
+              "text": "市",
+              "bbox": [
+                186.0,
+                178.33333333333334,
+                194.33333333333334,
+                191.66666666666666
+              ],
+              "source": "ocr",
+              "confidence": 93.0
+            },
+            {
+              "text": "婺",
+              "bbox": [
+                194.33333333333334,
+                179.66666666666666,
+                203.66666666666666,
+                187.66666666666666
+              ],
+              "source": "ocr",
+              "confidence": 0.0
+            },
+            {
+              "text": "城区",
+              "bbox": [
+                203.33333333333334,
+                178.33333333333334,
+                218.66666666666666,
+                191.66666666666666
+              ],
+              "source": "ocr",
+              "confidence": 93.0
+            },
+            {
+              "text": "汤",
+              "bbox": [
+                218.33333333333334,
+                180.0,
+                224.0,
+                187.66666666666666
+              ],
+              "source": "ocr",
+              "confidence": 92.0
+            },
+            {
+              "text": "溪",
+              "bbox": [
+                227.66666666666666,
+                179.66666666666666,
+                237.66666666666666,
+                187.66666666666666
+              ],
+              "source": "ocr",
+              "confidence": 92.0
+            },
+            {
+              "text": "镇",
+              "bbox": [
+                242.0,
+                179.66666666666666,
+                246.0,
+                187.66666666666666
+              ],
+              "source": "ocr",
+              "confidence": 92.0,
+              "numeric_verification": {
+                "word_indices": [
+                  12,
+                  13,
+                  14,
+                  15,
+                  16,
+                  17
+                ],
+                "bbox_pixel": [
+                  321,
+                  5,
+                  486,
+                  64
+                ],
+                "primary": "镇 永 湖 街 788 号",
+                "secondary": "",
+                "status": "numeric_uncertain",
+                "reason_code": "numeric_candidates_disagree",
+                "secondary_image_scale": 1.0,
+                "bbox_pdf": [
+                  241.66666666666666,
+                  175.33333333333334,
+                  296.6666666666667,
+                  195.0
+                ],
+                "page": 3,
+                "source": "ocr"
+              }
+            },
+            {
+              "text": "永",
+              "bbox": [
+                246.0,
+                178.33333333333334,
+                253.66666666666666,
+                191.66666666666666
+              ],
+              "source": "ocr",
+              "confidence": 80.0,
+              "numeric_verification": {
+                "word_indices": [
+                  12,
+                  13,
+                  14,
+                  15,
+                  16,
+                  17
+                ],
+                "bbox_pixel": [
+                  321,
+                  5,
+                  486,
+                  64
+                ],
+                "primary": "镇 永 湖 街 788 号",
+                "secondary": "",
+                "status": "numeric_uncertain",
+                "reason_code": "numeric_candidates_disagree",
+                "secondary_image_scale": 1.0,
+                "bbox_pdf": [
+                  241.66666666666666,
+                  175.33333333333334,
+                  296.6666666666667,
+                  195.0
+                ],
+                "page": 3,
+                "source": "ocr"
+              }
+            },
+            {
+              "text": "湖",
+              "bbox": [
+                253.33333333333334,
+                179.66666666666666,
+                263.6666666666667,
+                187.66666666666666
+              ],
+              "source": "ocr",
+              "confidence": 84.0,
+              "numeric_verification": {
+                "word_indices": [
+                  12,
+                  13,
+                  14,
+                  15,
+                  16,
+                  17
+                ],
+                "bbox_pixel": [
+                  321,
+                  5,
+                  486,
+                  64
+                ],
+                "primary": "镇 永 湖 街 788 号",
+                "secondary": "",
+                "status": "numeric_uncertain",
+                "reason_code": "numeric_candidates_disagree",
+                "secondary_image_scale": 1.0,
+                "bbox_pdf": [
+                  241.66666666666666,
+                  175.33333333333334,
+                  296.6666666666667,
+                  195.0
+                ],
+                "page": 3,
+                "source": "ocr"
+              }
+            },
+            {
+              "text": "街",
+              "bbox": [
+                263.3333333333333,
+                178.33333333333334,
+                271.0,
+                191.66666666666666
+              ],
+              "source": "ocr",
+              "confidence": 92.0,
+              "numeric_verification": {
+                "word_indices": [
+                  12,
+                  13,
+                  14,
+                  15,
+                  16,
+                  17
+                ],
+                "bbox_pixel": [
+                  321,
+                  5,
+                  486,
+                  64
+                ],
+                "primary": "镇 永 湖 街 788 号",
+                "secondary": "",
+                "status": "numeric_uncertain",
+                "reason_code": "numeric_candidates_disagree",
+                "secondary_image_scale": 1.0,
+                "bbox_pdf": [
+                  241.66666666666666,
+                  175.33333333333334,
+                  296.6666666666667,
+                  195.0
+                ],
+                "page": 3,
+                "source": "ocr"
+              }
+            },
+            {
+              "text": "788",
+              "bbox": [
+                270.0,
+                180.66666666666666,
+                282.0,
+                186.66666666666666
+              ],
+              "source": "ocr",
+              "confidence": 81.0,
+              "numeric_verification": {
+                "word_indices": [
+                  12,
+                  13,
+                  14,
+                  15,
+                  16,
+                  17
+                ],
+                "bbox_pixel": [
+                  321,
+                  5,
+                  486,
+                  64
+                ],
+                "primary": "镇 永 湖 街 788 号",
+                "secondary": "",
+                "status": "numeric_uncertain",
+                "reason_code": "numeric_candidates_disagree",
+                "secondary_image_scale": 1.0,
+                "bbox_pdf": [
+                  241.66666666666666,
+                  175.33333333333334,
+                  296.6666666666667,
+                  195.0
+                ],
+                "page": 3,
+                "source": "ocr"
+              }
+            },
+            {
+              "text": "号",
+              "bbox": [
+                285.0,
+                179.66666666666666,
+                292.0,
+                187.66666666666666
+              ],
+              "source": "ocr",
+              "confidence": 96.0,
+              "numeric_verification": {
+                "word_indices": [
+                  12,
+                  13,
+                  14,
+                  15,
+                  16,
+                  17
+                ],
+                "bbox_pixel": [
+                  321,
+                  5,
+                  486,
+                  64
+                ],
+                "primary": "镇 永 湖 街 788 号",
+                "secondary": "",
+                "status": "numeric_uncertain",
+                "reason_code": "numeric_candidates_disagree",
+                "secondary_image_scale": 1.0,
+                "bbox_pdf": [
+                  241.66666666666666,
+                  175.33333333333334,
+                  296.6666666666667,
+                  195.0
+                ],
+                "page": 3,
+                "source": "ocr"
+              }
+            }
+          ]
+        }
+      ],
+      "reason_code": "recovery_conflict",
+      "has_conflicting_candidates": true,
+      "accepted_count": 0
+    },
+    {
+      "bbox_pdf": [
+        134.6666717529297,
+        173.6666717529297,
+        296.66668701171875,
+        195.6666717529297
+      ],
+      "status": "unresolved",
+      "trigger": "ocr_coverage",
+      "uncovered_bbox_pdf": [
+        134.88888549804688,
+        173.88888549804688,
+        296.5245666503906,
+        195.5
+      ],
+      "recovery_dpi": 216,
+      "requested_bbox_pdf": [
+        134.88888549804688,
+        173.88888549804688,
+        296.5245666503906,
+        195.5
+      ],
+      "pixel_window": [
+        404,
+        521,
+        890,
+        587
+      ],
+      "segmentation_psm": 7,
+      "segmentation_reason": "text_lines",
+      "image_line_support": [],
+      "reused_attempt_index": 0,
+      "candidate_scope": "issue_region",
+      "candidates": [
+        {
+          "text": "浙江",
+          "bbox": [
+            139.0,
+            179.66666666666666,
+            155.33333333333334,
+            187.33333333333334
+          ],
+          "source": "ocr",
+          "confidence": 96.0
+        },
+        {
+          "text": "省",
+          "bbox": [
+            159.33333333333334,
+            179.66666666666666,
+            164.0,
+            187.66666666666666
+          ],
+          "source": "ocr",
+          "confidence": 96.0
+        },
+        {
+          "text": "金华",
+          "bbox": [
+            168.33333333333334,
+            179.66666666666666,
+            186.0,
+            187.66666666666666
+          ],
+          "source": "ocr",
+          "confidence": 93.0
+        },
+        {
+          "text": "市",
+          "bbox": [
+            186.0,
+            178.33333333333334,
+            194.33333333333334,
+            191.66666666666666
+          ],
+          "source": "ocr",
+          "confidence": 93.0
+        },
+        {
+          "text": "婺",
+          "bbox": [
+            194.33333333333334,
+            179.66666666666666,
+            203.66666666666666,
+            187.66666666666666
+          ],
+          "source": "ocr",
+          "confidence": 0.0
+        },
+        {
+          "text": "城区",
+          "bbox": [
+            203.33333333333334,
+            178.33333333333334,
+            218.66666666666666,
+            191.66666666666666
+          ],
+          "source": "ocr",
+          "confidence": 93.0
+        },
+        {
+          "text": "汤",
+          "bbox": [
+            218.33333333333334,
+            180.0,
+            224.0,
+            187.66666666666666
+          ],
+          "source": "ocr",
+          "confidence": 92.0
+        },
+        {
+          "text": "溪",
+          "bbox": [
+            227.66666666666666,
+            179.66666666666666,
+            237.66666666666666,
+            187.66666666666666
+          ],
+          "source": "ocr",
+          "confidence": 92.0
+        },
+        {
+          "text": "镇",
+          "bbox": [
+            242.0,
+            179.66666666666666,
+            246.0,
+            187.66666666666666
+          ],
+          "source": "ocr",
+          "confidence": 92.0,
+          "numeric_verification": {
+            "word_indices": [
+              12,
+              13,
+              14,
+              15,
+              16,
+              17
+            ],
+            "bbox_pixel": [
+              321,
+              5,
+              486,
+              64
+            ],
+            "primary": "镇 永 湖 街 788 号",
+            "secondary": "",
+            "status": "numeric_uncertain",
+            "reason_code": "numeric_candidates_disagree",
+            "secondary_image_scale": 1.0,
+            "bbox_pdf": [
+              241.66666666666666,
+              175.33333333333334,
+              296.6666666666667,
+              195.0
+            ],
+            "page": 3,
+            "source": "ocr"
+          }
+        },
+        {
+          "text": "永",
+          "bbox": [
+            246.0,
+            178.33333333333334,
+            253.66666666666666,
+            191.66666666666666
+          ],
+          "source": "ocr",
+          "confidence": 80.0,
+          "numeric_verification": {
+            "word_indices": [
+              12,
+              13,
+              14,
+              15,
+              16,
+              17
+            ],
+            "bbox_pixel": [
+              321,
+              5,
+              486,
+              64
+            ],
+            "primary": "镇 永 湖 街 788 号",
+            "secondary": "",
+            "status": "numeric_uncertain",
+            "reason_code": "numeric_candidates_disagree",
+            "secondary_image_scale": 1.0,
+            "bbox_pdf": [
+              241.66666666666666,
+              175.33333333333334,
+              296.6666666666667,
+              195.0
+            ],
+            "page": 3,
+            "source": "ocr"
+          }
+        },
+        {
+          "text": "湖",
+          "bbox": [
+            253.33333333333334,
+            179.66666666666666,
+            263.6666666666667,
+            187.66666666666666
+          ],
+          "source": "ocr",
+          "confidence": 84.0,
+          "numeric_verification": {
+            "word_indices": [
+              12,
+              13,
+              14,
+              15,
+              16,
+              17
+            ],
+            "bbox_pixel": [
+              321,
+              5,
+              486,
+              64
+            ],
+            "primary": "镇 永 湖 街 788 号",
+            "secondary": "",
+            "status": "numeric_uncertain",
+            "reason_code": "numeric_candidates_disagree",
+            "secondary_image_scale": 1.0,
+            "bbox_pdf": [
+              241.66666666666666,
+              175.33333333333334,
+              296.6666666666667,
+              195.0
+            ],
+            "page": 3,
+            "source": "ocr"
+          }
+        },
+        {
+          "text": "街",
+          "bbox": [
+            263.3333333333333,
+            178.33333333333334,
+            271.0,
+            191.66666666666666
+          ],
+          "source": "ocr",
+          "confidence": 92.0,
+          "numeric_verification": {
+            "word_indices": [
+              12,
+              13,
+              14,
+              15,
+              16,
+              17
+            ],
+            "bbox_pixel": [
+              321,
+              5,
+              486,
+              64
+            ],
+            "primary": "镇 永 湖 街 788 号",
+            "secondary": "",
+            "status": "numeric_uncertain",
+            "reason_code": "numeric_candidates_disagree",
+            "secondary_image_scale": 1.0,
+            "bbox_pdf": [
+              241.66666666666666,
+              175.33333333333334,
+              296.6666666666667,
+              195.0
+            ],
+            "page": 3,
+            "source": "ocr"
+          }
+        },
+        {
+          "text": "788",
+          "bbox": [
+            270.0,
+            180.66666666666666,
+            282.0,
+            186.66666666666666
+          ],
+          "source": "ocr",
+          "confidence": 81.0,
+          "numeric_verification": {
+            "word_indices": [
+              12,
+              13,
+              14,
+              15,
+              16,
+              17
+            ],
+            "bbox_pixel": [
+              321,
+              5,
+              486,
+              64
+            ],
+            "primary": "镇 永 湖 街 788 号",
+            "secondary": "",
+            "status": "numeric_uncertain",
+            "reason_code": "numeric_candidates_disagree",
+            "secondary_image_scale": 1.0,
+            "bbox_pdf": [
+              241.66666666666666,
+              175.33333333333334,
+              296.6666666666667,
+              195.0
+            ],
+            "page": 3,
+            "source": "ocr"
+          }
+        },
+        {
+          "text": "号",
+          "bbox": [
+            285.0,
+            179.66666666666666,
+            292.0,
+            187.66666666666666
+          ],
+          "source": "ocr",
+          "confidence": 96.0,
+          "numeric_verification": {
+            "word_indices": [
+              12,
+              13,
+              14,
+              15,
+              16,
+              17
+            ],
+            "bbox_pixel": [
+              321,
+              5,
+              486,
+              64
+            ],
+            "primary": "镇 永 湖 街 788 号",
+            "secondary": "",
+            "status": "numeric_uncertain",
+            "reason_code": "numeric_candidates_disagree",
+            "secondary_image_scale": 1.0,
+            "bbox_pdf": [
+              241.66666666666666,
+              175.33333333333334,
+              296.6666666666667,
+              195.0
+            ],
+            "page": 3,
+            "source": "ocr"
+          }
+        }
+      ],
+      "candidate_lines": [
+        {
+          "_ordered_words": [
+            {
+              "text": "浙江",
+              "bbox": [
+                139.0,
+                179.66666666666666,
+                155.33333333333334,
+                187.33333333333334
+              ],
+              "source": "ocr",
+              "confidence": 96.0
+            },
+            {
+              "text": "省",
+              "bbox": [
+                159.33333333333334,
+                179.66666666666666,
+                164.0,
+                187.66666666666666
+              ],
+              "source": "ocr",
+              "confidence": 96.0
+            },
+            {
+              "text": "金华",
+              "bbox": [
+                168.33333333333334,
+                179.66666666666666,
+                186.0,
+                187.66666666666666
+              ],
+              "source": "ocr",
+              "confidence": 93.0
+            },
+            {
+              "text": "市",
+              "bbox": [
+                186.0,
+                178.33333333333334,
+                194.33333333333334,
+                191.66666666666666
+              ],
+              "source": "ocr",
+              "confidence": 93.0
+            },
+            {
+              "text": "婺",
+              "bbox": [
+                194.33333333333334,
+                179.66666666666666,
+                203.66666666666666,
+                187.66666666666666
+              ],
+              "source": "ocr",
+              "confidence": 0.0
+            },
+            {
+              "text": "城区",
+              "bbox": [
+                203.33333333333334,
+                178.33333333333334,
+                218.66666666666666,
+                191.66666666666666
+              ],
+              "source": "ocr",
+              "confidence": 93.0
+            },
+            {
+              "text": "汤",
+              "bbox": [
+                218.33333333333334,
+                180.0,
+                224.0,
+                187.66666666666666
+              ],
+              "source": "ocr",
+              "confidence": 92.0
+            },
+            {
+              "text": "溪",
+              "bbox": [
+                227.66666666666666,
+                179.66666666666666,
+                237.66666666666666,
+                187.66666666666666
+              ],
+              "source": "ocr",
+              "confidence": 92.0
+            },
+            {
+              "text": "镇",
+              "bbox": [
+                242.0,
+                179.66666666666666,
+                246.0,
+                187.66666666666666
+              ],
+              "source": "ocr",
+              "confidence": 92.0,
+              "numeric_verification": {
+                "word_indices": [
+                  12,
+                  13,
+                  14,
+                  15,
+                  16,
+                  17
+                ],
+                "bbox_pixel": [
+                  321,
+                  5,
+                  486,
+                  64
+                ],
+                "primary": "镇 永 湖 街 788 号",
+                "secondary": "",
+                "status": "numeric_uncertain",
+                "reason_code": "numeric_candidates_disagree",
+                "secondary_image_scale": 1.0,
+                "bbox_pdf": [
+                  241.66666666666666,
+                  175.33333333333334,
+                  296.6666666666667,
+                  195.0
+                ],
+                "page": 3,
+                "source": "ocr"
+              }
+            },
+            {
+              "text": "永",
+              "bbox": [
+                246.0,
+                178.33333333333334,
+                253.66666666666666,
+                191.66666666666666
+              ],
+              "source": "ocr",
+              "confidence": 80.0,
+              "numeric_verification": {
+                "word_indices": [
+                  12,
+                  13,
+                  14,
+                  15,
+                  16,
+                  17
+                ],
+                "bbox_pixel": [
+                  321,
+                  5,
+                  486,
+                  64
+                ],
+                "primary": "镇 永 湖 街 788 号",
+                "secondary": "",
+                "status": "numeric_uncertain",
+                "reason_code": "numeric_candidates_disagree",
+                "secondary_image_scale": 1.0,
+                "bbox_pdf": [
+                  241.66666666666666,
+                  175.33333333333334,
+                  296.6666666666667,
+                  195.0
+                ],
+                "page": 3,
+                "source": "ocr"
+              }
+            },
+            {
+              "text": "湖",
+              "bbox": [
+                253.33333333333334,
+                179.66666666666666,
+                263.6666666666667,
+                187.66666666666666
+              ],
+              "source": "ocr",
+              "confidence": 84.0,
+              "numeric_verification": {
+                "word_indices": [
+                  12,
+                  13,
+                  14,
+                  15,
+                  16,
+                  17
+                ],
+                "bbox_pixel": [
+                  321,
+                  5,
+                  486,
+                  64
+                ],
+                "primary": "镇 永 湖 街 788 号",
+                "secondary": "",
+                "status": "numeric_uncertain",
+                "reason_code": "numeric_candidates_disagree",
+                "secondary_image_scale": 1.0,
+                "bbox_pdf": [
+                  241.66666666666666,
+                  175.33333333333334,
+                  296.6666666666667,
+                  195.0
+                ],
+                "page": 3,
+                "source": "ocr"
+              }
+            },
+            {
+              "text": "街",
+              "bbox": [
+                263.3333333333333,
+                178.33333333333334,
+                271.0,
+                191.66666666666666
+              ],
+              "source": "ocr",
+              "confidence": 92.0,
+              "numeric_verification": {
+                "word_indices": [
+                  12,
+                  13,
+                  14,
+                  15,
+                  16,
+                  17
+                ],
+                "bbox_pixel": [
+                  321,
+                  5,
+                  486,
+                  64
+                ],
+                "primary": "镇 永 湖 街 788 号",
+                "secondary": "",
+                "status": "numeric_uncertain",
+                "reason_code": "numeric_candidates_disagree",
+                "secondary_image_scale": 1.0,
+                "bbox_pdf": [
+                  241.66666666666666,
+                  175.33333333333334,
+                  296.6666666666667,
+                  195.0
+                ],
+                "page": 3,
+                "source": "ocr"
+              }
+            },
+            {
+              "text": "788",
+              "bbox": [
+                270.0,
+                180.66666666666666,
+                282.0,
+                186.66666666666666
+              ],
+              "source": "ocr",
+              "confidence": 81.0,
+              "numeric_verification": {
+                "word_indices": [
+                  12,
+                  13,
+                  14,
+                  15,
+                  16,
+                  17
+                ],
+                "bbox_pixel": [
+                  321,
+                  5,
+                  486,
+                  64
+                ],
+                "primary": "镇 永 湖 街 788 号",
+                "secondary": "",
+                "status": "numeric_uncertain",
+                "reason_code": "numeric_candidates_disagree",
+                "secondary_image_scale": 1.0,
+                "bbox_pdf": [
+                  241.66666666666666,
+                  175.33333333333334,
+                  296.6666666666667,
+                  195.0
+                ],
+                "page": 3,
+                "source": "ocr"
+              }
+            },
+            {
+              "text": "号",
+              "bbox": [
+                285.0,
+                179.66666666666666,
+                292.0,
+                187.66666666666666
+              ],
+              "source": "ocr",
+              "confidence": 96.0,
+              "numeric_verification": {
+                "word_indices": [
+                  12,
+                  13,
+                  14,
+                  15,
+                  16,
+                  17
+                ],
+                "bbox_pixel": [
+                  321,
+                  5,
+                  486,
+                  64
+                ],
+                "primary": "镇 永 湖 街 788 号",
+                "secondary": "",
+                "status": "numeric_uncertain",
+                "reason_code": "numeric_candidates_disagree",
+                "secondary_image_scale": 1.0,
+                "bbox_pdf": [
+                  241.66666666666666,
+                  175.33333333333334,
+                  296.6666666666667,
+                  195.0
+                ],
+                "page": 3,
+                "source": "ocr"
+              }
+            }
+          ]
+        }
+      ],
+      "reason_code": "recovery_conflict",
+      "has_conflicting_candidates": true,
+      "accepted_count": 0
+    }
+  ]
+}

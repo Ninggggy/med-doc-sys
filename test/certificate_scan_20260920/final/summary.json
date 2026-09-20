@@ -1,0 +1,362 @@
+[
+  {
+    "document": 1,
+    "page_count": 3,
+    "seconds": 450.988,
+    "pages": [
+      {
+        "page": 1,
+        "status": "partial",
+        "chars": 783,
+        "table_shapes": [],
+        "expected_table_shapes": null,
+        "structure_matches": null,
+        "errors": {
+          "ocr_coverage": 14,
+          "ocr_quality": 27,
+          "numeric_uncertain": 1
+        },
+        "embedded_states": {
+          "missing": 12,
+          "conflict": 25,
+          "matched": 4,
+          "revalidated": 1
+        },
+        "ocr_calls": 2,
+        "seconds": 179.124
+      },
+      {
+        "page": 2,
+        "status": "partial",
+        "chars": 421,
+        "table_shapes": [],
+        "expected_table_shapes": null,
+        "structure_matches": null,
+        "errors": {
+          "ocr_quality": 19,
+          "ocr_coverage": 86,
+          "numeric_uncertain": 1
+        },
+        "embedded_states": {
+          "matched": 2,
+          "conflict": 18,
+          "missing": 85
+        },
+        "ocr_calls": 2,
+        "seconds": 134.839
+      },
+      {
+        "page": 3,
+        "status": "partial",
+        "chars": 488,
+        "table_shapes": [],
+        "expected_table_shapes": null,
+        "structure_matches": null,
+        "errors": {
+          "ocr_coverage": 45,
+          "ocr_quality": 12,
+          "numeric_uncertain": 1
+        },
+        "embedded_states": {
+          "conflict": 10,
+          "matched": 3,
+          "missing": 43,
+          "revalidated": 3
+        },
+        "ocr_calls": 2,
+        "seconds": 132.48
+      }
+    ],
+    "full_text_acceptance": "not_passed"
+  },
+  {
+    "document": 2,
+    "page_count": 5,
+    "seconds": 450.161,
+    "pages": [
+      {
+        "page": 1,
+        "status": "partial",
+        "chars": 377,
+        "table_shapes": [],
+        "expected_table_shapes": null,
+        "structure_matches": null,
+        "errors": {
+          "ocr_coverage": 20,
+          "ocr_quality": 21,
+          "numeric_uncertain": 1
+        },
+        "embedded_states": {
+          "missing": 18,
+          "conflict": 19,
+          "revalidated": 1
+        },
+        "ocr_calls": 2,
+        "seconds": 137.629
+      },
+      {
+        "page": 2,
+        "status": "partial",
+        "chars": 1105,
+        "table_shapes": [],
+        "expected_table_shapes": null,
+        "structure_matches": null,
+        "errors": {
+          "ocr_coverage": 6,
+          "ocr_quality": 45,
+          "numeric_uncertain": 1
+        },
+        "embedded_states": {
+          "conflict": 43,
+          "missing": 4,
+          "matched": 3
+        },
+        "ocr_calls": 3,
+        "seconds": 188.069
+      },
+      {
+        "page": 3,
+        "status": "partial",
+        "chars": 653,
+        "table_shapes": [
+          [
+            7,
+            5
+          ]
+        ],
+        "expected_table_shapes": [
+          [
+            7,
+            5
+          ]
+        ],
+        "structure_matches": true,
+        "errors": {
+          "ocr_quality": 35,
+          "ocr_coverage": 9,
+          "numeric_uncertain": 1,
+          "table_structure_unresolved": 1,
+          "text_assembly_unresolved": 2
+        },
+        "embedded_states": {
+          "missing": 8,
+          "conflict": 22,
+          "matched": 7
+        },
+        "ocr_calls": 5,
+        "seconds": 57.358
+      },
+      {
+        "page": 4,
+        "status": "partial",
+        "chars": 162,
+        "table_shapes": [
+          [
+            2,
+            4
+          ]
+        ],
+        "expected_table_shapes": [
+          [
+            2,
+            4
+          ]
+        ],
+        "structure_matches": true,
+        "errors": {
+          "ocr_coverage": 8,
+          "ocr_quality": 3,
+          "table_structure_unresolved": 1
+        },
+        "embedded_states": {
+          "missing": 6,
+          "conflict": 2
+        },
+        "ocr_calls": 5,
+        "seconds": 30.914
+      },
+      {
+        "page": 5,
+        "status": "partial",
+        "chars": 79,
+        "table_shapes": [
+          [
+            3,
+            1
+          ],
+          [
+            3,
+            1
+          ]
+        ],
+        "expected_table_shapes": [
+          [
+            3,
+            1
+          ],
+          [
+            3,
+            1
+          ]
+        ],
+        "structure_matches": true,
+        "errors": {
+          "ocr_quality": 3,
+          "ocr_coverage": 34
+        },
+        "embedded_states": {
+          "matched": 3,
+          "conflict": 2,
+          "missing": 33
+        },
+        "ocr_calls": 5,
+        "seconds": 30.59
+      }
+    ],
+    "full_text_acceptance": "not_passed"
+  },
+  {
+    "document": 3,
+    "page_count": 5,
+    "seconds": 377.811,
+    "pages": [
+      {
+        "page": 1,
+        "status": "partial",
+        "chars": 516,
+        "table_shapes": [],
+        "expected_table_shapes": null,
+        "structure_matches": null,
+        "errors": {
+          "ocr_quality": 32,
+          "ocr_coverage": 17,
+          "numeric_uncertain": 1,
+          "table_structure_unresolved": 1
+        },
+        "embedded_states": {
+          "conflict": 31,
+          "missing": 16
+        },
+        "ocr_calls": 2,
+        "seconds": 129.121
+      },
+      {
+        "page": 2,
+        "status": "partial",
+        "chars": 1364,
+        "table_shapes": [],
+        "expected_table_shapes": null,
+        "structure_matches": null,
+        "errors": {
+          "ocr_quality": 26,
+          "ocr_coverage": 4,
+          "numeric_uncertain": 1,
+          "table_structure_unresolved": 1
+        },
+        "embedded_states": {
+          "conflict": 25,
+          "missing": 3,
+          "matched": 2
+        },
+        "ocr_calls": 5,
+        "seconds": 126.206
+      },
+      {
+        "page": 3,
+        "status": "partial",
+        "chars": 462,
+        "table_shapes": [
+          [
+            20,
+            5
+          ]
+        ],
+        "expected_table_shapes": [
+          [
+            20,
+            5
+          ]
+        ],
+        "structure_matches": true,
+        "errors": {
+          "ocr_quality": 20,
+          "ocr_coverage": 97,
+          "table_structure_unresolved": 1
+        },
+        "embedded_states": {
+          "missing": 96,
+          "conflict": 10
+        },
+        "ocr_calls": 5,
+        "seconds": 50.246
+      },
+      {
+        "page": 4,
+        "status": "partial",
+        "chars": 176,
+        "table_shapes": [
+          [
+            2,
+            4
+          ]
+        ],
+        "expected_table_shapes": [
+          [
+            2,
+            4
+          ]
+        ],
+        "structure_matches": true,
+        "errors": {
+          "ocr_quality": 11,
+          "ocr_coverage": 4,
+          "table_structure_unresolved": 1
+        },
+        "embedded_states": {
+          "conflict": 6,
+          "missing": 2
+        },
+        "ocr_calls": 5,
+        "seconds": 32.745
+      },
+      {
+        "page": 5,
+        "status": "partial",
+        "chars": 81,
+        "table_shapes": [
+          [
+            3,
+            1
+          ],
+          [
+            3,
+            1
+          ]
+        ],
+        "expected_table_shapes": [
+          [
+            3,
+            1
+          ],
+          [
+            3,
+            1
+          ]
+        ],
+        "structure_matches": true,
+        "errors": {
+          "ocr_quality": 7,
+          "ocr_coverage": 29
+        },
+        "embedded_states": {
+          "conflict": 4,
+          "matched": 1,
+          "missing": 28
+        },
+        "ocr_calls": 5,
+        "seconds": 37.059
+      }
+    ],
+    "full_text_acceptance": "not_passed"
+  }
+]

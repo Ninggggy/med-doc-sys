@@ -1,0 +1,572 @@
+{
+  "expected": "药品名称不得使用",
+  "words": [
+    {
+      "text": "药品",
+      "bbox": [
+        30.666666666666668,
+        45.333333333333336,
+        77.33333333333333,
+        56.0
+      ],
+      "source": "ocr",
+      "confidence": 96.0,
+      "recovery_origin": "uncovered_original_crop",
+      "recovery_adoption_reason": "original_image_line_support"
+    },
+    {
+      "text": "名",
+      "bbox": [
+        58.666666666666664,
+        42.666666666666664,
+        69.33333333333333,
+        62.666666666666664
+      ],
+      "source": "ocr",
+      "confidence": 93.0,
+      "recovery_origin": "uncovered_original_crop",
+      "recovery_adoption_reason": "original_image_line_support"
+    },
+    {
+      "text": "称",
+      "bbox": [
+        68.66666666666667,
+        42.666666666666664,
+        79.33333333333333,
+        62.666666666666664
+      ],
+      "source": "ocr",
+      "confidence": 91.0,
+      "recovery_origin": "uncovered_original_crop",
+      "recovery_adoption_reason": "original_image_line_support"
+    },
+    {
+      "text": "不",
+      "bbox": [
+        30.666666666666668,
+        100.66666666666667,
+        46.0,
+        111.33333333333333
+      ],
+      "source": "ocr",
+      "confidence": 96.0,
+      "recovery_origin": "uncovered_original_crop",
+      "recovery_adoption_reason": "original_image_line_support"
+    },
+    {
+      "text": "得",
+      "bbox": [
+        46.0,
+        100.0,
+        57.333333333333336,
+        111.33333333333333
+      ],
+      "source": "ocr",
+      "confidence": 96.0,
+      "recovery_origin": "uncovered_original_crop",
+      "recovery_adoption_reason": "original_image_line_support"
+    },
+    {
+      "text": "使",
+      "bbox": [
+        58.666666666666664,
+        100.0,
+        65.33333333333333,
+        110.66666666666667
+      ],
+      "source": "ocr",
+      "confidence": 96.0,
+      "recovery_origin": "uncovered_original_crop",
+      "recovery_adoption_reason": "original_image_line_support"
+    },
+    {
+      "text": "用",
+      "bbox": [
+        70.0,
+        100.66666666666667,
+        76.66666666666667,
+        111.33333333333333
+      ],
+      "source": "ocr",
+      "confidence": 96.0,
+      "recovery_origin": "uncovered_original_crop",
+      "recovery_adoption_reason": "original_image_line_support"
+    }
+  ],
+  "lines": [
+    {
+      "text": "药品 名 称",
+      "bbox": [
+        30.666666666666668,
+        42.666666666666664,
+        79.33333333333333,
+        62.666666666666664
+      ],
+      "source": "ocr",
+      "_ordered_words": [
+        {
+          "text": "药品",
+          "bbox": [
+            30.666666666666668,
+            45.333333333333336,
+            77.33333333333333,
+            56.0
+          ],
+          "source": "ocr",
+          "confidence": 96.0,
+          "recovery_origin": "uncovered_original_crop",
+          "recovery_adoption_reason": "original_image_line_support"
+        },
+        {
+          "text": "名",
+          "bbox": [
+            58.666666666666664,
+            42.666666666666664,
+            69.33333333333333,
+            62.666666666666664
+          ],
+          "source": "ocr",
+          "confidence": 93.0,
+          "recovery_origin": "uncovered_original_crop",
+          "recovery_adoption_reason": "original_image_line_support"
+        },
+        {
+          "text": "称",
+          "bbox": [
+            68.66666666666667,
+            42.666666666666664,
+            79.33333333333333,
+            62.666666666666664
+          ],
+          "source": "ocr",
+          "confidence": 91.0,
+          "recovery_origin": "uncovered_original_crop",
+          "recovery_adoption_reason": "original_image_line_support"
+        }
+      ]
+    },
+    {
+      "text": "不 得 使 用",
+      "bbox": [
+        30.666666666666668,
+        100.0,
+        76.66666666666667,
+        111.33333333333333
+      ],
+      "source": "ocr",
+      "_ordered_words": [
+        {
+          "text": "不",
+          "bbox": [
+            30.666666666666668,
+            100.66666666666667,
+            46.0,
+            111.33333333333333
+          ],
+          "source": "ocr",
+          "confidence": 96.0,
+          "recovery_origin": "uncovered_original_crop",
+          "recovery_adoption_reason": "original_image_line_support"
+        },
+        {
+          "text": "得",
+          "bbox": [
+            46.0,
+            100.0,
+            57.333333333333336,
+            111.33333333333333
+          ],
+          "source": "ocr",
+          "confidence": 96.0,
+          "recovery_origin": "uncovered_original_crop",
+          "recovery_adoption_reason": "original_image_line_support"
+        },
+        {
+          "text": "使",
+          "bbox": [
+            58.666666666666664,
+            100.0,
+            65.33333333333333,
+            110.66666666666667
+          ],
+          "source": "ocr",
+          "confidence": 96.0,
+          "recovery_origin": "uncovered_original_crop",
+          "recovery_adoption_reason": "original_image_line_support"
+        },
+        {
+          "text": "用",
+          "bbox": [
+            70.0,
+            100.66666666666667,
+            76.66666666666667,
+            111.33333333333333
+          ],
+          "source": "ocr",
+          "confidence": 96.0,
+          "recovery_origin": "uncovered_original_crop",
+          "recovery_adoption_reason": "original_image_line_support"
+        }
+      ]
+    }
+  ],
+  "attempts": [
+    {
+      "bbox_pdf": [
+        11.0,
+        11.0,
+        439.0,
+        154.0
+      ],
+      "status": "recovered",
+      "trigger": "ocr_quality",
+      "quality_bbox_pdf": [
+        25.0,
+        20.0,
+        405.0,
+        125.0
+      ],
+      "recovery_dpi": 216,
+      "requested_bbox_pdf": [
+        11.0,
+        11.0,
+        439.0,
+        154.0
+      ],
+      "pixel_window": [
+        33,
+        33,
+        1317,
+        462
+      ],
+      "segmentation_psm": 6,
+      "segmentation_reason": "image_lines",
+      "image_line_support": [
+        {
+          "bbox": [
+            30.66666603088379,
+            45.33333206176758,
+            77.33333587646484,
+            56.0
+          ],
+          "component_bboxes": [
+            [
+              30.666666666666668,
+              45.333333333333336,
+              41.333333333333336,
+              48.0
+            ],
+            [
+              31.0,
+              48.333333333333336,
+              35.0,
+              54.0
+            ],
+            [
+              31.0,
+              54.333333333333336,
+              35.0,
+              56.0
+            ],
+            [
+              35.0,
+              48.333333333333336,
+              41.0,
+              56.0
+            ],
+            [
+              36.666666666666664,
+              51.666666666666664,
+              38.666666666666664,
+              54.0
+            ],
+            [
+              43.0,
+              50.666666666666664,
+              47.666666666666664,
+              56.0
+            ],
+            [
+              44.0,
+              45.666666666666664,
+              52.0,
+              50.0
+            ],
+            [
+              48.333333333333336,
+              50.666666666666664,
+              53.0,
+              56.0
+            ],
+            [
+              54.666666666666664,
+              45.333333333333336,
+              64.66666666666667,
+              56.0
+            ],
+            [
+              66.33333333333333,
+              45.333333333333336,
+              77.33333333333333,
+              56.0
+            ],
+            [
+              71.0,
+              50.333333333333336,
+              73.0,
+              54.333333333333336
+            ],
+            [
+              72.33333333333333,
+              48.666666666666664,
+              74.66666666666667,
+              56.0
+            ],
+            [
+              75.33333333333333,
+              50.333333333333336,
+              77.0,
+              54.333333333333336
+            ]
+          ]
+        },
+        {
+          "bbox": [
+            30.66666603088379,
+            100.33333587646484,
+            76.66666412353516,
+            111.0
+          ],
+          "component_bboxes": [
+            [
+              30.666666666666668,
+              101.0,
+              41.0,
+              111.0
+            ],
+            [
+              37.0,
+              104.0,
+              41.333333333333336,
+              108.33333333333333
+            ],
+            [
+              42.666666666666664,
+              100.33333333333333,
+              45.666666666666664,
+              103.66666666666667
+            ],
+            [
+              42.666666666666664,
+              103.0,
+              46.333333333333336,
+              111.0
+            ],
+            [
+              45.666666666666664,
+              105.33333333333333,
+              53.333333333333336,
+              111.0
+            ],
+            [
+              46.666666666666664,
+              100.66666666666667,
+              52.666666666666664,
+              104.66666666666667
+            ],
+            [
+              47.0,
+              108.33333333333333,
+              48.666666666666664,
+              110.0
+            ],
+            [
+              54.666666666666664,
+              100.33333333333333,
+              65.33333333333333,
+              111.0
+            ],
+            [
+              66.66666666666667,
+              101.0,
+              76.66666666666667,
+              111.0
+            ]
+          ]
+        }
+      ],
+      "ocr_input_size": [
+        643,
+        215
+      ],
+      "input_size_reason": "large_consistent_image_lines",
+      "candidates": [
+        {
+          "text": "药品",
+          "bbox": [
+            30.666666666666668,
+            45.333333333333336,
+            77.33333333333333,
+            56.0
+          ],
+          "source": "ocr",
+          "confidence": 96.0
+        },
+        {
+          "text": "名",
+          "bbox": [
+            58.666666666666664,
+            42.666666666666664,
+            69.33333333333333,
+            62.666666666666664
+          ],
+          "source": "ocr",
+          "confidence": 93.0
+        },
+        {
+          "text": "称",
+          "bbox": [
+            68.66666666666667,
+            42.666666666666664,
+            79.33333333333333,
+            62.666666666666664
+          ],
+          "source": "ocr",
+          "confidence": 91.0
+        },
+        {
+          "text": "不",
+          "bbox": [
+            30.666666666666668,
+            100.66666666666667,
+            46.0,
+            111.33333333333333
+          ],
+          "source": "ocr",
+          "confidence": 96.0
+        },
+        {
+          "text": "得",
+          "bbox": [
+            46.0,
+            100.0,
+            57.333333333333336,
+            111.33333333333333
+          ],
+          "source": "ocr",
+          "confidence": 96.0
+        },
+        {
+          "text": "使",
+          "bbox": [
+            58.666666666666664,
+            100.0,
+            65.33333333333333,
+            110.66666666666667
+          ],
+          "source": "ocr",
+          "confidence": 96.0
+        },
+        {
+          "text": "用",
+          "bbox": [
+            70.0,
+            100.66666666666667,
+            76.66666666666667,
+            111.33333333333333
+          ],
+          "source": "ocr",
+          "confidence": 96.0
+        }
+      ],
+      "candidate_lines": [
+        {
+          "_ordered_words": [
+            {
+              "text": "药品",
+              "bbox": [
+                30.666666666666668,
+                45.333333333333336,
+                77.33333333333333,
+                56.0
+              ],
+              "source": "ocr",
+              "confidence": 96.0
+            },
+            {
+              "text": "名",
+              "bbox": [
+                58.666666666666664,
+                42.666666666666664,
+                69.33333333333333,
+                62.666666666666664
+              ],
+              "source": "ocr",
+              "confidence": 93.0
+            },
+            {
+              "text": "称",
+              "bbox": [
+                68.66666666666667,
+                42.666666666666664,
+                79.33333333333333,
+                62.666666666666664
+              ],
+              "source": "ocr",
+              "confidence": 91.0
+            }
+          ]
+        },
+        {
+          "_ordered_words": [
+            {
+              "text": "不",
+              "bbox": [
+                30.666666666666668,
+                100.66666666666667,
+                46.0,
+                111.33333333333333
+              ],
+              "source": "ocr",
+              "confidence": 96.0
+            },
+            {
+              "text": "得",
+              "bbox": [
+                46.0,
+                100.0,
+                57.333333333333336,
+                111.33333333333333
+              ],
+              "source": "ocr",
+              "confidence": 96.0
+            },
+            {
+              "text": "使",
+              "bbox": [
+                58.666666666666664,
+                100.0,
+                65.33333333333333,
+                110.66666666666667
+              ],
+              "source": "ocr",
+              "confidence": 96.0
+            },
+            {
+              "text": "用",
+              "bbox": [
+                70.0,
+                100.66666666666667,
+                76.66666666666667,
+                111.33333333333333
+              ],
+              "source": "ocr",
+              "confidence": 96.0
+            }
+          ]
+        }
+      ],
+      "accepted_count": 7
+    }
+  ]
+}

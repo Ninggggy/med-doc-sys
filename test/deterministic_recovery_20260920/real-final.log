@@ -1,0 +1,16 @@
+..F
+======================================================================
+FAIL: test_real_chinese_multiline_empty_primary (test_pdf_deterministic_recovery.DeterministicRecoveryTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/app/agent/test/test_pdf_deterministic_recovery.py", line 159, in test_real_chinese_multiline_empty_primary
+    self.assertEqual(''.join(w['text'] for w in words),'生产范围质量标准')
+AssertionError: '质量标准' != '生产范围质量标准'
+- 质量标准
++ 生产范围质量标准
+
+
+----------------------------------------------------------------------
+Ran 3 tests in 10.792s
+
+FAILED (failures=1)

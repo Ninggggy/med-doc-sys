@@ -1,0 +1,14 @@
+......F...................................................................................................................ss.s.............filing parse project_id=project-main task_id= file_id=app_form_0e42917e7581 page=1 stage=page exception_type= code=table_structure_unresolved http_status=None
+.
+======================================================================
+FAIL: test_image_lines_vary_content_size_and_multiline_layout (test_pdf_deterministic_recovery.DeterministicRecoveryTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/app/agent/test/test_pdf_deterministic_recovery.py", line 22, in test_image_lines_vary_content_size_and_multiline_layout
+    self.assertEqual(recovery_segmentation([],[],support)[0],7,(text,size,support))
+AssertionError: 6 != 7 : ('药品生产范围', 12, [])
+
+----------------------------------------------------------------------
+Ran 140 tests in 47.966s
+
+FAILED (failures=1, skipped=3)

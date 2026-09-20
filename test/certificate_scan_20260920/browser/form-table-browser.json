@@ -1,0 +1,9 @@
+{
+  "checks": [
+    "merged_table_actual_ui_save",
+    "application_fields_rebuilt",
+    "reload_preserves_cells_and_rowspan",
+    "original_evidence_unchanged"
+  ],
+  "mode": "production_build_real_api_synthetic_parse_evidence"
+}

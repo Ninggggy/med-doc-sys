@@ -1,0 +1,70 @@
+[
+  {
+    "document": 1,
+    "page_count": 3,
+    "seconds": 396.35,
+    "pages": [
+      {
+        "page": 1,
+        "status": "partial",
+        "chars": 753,
+        "table_shapes": [],
+        "expected_table_shapes": null,
+        "structure_matches": null,
+        "errors": {
+          "ocr_coverage": 14,
+          "ocr_quality": 20,
+          "numeric_uncertain": 1
+        },
+        "embedded_states": {
+          "missing": 13,
+          "matched": 10,
+          "conflict": 19
+        },
+        "ocr_calls": 2,
+        "seconds": 129.766
+      },
+      {
+        "page": 2,
+        "status": "partial",
+        "chars": 421,
+        "table_shapes": [],
+        "expected_table_shapes": null,
+        "structure_matches": null,
+        "errors": {
+          "ocr_quality": 24,
+          "ocr_coverage": 97,
+          "numeric_uncertain": 1
+        },
+        "embedded_states": {
+          "matched": 2,
+          "conflict": 23,
+          "missing": 96
+        },
+        "ocr_calls": 2,
+        "seconds": 135.108
+      },
+      {
+        "page": 3,
+        "status": "partial",
+        "chars": 318,
+        "table_shapes": [],
+        "expected_table_shapes": null,
+        "structure_matches": null,
+        "errors": {
+          "ocr_coverage": 47,
+          "ocr_quality": 11,
+          "numeric_uncertain": 1
+        },
+        "embedded_states": {
+          "matched": 5,
+          "missing": 46,
+          "conflict": 10
+        },
+        "ocr_calls": 2,
+        "seconds": 126.087
+      }
+    ],
+    "full_text_acceptance": "not_passed"
+  }
+]

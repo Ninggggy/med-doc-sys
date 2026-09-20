@@ -1,0 +1,48 @@
+
+> agent-fronted@0.1.0 build
+> vue-cli-service build
+
+
+-  Building for production...
+Browserslist: browsers data (caniuse-lite) is 7 months old. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+ WARNING  Compiled with 3 warnings7:28:52 PM
+
+ warning  
+
+asset size limit: The following asset(s) exceed the recommended size limit (244 KiB).
+This can impact web performance.
+Assets: 
+  js/app.9e949d05.js (581 KiB)
+  js/chunk-vendors.891519cd.js (1.09 MiB)
+
+ warning  
+
+entrypoint size limit: The following entrypoint(s) combined asset size exceeds the recommended limit (244 KiB). This can impact web performance.
+Entrypoints:
+  app (1.9 MiB)
+      css/chunk-vendors.6b92dc4c.css
+      js/chunk-vendors.891519cd.js
+      css/app.adbb74a6.css
+      js/app.9e949d05.js
+
+
+ warning  
+
+webpack performance recommendations: 
+You can limit the size of your bundles by using import() or require.ensure to lazy load some parts of your application.
+For more info visit https://webpack.js.org/guides/code-splitting/
+
+  File                                   Size              Gzipped
+
+  dist/js/chunk-vendors.891519cd.js      1119.29 KiB       331.05 KiB
+  dist/js/app.9e949d05.js                581.33 KiB        128.03 KiB
+  dist/css/chunk-vendors.6b92dc4c.css    206.21 KiB        33.53 KiB
+  dist/css/app.adbb74a6.css              41.63 KiB         7.25 KiB
+
+  Images and other types of assets omitted.
+
+ DONE  Build complete. The dist directory is ready to be deployed.
+ INFO  Check out deployment instructions at https://cli.vuejs.org/guide/deployment.html
+      

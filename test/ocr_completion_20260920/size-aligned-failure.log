@@ -1,0 +1,53 @@
+....
+======================================================================
+FAIL: test_real_varied_content_and_font_sizes (test_ocr_input_size.InputSizeTests) (font='china-s', size=28, a='生产范围')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/app/agent/test/test_ocr_input_size.py", line 69, in test_real_varied_content_and_font_sizes
+    self.assertEqual(''.join(w['text'] for w in words).replace(' ',''),(a+b).replace(' ',''))
+AssertionError: '生产质量标准' != '生产范围质量标准'
+- 生产质量标准
++ 生产范围质量标准
+?   ++
+
+
+======================================================================
+FAIL: test_real_varied_content_and_font_sizes (test_ocr_input_size.InputSizeTests) (font='china-s', size=12, a='药品名称')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/app/agent/test/test_ocr_input_size.py", line 69, in test_real_varied_content_and_font_sizes
+    self.assertEqual(''.join(w['text'] for w in words).replace(' ',''),(a+b).replace(' ',''))
+AssertionError: '药品名不得使用' != '药品名称不得使用'
+- 药品名不得使用
++ 药品名称不得使用
+?    +
+
+
+======================================================================
+FAIL: test_real_varied_content_and_font_sizes (test_ocr_input_size.InputSizeTests) (font='china-s', size=22, a='药品名称')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/app/agent/test/test_ocr_input_size.py", line 69, in test_real_varied_content_and_font_sizes
+    self.assertEqual(''.join(w['text'] for w in words).replace(' ',''),(a+b).replace(' ',''))
+AssertionError: '药品不得用' != '药品名称不得使用'
+- 药品不得用
++ 药品名称不得使用
+?   ++  +
+
+
+======================================================================
+FAIL: test_real_varied_content_and_font_sizes (test_ocr_input_size.InputSizeTests) (font='china-s', size=28, a='药品名称')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/app/agent/test/test_ocr_input_size.py", line 69, in test_real_varied_content_and_font_sizes
+    self.assertEqual(''.join(w['text'] for w in words).replace(' ',''),(a+b).replace(' ',''))
+AssertionError: '药品名不得使用' != '药品名称不得使用'
+- 药品名不得使用
++ 药品名称不得使用
+?    +
+
+
+----------------------------------------------------------------------
+Ran 5 tests in 23.850s
+
+FAILED (failures=4)

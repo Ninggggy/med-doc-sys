@@ -1,0 +1,17 @@
+..........s...........................................................................................................ss.s....
+======================================================================
+FAIL: test_real_varied_content_and_font_sizes (test_ocr_input_size.InputSizeTests) (font='china-s', size=28, a='生产范围')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/app/agent/test/test_ocr_input_size.py", line 69, in test_real_varied_content_and_font_sizes
+    self.assertEqual(''.join(w['text'] for w in words).replace(' ',''),(a+b).replace(' ',''))
+AssertionError: '生产质量标准' != '生产范围质量标准'
+- 生产质量标准
++ 生产范围质量标准
+?   ++
+
+
+----------------------------------------------------------------------
+Ran 127 tests in 70.534s
+
+FAILED (failures=1, skipped=4)

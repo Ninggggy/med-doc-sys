@@ -1,0 +1,8 @@
+test/ocr_completion_20260920/doc1-progress.json filter=lfs diff=lfs merge=lfs -text
+test/certificate_scan_20260920/final/doc2-pages.json filter=lfs diff=lfs merge=lfs -text
+test/certificate_scan_20260920/final/doc1-pages.json filter=lfs diff=lfs merge=lfs -text
+test/certificate_scan_20260920/round1/doc1-pages.json filter=lfs diff=lfs merge=lfs -text
+test/certificate_scan_20260920/round1/doc2-pages.json filter=lfs diff=lfs merge=lfs -text
+test/ocr_completion_20260920/final/doc2-pages.json filter=lfs diff=lfs merge=lfs -text
+test/ocr_completion_20260920/final/doc3-pages.json filter=lfs diff=lfs merge=lfs -text
+test/ocr_completion_20260920/final/doc1-pages.json filter=lfs diff=lfs merge=lfs -text

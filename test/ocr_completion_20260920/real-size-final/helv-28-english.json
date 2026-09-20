@@ -1,0 +1,452 @@
+{
+  "expected": "Readable sampleRestricted supply",
+  "words": [
+    {
+      "text": "Readable",
+      "bbox": [
+        33.0,
+        35.0,
+        149.0,
+        56.0
+      ],
+      "source": "ocr",
+      "confidence": 89.0,
+      "recovery_origin": "uncovered_original_crop",
+      "recovery_adoption_reason": "original_image_line_support"
+    },
+    {
+      "text": "sample",
+      "bbox": [
+        159.0,
+        35.0,
+        247.0,
+        61.0
+      ],
+      "source": "ocr",
+      "confidence": 92.0,
+      "recovery_origin": "uncovered_original_crop",
+      "recovery_adoption_reason": "original_image_line_support"
+    },
+    {
+      "text": "Restricted",
+      "bbox": [
+        33.0,
+        90.0,
+        154.0,
+        111.0
+      ],
+      "source": "ocr",
+      "confidence": 91.0,
+      "recovery_origin": "uncovered_original_crop",
+      "recovery_adoption_reason": "original_image_line_support"
+    },
+    {
+      "text": "supply",
+      "bbox": [
+        165.0,
+        90.0,
+        244.0,
+        116.0
+      ],
+      "source": "ocr",
+      "confidence": 92.0,
+      "recovery_origin": "uncovered_original_crop",
+      "recovery_adoption_reason": "original_image_line_support"
+    }
+  ],
+  "lines": [
+    {
+      "text": "Readable sample",
+      "bbox": [
+        33.0,
+        35.0,
+        247.0,
+        61.0
+      ],
+      "source": "ocr",
+      "_ordered_words": [
+        {
+          "text": "Readable",
+          "bbox": [
+            33.0,
+            35.0,
+            149.0,
+            56.0
+          ],
+          "source": "ocr",
+          "confidence": 89.0,
+          "recovery_origin": "uncovered_original_crop",
+          "recovery_adoption_reason": "original_image_line_support"
+        },
+        {
+          "text": "sample",
+          "bbox": [
+            159.0,
+            35.0,
+            247.0,
+            61.0
+          ],
+          "source": "ocr",
+          "confidence": 92.0,
+          "recovery_origin": "uncovered_original_crop",
+          "recovery_adoption_reason": "original_image_line_support"
+        }
+      ]
+    },
+    {
+      "text": "Restricted supply",
+      "bbox": [
+        33.0,
+        90.0,
+        244.0,
+        116.0
+      ],
+      "source": "ocr",
+      "_ordered_words": [
+        {
+          "text": "Restricted",
+          "bbox": [
+            33.0,
+            90.0,
+            154.0,
+            111.0
+          ],
+          "source": "ocr",
+          "confidence": 91.0,
+          "recovery_origin": "uncovered_original_crop",
+          "recovery_adoption_reason": "original_image_line_support"
+        },
+        {
+          "text": "supply",
+          "bbox": [
+            165.0,
+            90.0,
+            244.0,
+            116.0
+          ],
+          "source": "ocr",
+          "confidence": 92.0,
+          "recovery_origin": "uncovered_original_crop",
+          "recovery_adoption_reason": "original_image_line_support"
+        }
+      ]
+    }
+  ],
+  "attempts": [
+    {
+      "bbox_pdf": [
+        11.0,
+        11.0,
+        439.0,
+        154.0
+      ],
+      "status": "recovered",
+      "trigger": "ocr_quality",
+      "quality_bbox_pdf": [
+        25.0,
+        20.0,
+        405.0,
+        125.0
+      ],
+      "recovery_dpi": 216,
+      "requested_bbox_pdf": [
+        11.0,
+        11.0,
+        439.0,
+        154.0
+      ],
+      "pixel_window": [
+        33,
+        33,
+        1317,
+        462
+      ],
+      "segmentation_psm": 6,
+      "segmentation_reason": "image_lines",
+      "image_line_support": [
+        {
+          "bbox": [
+            32.66666793823242,
+            34.66666793823242,
+            246.6666717529297,
+            61.0
+          ],
+          "component_bboxes": [
+            [
+              32.666666666666664,
+              34.666666666666664,
+              49.0,
+              55.0
+            ],
+            [
+              51.333333333333336,
+              40.0,
+              64.66666666666667,
+              55.666666666666664
+            ],
+            [
+              67.0,
+              40.0,
+              80.66666666666667,
+              55.666666666666664
+            ],
+            [
+              82.0,
+              34.666666666666664,
+              95.33333333333333,
+              55.666666666666664
+            ],
+            [
+              98.33333333333333,
+              40.0,
+              112.0,
+              55.666666666666664
+            ],
+            [
+              114.0,
+              34.666666666666664,
+              127.0,
+              55.666666666666664
+            ],
+            [
+              135.33333333333334,
+              40.0,
+              148.66666666666666,
+              55.666666666666664
+            ],
+            [
+              158.66666666666666,
+              40.0,
+              170.66666666666666,
+              55.666666666666664
+            ],
+            [
+              173.0,
+              40.0,
+              186.66666666666666,
+              55.666666666666664
+            ],
+            [
+              189.33333333333334,
+              40.0,
+              208.66666666666666,
+              55.0
+            ],
+            [
+              212.33333333333334,
+              40.0,
+              225.33333333333334,
+              61.0
+            ],
+            [
+              233.33333333333334,
+              40.0,
+              246.66666666666666,
+              55.666666666666664
+            ]
+          ]
+        },
+        {
+          "bbox": [
+            32.66666793823242,
+            89.66666412353516,
+            244.0,
+            116.0
+          ],
+          "component_bboxes": [
+            [
+              32.666666666666664,
+              89.66666666666667,
+              49.0,
+              110.0
+            ],
+            [
+              51.333333333333336,
+              95.0,
+              64.66666666666667,
+              110.66666666666667
+            ],
+            [
+              66.66666666666667,
+              95.0,
+              78.66666666666667,
+              110.66666666666667
+            ],
+            [
+              80.0,
+              91.33333333333333,
+              86.66666666666667,
+              110.66666666666667
+            ],
+            [
+              89.66666666666667,
+              95.0,
+              96.66666666666667,
+              110.0
+            ],
+            [
+              104.0,
+              95.0,
+              116.33333333333333,
+              110.66666666666667
+            ],
+            [
+              117.33333333333333,
+              91.33333333333333,
+              124.0,
+              110.66666666666667
+            ],
+            [
+              126.0,
+              95.0,
+              139.33333333333334,
+              110.66666666666667
+            ],
+            [
+              141.0,
+              89.66666666666667,
+              154.33333333333334,
+              110.66666666666667
+            ],
+            [
+              164.66666666666666,
+              95.0,
+              176.66666666666666,
+              110.66666666666667
+            ],
+            [
+              179.33333333333334,
+              95.33333333333333,
+              191.33333333333334,
+              110.66666666666667
+            ],
+            [
+              195.0,
+              95.0,
+              208.0,
+              116.0
+            ],
+            [
+              210.66666666666666,
+              95.0,
+              223.66666666666666,
+              116.0
+            ],
+            [
+              231.33333333333334,
+              95.33333333333333,
+              244.0,
+              116.0
+            ]
+          ]
+        }
+      ],
+      "ocr_input_size": [
+        428,
+        143
+      ],
+      "input_size_reason": "large_consistent_image_lines",
+      "candidates": [
+        {
+          "text": "Readable",
+          "bbox": [
+            33.0,
+            35.0,
+            149.0,
+            56.0
+          ],
+          "source": "ocr",
+          "confidence": 89.0
+        },
+        {
+          "text": "sample",
+          "bbox": [
+            159.0,
+            35.0,
+            247.0,
+            61.0
+          ],
+          "source": "ocr",
+          "confidence": 92.0
+        },
+        {
+          "text": "Restricted",
+          "bbox": [
+            33.0,
+            90.0,
+            154.0,
+            111.0
+          ],
+          "source": "ocr",
+          "confidence": 91.0
+        },
+        {
+          "text": "supply",
+          "bbox": [
+            165.0,
+            90.0,
+            244.0,
+            116.0
+          ],
+          "source": "ocr",
+          "confidence": 92.0
+        }
+      ],
+      "candidate_lines": [
+        {
+          "_ordered_words": [
+            {
+              "text": "Readable",
+              "bbox": [
+                33.0,
+                35.0,
+                149.0,
+                56.0
+              ],
+              "source": "ocr",
+              "confidence": 89.0
+            },
+            {
+              "text": "sample",
+              "bbox": [
+                159.0,
+                35.0,
+                247.0,
+                61.0
+              ],
+              "source": "ocr",
+              "confidence": 92.0
+            }
+          ]
+        },
+        {
+          "_ordered_words": [
+            {
+              "text": "Restricted",
+              "bbox": [
+                33.0,
+                90.0,
+                154.0,
+                111.0
+              ],
+              "source": "ocr",
+              "confidence": 91.0
+            },
+            {
+              "text": "supply",
+              "bbox": [
+                165.0,
+                90.0,
+                244.0,
+                116.0
+              ],
+              "source": "ocr",
+              "confidence": 92.0
+            }
+          ]
+        }
+      ],
+      "accepted_count": 4
+    }
+  ]
+}

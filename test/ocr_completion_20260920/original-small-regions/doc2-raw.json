@@ -1,0 +1,132 @@
+{
+  "level": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    5,
+    5
+  ],
+  "page_num": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+  ],
+  "block_num": [
+    0,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+  ],
+  "par_num": [
+    0,
+    0,
+    1,
+    1,
+    1,
+    1,
+    1
+  ],
+  "line_num": [
+    0,
+    0,
+    0,
+    1,
+    1,
+    1,
+    1
+  ],
+  "word_num": [
+    0,
+    0,
+    0,
+    0,
+    1,
+    2,
+    3
+  ],
+  "left": [
+    0,
+    153,
+    153,
+    153,
+    153,
+    234,
+    287
+  ],
+  "top": [
+    0,
+    23,
+    23,
+    23,
+    19,
+    23,
+    27
+  ],
+  "width": [
+    426,
+    146,
+    146,
+    146,
+    68,
+    38,
+    12
+  ],
+  "height": [
+    66,
+    25,
+    25,
+    25,
+    41,
+    25,
+    19
+  ],
+  "conf": [
+    -1,
+    -1,
+    -1,
+    -1,
+    54,
+    33,
+    84
+  ],
+  "text": [
+    "",
+    "",
+    "",
+    "",
+    "PRAIA",
+    "PH",
+    "3"
+  ],
+  "numeric_verification": [
+    {
+      "word_indices": [
+        4,
+        5,
+        6
+      ],
+      "bbox_pixel": [
+        152,
+        14,
+        318,
+        61
+      ],
+      "primary": "PRAIA PH 3",
+      "secondary": "PR AEP He 3",
+      "status": "numeric_uncertain",
+      "reason_code": "numeric_candidates_disagree",
+      "secondary_image_scale": 1.0
+    }
+  ],
+  "execution_budget_enforced": true,
+  "preprocessing": "original_gray"
+}

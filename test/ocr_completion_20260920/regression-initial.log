@@ -1,0 +1,41 @@
+.......s..ss...............................................................................................................ss.s.............filing parse project_id=project-form-rollback task_id= file_id=app_form_0e57c18d2af2 stage=persist exceptions=[{'exception_type': 'RuntimeError', 'frames': [{'file': 'filing_change_review_service.py', 'line': 1414, 'function': '_import_application_form_once'}, {'file': 'test_filing_change_review_service_regression.py', 'line': 81, 'function': '_commit'}]}]
+.filing parse project_id=project-form-replacement-rollback task_id= file_id=app_form_f45a555e6842 stage=persist exceptions=[{'exception_type': 'RuntimeError', 'frames': [{'file': 'filing_change_review_service.py', 'line': 1414, 'function': '_import_application_form_once'}, {'file': 'test_filing_change_review_service_regression.py', 'line': 81, 'function': '_commit'}]}]
+.filing parse project_id=project-application-staging-invalid task_id= file_id=empty.pdf stage=upload exceptions=[{'exception_type': 'ParseFailure', 'frames': [{'file': 'filing_change_review_service.py', 'line': 1221, 'function': 'stage_application_form_import'}]}]
+filing parse project_id=project-application-staging-invalid task_id= file_id=large.pdf stage=upload exceptions=[{'exception_type': 'ParseFailure', 'frames': [{'file': 'filing_change_review_service.py', 'line': 1216, 'function': 'stage_application_form_import'}]}]
+.........filing parse project_id=p-retry task_id= file_id=d-retry stage=parse exceptions=[{'exception_type': 'ParseFailure', 'frames': [{'file': 'filing_change_review_service.py', 'line': 1755, 'function': 'parse_submission'}, {'file': 'filing_parse_outcome.py', 'line': 208, 'function': 'outcome'}]}]
+..filing parse project_id=p-batch task_id= file_id=empty stage=parse exceptions=[{'exception_type': 'ParseFailure', 'frames': [{'file': 'filing_change_review_service.py', 'line': 1755, 'function': 'parse_submission'}, {'file': 'filing_parse_outcome.py', 'line': 208, 'function': 'outcome'}]}]
+..filing parse project_id=p-interrupt task_id=late file_id=a stage=persist exceptions=[{'exception_type': 'ParseFailure', 'frames': [{'file': 'filing_change_review_service.py', 'line': 1798, 'function': 'parse_submission'}, {'file': 'filing_change_review_service.py', 'line': 1052, 'function': '_persist_parse_task_content'}]}]
+..filing parse project_id=project-parse-rollback task_id= file_id=doc-parse-rollback stage=persist exceptions=[{'exception_type': 'RuntimeError', 'frames': [{'file': 'filing_change_review_service.py', 'line': 1799, 'function': 'parse_submission'}, {'file': 'test_filing_change_review_service_regression.py', 'line': 81, 'function': '_commit'}]}]
+...filing parse project_id=p-real-form task_id= file_id=app_form_d46be0796c50 stage=application_form exceptions=[{'exception_type': 'ParseFailure', 'frames': [{'file': 'filing_change_review_service.py', 'line': 1329, 'function': '_import_application_form_once'}, {'file': 'filing_change_form_parser_service.py', 'line': 56, 'function': 'parse_form_file'}, {'file': 'filing_parse_outcome.py', 'line': 379, 'function': 'form_outcome'}, {'file': 'filing_parse_outcome.py', 'line': 208, 'function': 'outcome'}]}]
+filing parse project_id=p-real-form task_id= file_id=app_form_79a18469573a stage=application_form exceptions=[{'exception_type': 'PermissionError', 'frames': [{'file': 'filing_change_review_service.py', 'line': 1470, 'function': 'parse_application_form'}, {'file': 'test_filing_change_review_service_regression.py', 'line': 700, 'function': 'unreadable_source'}]}]
+.filing parse project_id=p-invalid-form task_id= file_id=app_form_2c27ef244298 stage=upload exceptions=[{'exception_type': 'ParseFailure', 'frames': [{'file': 'filing_change_review_service.py', 'line': 1324, 'function': '_import_application_form_once'}]}]
+filing parse project_id=p-invalid-form task_id= file_id=app_form_33d46867a217 stage=application_form exceptions=[{'exception_type': 'ParseFailure', 'frames': [{'file': 'filing_change_review_service.py', 'line': 1329, 'function': '_import_application_form_once'}, {'file': 'filing_change_form_parser_service.py', 'line': 37, 'function': 'parse_form_file'}, {'file': 'filing_parse_outcome.py', 'line': 144, 'function': 'check_file'}]}, {'exception_type': 'FileDataError', 'frames': [{'file': 'filing_parse_outcome.py', 'line': 136, 'function': 'check_file'}, {'file': '__init__.py', 'line': 3006, 'function': '__init__'}]}, {'exception_type': 'FzErrorFormat', 'frames': [{'file': '__init__.py', 'line': 3003, 'function': '__init__'}, {'file': 'mupdf.py', 'line': 45311, 'function': 'fz_open_document'}]}]
+filing parse project_id=p-invalid-form task_id= file_id=app_form_e2971b9e4605 stage=application_form exceptions=[{'exception_type': 'ParseFailure', 'frames': [{'file': 'filing_change_review_service.py', 'line': 1329, 'function': '_import_application_form_once'}, {'file': 'filing_change_form_parser_service.py', 'line': 37, 'function': 'parse_form_file'}, {'file': 'filing_parse_outcome.py', 'line': 138, 'function': 'check_file'}]}]
+.filing parse project_id=pdf-project task_id= file_id=pdf-doc page=2 stage=ocr exception_type=TimeoutError code=ocr_timeout http_status=None
+..filing parse project_id= task_id= file_id=fcrm_47ec302ddb5e4b95 stage=reference_parse exceptions=[{'exception_type': 'RuntimeError', 'frames': [{'file': 'filing_change_review_service.py', 'line': 2865, 'function': 'parse_reference_material'}, {'file': 'test_filing_change_review_service_regression.py', 'line': 81, 'function': '_commit'}]}]
+...s......filing parse project_id=project-main task_id= file_id=app_form_df0c2a96ec2c page=1 stage=page exception_type= code=ocr_quality http_status=None
+.filing parse project_id=project-main task_id= file_id=app_form_b2d027b0895f page=1 stage=page exception_type= code=ocr_quality http_status=None
+filing parse project_id=project-main task_id= file_id=app_form_b2d027b0895f page=1 stage=page exception_type= code=numeric_uncertain http_status=None
+....filing parse project_id=project-main task_id= file_id=app_form_deda84674948 page=1 stage=page exception_type= code=ocr_coverage http_status=None
+filing parse project_id=project-main task_id= file_id=app_form_deda84674948 page=1 stage=page exception_type= code=ocr_coverage http_status=None
+...filing parse project_id=project-main task_id= file_id=app_form_dff946c5ec81 page=1 stage=page exception_type= code=table_structure_unresolved http_status=None
+..filing parse project_id=project-main task_id= file_id=app_form_dbbad7d0e02d page=1 stage=page exception_type= code=ocr_coverage http_status=None
+filing parse project_id=project-main task_id= file_id=app_form_dbbad7d0e02d page=1 stage=field_region exception_type= code=field_region_crossing http_status=None
+.filing parse project_id=project-main task_id= file_id=app_form_90627d0420d4 page=1 stage=page exception_type= code=ocr_coverage http_status=None
+...filing parse project_id=project-main task_id= file_id=app_form_7c82a65cdafa page=1 stage=page exception_type= code=table_structure_unresolved http_status=None
+..filing parse project_id=project-main task_id= file_id=app_form_8bf12c1aa5aa page=1 stage=page exception_type= code=ocr_quality http_status=None
+....ssssss..E...
+======================================================================
+ERROR: test_numeric_uncertainty_persistence (unittest.loader._FailedTest)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: test_numeric_uncertainty_persistence
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/unittest/loader.py", line 154, in loadTestsFromName
+    module = __import__(module_name)
+ModuleNotFoundError: No module named 'test_numeric_uncertainty_persistence'
+
+
+----------------------------------------------------------------------
+Ran 206 tests in 142.610s
+
+FAILED (errors=1, skipped=13)

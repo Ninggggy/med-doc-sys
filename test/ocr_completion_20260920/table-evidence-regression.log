@@ -1,0 +1,6 @@
+.............filing parse project_id=numeric-persistence task_id= file_id=fcs_e3e7d0cc9c1b4d5e page=1 stage=ocr_numeric exception_type= code=numeric_uncertain http_status=None
+........................................
+----------------------------------------------------------------------
+Ran 53 tests in 9.435s
+
+OK

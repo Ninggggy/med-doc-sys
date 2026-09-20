@@ -1,0 +1,20 @@
+[
+  {
+    "name": "line1",
+    "lang": "chi_sim+eng",
+    "psm": 7,
+    "text": ""
+  },
+  {
+    "name": "chinese_only",
+    "lang": "chi_sim",
+    "psm": 6,
+    "text": "质量标准"
+  },
+  {
+    "name": "english_first",
+    "lang": "eng+chi_sim",
+    "psm": 6,
+    "text": "质量标准"
+  }
+]

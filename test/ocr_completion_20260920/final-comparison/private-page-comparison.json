@@ -1,0 +1,1605 @@
+[
+  {
+    "document": 1,
+    "page": 1,
+    "status": "partial",
+    "fields": [
+      {
+        "label": "代码",
+        "expected": "91330183MA2CG7XR9P",
+        "found_in_page": true
+      },
+      {
+        "label": "名称",
+        "expected": "浙江百代医药科技有限公司",
+        "found_in_page": true
+      },
+      {
+        "label": "类型",
+        "expected": "有限责任公司（自然人投资或控股）",
+        "found_in_page": false
+      },
+      {
+        "label": "法定代表人",
+        "expected": "蒲建",
+        "found_in_page": false
+      },
+      {
+        "label": "资本",
+        "expected": "陆仟万元整",
+        "found_in_page": false
+      },
+      {
+        "label": "成立日期",
+        "expected": "2018年12月18日",
+        "found_in_page": true
+      },
+      {
+        "label": "住所",
+        "expected": "浙江省杭州市临平区经济技术开发区临平大道502号1幢8楼802号-1",
+        "found_in_page": false
+      },
+      {
+        "label": "经营范围",
+        "expected": "许可项目：药品生产；药品批发；药品委托生产；第三类医疗器械经营；化妆品生产(依法须经批准的项目，经相关部门批准后方可开展经营活动，具体经营项目以审批结果为准)。一般项目：进出口代理；货物进出口；技术进出口；技术服务、技术开发、技术咨询、技术交流、技术转让、技术推广；第一类医疗器械销售；药物检测仪器销售；自然科学研究和试验发展；医学研究和试验发展；信息咨询服务（不含许可类信息咨询服务）；化工产品销售（不含许可类化工产品）；基础化学原料制造（不含危险化学品等许可类化学品的制造）；特殊医学用途配方食品销售；第二类医疗器械销售；化妆品批发；医用包装材料制造(除依法须经批准的项目外，凭营业执照依法自主开展经营活动)。",
+        "found_in_page": false
+      },
+      {
+        "label": "登记日期",
+        "expected": "2024年11月25日",
+        "found_in_page": false
+      }
+    ],
+    "table_mismatches": [],
+    "pending_visual_verification": [
+      "小字号标点逐字放大复核，不能将中英文括号自动等同"
+    ],
+    "recovery_calls": 1,
+    "resized_calls": 0,
+    "seconds": 125.739,
+    "full_text_acceptance": "not_passed"
+  },
+  {
+    "document": 1,
+    "page": 2,
+    "status": "partial",
+    "fields": [
+      {
+        "label": "代码",
+        "expected": "91330701MA2EA5925G",
+        "found_in_page": true
+      },
+      {
+        "label": "名称",
+        "expected": "浙江赛默制药有限公司",
+        "found_in_page": true
+      },
+      {
+        "label": "类型",
+        "expected": "有限责任公司（非自然人投资或控股的法人独资）",
+        "found_in_page": false
+      },
+      {
+        "label": "法定代表人",
+        "expected": "邵春能",
+        "found_in_page": false
+      },
+      {
+        "label": "资本",
+        "expected": "壹亿元整",
+        "found_in_page": false
+      },
+      {
+        "label": "成立日期",
+        "expected": "2019年06月12日",
+        "found_in_page": false
+      },
+      {
+        "label": "住所",
+        "expected": "浙江省金华市婺城区西关街道李渔路1313号金华信息经济产业园9幢1602室（自主申报）",
+        "found_in_page": false
+      },
+      {
+        "label": "经营范围",
+        "expected": "许可项目：药品生产；药品委托生产；兽药生产；第二类医疗器械生产；第三类医疗器械生产；食品生产；药品进出口；药品批发；第三类医疗器械经营；保健食品生产(依法须经批准的项目，经相关部门批准后方可开展经营活动，具体经营项目以审批结果为准)。一般项目：货物进出口；技术进出口；保健食品（预包装）销售；基础化学原料制造（不含危险化学品等许可类化学品的制造）；化工产品生产（不含许可类化工产品）；专用化学产品制造（不含危险化学品）；第一类医疗器械生产；技术服务、技术开发、技术咨询、技术交流、技术转让、技术推广；生物农药技术研发；生物化工产品技术研发；第一类医疗器械销售；第二类医疗器械销售；医用包装材料制造；包装材料及制品销售(除依法须经批准的项目外，凭营业执照依法自主开展经营活动)。",
+        "found_in_page": false
+      },
+      {
+        "label": "登记日期",
+        "expected": "2024年03月26日",
+        "found_in_page": false
+      }
+    ],
+    "table_mismatches": [],
+    "pending_visual_verification": [
+      "小字号标点逐字放大复核；第二页年份标签位置不同，不改变日期数值"
+    ],
+    "recovery_calls": 0,
+    "resized_calls": 0,
+    "seconds": 145.64,
+    "full_text_acceptance": "not_passed"
+  },
+  {
+    "document": 1,
+    "page": 3,
+    "status": "partial",
+    "fields": [
+      {
+        "label": "代码",
+        "expected": "91330701MA2EA5925G",
+        "found_in_page": true
+      },
+      {
+        "label": "名称",
+        "expected": "浙江赛默制药有限公司",
+        "found_in_page": true
+      },
+      {
+        "label": "类型",
+        "expected": "有限责任公司（非自然人投资或控股的法人独资）",
+        "found_in_page": false
+      },
+      {
+        "label": "法定代表人",
+        "expected": "邵春能",
+        "found_in_page": false
+      },
+      {
+        "label": "资本",
+        "expected": "壹亿元整",
+        "found_in_page": false
+      },
+      {
+        "label": "成立日期",
+        "expected": "2019年06月12日",
+        "found_in_page": false
+      },
+      {
+        "label": "住所",
+        "expected": "浙江省金华市婺城区西关街道李渔路1313号金华信息经济产业园9幢1602室（自主申报）",
+        "found_in_page": false
+      },
+      {
+        "label": "经营范围",
+        "expected": "许可项目：药品生产；药品委托生产；兽药生产；第二类医疗器械生产；第三类医疗器械生产；食品生产；药品进出口；药品批发；第三类医疗器械经营；保健食品生产(依法须经批准的项目，经相关部门批准后方可开展经营活动，具体经营项目以审批结果为准)。一般项目：货物进出口；技术进出口；保健食品（预包装）销售；基础化学原料制造（不含危险化学品等许可类化学品的制造）；化工产品生产（不含许可类化工产品）；专用化学产品制造（不含危险化学品）；第一类医疗器械生产；技术服务、技术开发、技术咨询、技术交流、技术转让、技术推广；生物农药技术研发；生物化工产品技术研发；第一类医疗器械销售；第二类医疗器械销售；医用包装材料制造；包装材料及制品销售(除依法须经批准的项目外，凭营业执照依法自主开展经营活动)。",
+        "found_in_page": false
+      },
+      {
+        "label": "登记日期",
+        "expected": "2024年03月26日",
+        "found_in_page": false
+      }
+    ],
+    "table_mismatches": [],
+    "pending_visual_verification": [
+      "小字号标点逐字放大复核；第二页年份标签位置不同，不改变日期数值"
+    ],
+    "recovery_calls": 1,
+    "resized_calls": 0,
+    "seconds": 125.141,
+    "full_text_acceptance": "not_passed"
+  },
+  {
+    "document": 2,
+    "page": 1,
+    "status": "partial",
+    "fields": [
+      {
+        "label": "企业名称",
+        "expected": "浙江百代医药科技有限公司",
+        "found_in_page": false
+      },
+      {
+        "label": "许可证编号",
+        "expected": "浙20200019",
+        "found_in_page": false
+      },
+      {
+        "label": "社会信用代码",
+        "expected": "91330183MA2CG7XR9P",
+        "found_in_page": false
+      },
+      {
+        "label": "分类码",
+        "expected": "Bh",
+        "found_in_page": false
+      },
+      {
+        "label": "注册地址",
+        "expected": "浙江省杭州市临平区经济技术开发区临平大道502号1幢8楼802号-1",
+        "found_in_page": false
+      },
+      {
+        "label": "法定代表人",
+        "expected": "蒲建",
+        "found_in_page": false
+      },
+      {
+        "label": "企业负责人",
+        "expected": "蒲建",
+        "found_in_page": false
+      },
+      {
+        "label": "质量负责人",
+        "expected": "付虎生",
+        "found_in_page": true
+      },
+      {
+        "label": "发证机关",
+        "expected": "浙江省药品监督管理局",
+        "found_in_page": true
+      },
+      {
+        "label": "发证日期",
+        "expected": "2025年8月6日",
+        "found_in_page": false
+      },
+      {
+        "label": "有效期至",
+        "expected": "2025年12月20日",
+        "found_in_page": false
+      },
+      {
+        "label": "日常监督管理机构",
+        "expected": "浙江省药品监督管理局",
+        "found_in_page": true
+      },
+      {
+        "label": "投诉举报电话",
+        "expected": "12345",
+        "found_in_page": false
+      },
+      {
+        "label": "签发人",
+        "expected": "张海军",
+        "found_in_page": false
+      },
+      {
+        "label": "生产地址和生产范围",
+        "expected": "受托生产企业：浙江凯润药业股份有限公司，浙江省湖州市德清县阜溪街道英溪北路689号，左乙拉西坦口服溶液***",
+        "found_in_page": false
+      }
+    ],
+    "table_mismatches": [],
+    "pending_visual_verification": [
+      "印章覆盖的许可证编号与签发人需原件放大复核"
+    ],
+    "recovery_calls": 1,
+    "resized_calls": 0,
+    "seconds": 144.222,
+    "full_text_acceptance": "not_passed"
+  },
+  {
+    "document": 2,
+    "page": 2,
+    "status": "partial",
+    "fields": [
+      {
+        "label": "企业名称",
+        "expected": "浙江百代医药科技有限公司",
+        "found_in_page": true
+      },
+      {
+        "label": "许可证编号",
+        "expected": "浙20200019",
+        "found_in_page": true
+      },
+      {
+        "label": "社会信用代码",
+        "expected": "91330183MA2CG7XR9P",
+        "found_in_page": false
+      },
+      {
+        "label": "分类码",
+        "expected": "Bh",
+        "found_in_page": true
+      },
+      {
+        "label": "注册地址",
+        "expected": "浙江省杭州市临平区经济技术开发区临平大道502号1幢8楼802号-1",
+        "found_in_page": false
+      },
+      {
+        "label": "法定代表人",
+        "expected": "蒲建",
+        "found_in_page": false
+      },
+      {
+        "label": "企业负责人",
+        "expected": "蒲建",
+        "found_in_page": false
+      },
+      {
+        "label": "质量负责人",
+        "expected": "付虎生",
+        "found_in_page": true
+      },
+      {
+        "label": "发证机关",
+        "expected": "浙江省药品监督管理局",
+        "found_in_page": false
+      },
+      {
+        "label": "发证日期",
+        "expected": "2025年8月6日",
+        "found_in_page": false
+      },
+      {
+        "label": "有效期至",
+        "expected": "2025年12月20日",
+        "found_in_page": false
+      },
+      {
+        "label": "质量授权人",
+        "expected": "付虎生",
+        "found_in_page": true
+      },
+      {
+        "label": "生产负责人",
+        "expected": "张赛",
+        "found_in_page": true
+      },
+      {
+        "label": "生产地址和生产范围",
+        "expected": "受托生产企业：浙江赛默制药有限公司，浙江省金华市婺城区汤溪镇永湖街788号，米诺地尔搽剂；浙江苏可安药业有限公司，浙江省杭州市钱塘区白杨街道长福杭路829号，氟康唑胶囊；浙江凯润药业股份有限公司，浙江省湖州市德清县阜溪街道英溪北路689号，左乙拉西坦口服溶液；浙江赛默制药有限公司，浙江省金华市婺城区汤溪镇永湖街788号，乙酰半胱氨酸注射液、他达拉非片、双氯芬酸二乙胺乳胶剂、吲哚布芬片、吸入用硫酸沙丁胺醇溶液、夫西地酸乳膏、比索洛尔氨氯地平片、氟伐他汀钠缓释片、氟比洛芬凝胶贴膏、洛索洛芬钠凝胶贴膏、洛索洛芬钠细粒剂、环丝氨酸胶囊、甲氧氯普胺片、盐酸丙卡特罗颗粒、盐酸溴己新口服溶液、盐酸特比萘芬喷雾剂、硫辛酸片、硫酸特布他林雾化吸入用溶液、硫酸镁钠钾口服用浓溶液、米诺地尔搽剂、糠酸莫米松乳膏、罗沙司他胶囊、联苯苄唑溶液、聚乙烯醇滴眼液、苯磺酸氨氯地平颗粒、草酸艾司西酞普兰片、蒙脱石混悬液、阿司匹林肠溶片、阿立哌唑口服溶液（企业应取得相应的药品批准文号（未实施批准文号管理的中药饮片除外），且该剂型通过GMP符合性检查后方可上市销售药品。）",
+        "found_in_page": false
+      }
+    ],
+    "table_mismatches": [],
+    "pending_visual_verification": [
+      "印章重叠的受托地址与长福杭路字形需放大核实，不能据OCR填正"
+    ],
+    "recovery_calls": 0,
+    "resized_calls": 0,
+    "seconds": 137.017,
+    "full_text_acceptance": "not_passed"
+  },
+  {
+    "document": 2,
+    "page": 3,
+    "status": "partial",
+    "fields": [
+      {
+        "label": "标题",
+        "expected": "车间和生产线情况：",
+        "found_in_page": false
+      }
+    ],
+    "table_mismatches": [
+      {
+        "table": 0,
+        "row": 0,
+        "column": 0,
+        "expected": "类型",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 0,
+        "column": 1,
+        "expected": "生产地址",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 0,
+        "column": 2,
+        "expected": "车间",
+        "actual": "+"
+      },
+      {
+        "table": 0,
+        "row": 1,
+        "column": 0,
+        "expected": "委托",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 1,
+        "column": 1,
+        "expected": "浙江省湖州市德清县阜溪街道英溪北路689号",
+        "actual": "攻 省 湖州 市 德清 县 阜 溪 街 道 英 溪 北 路 689 号"
+      },
+      {
+        "table": 0,
+        "row": 2,
+        "column": 0,
+        "expected": "委托",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 2,
+        "column": 1,
+        "expected": "浙江省金华市婺城区汤溪镇永湖街788号",
+        "actual": "浙江 省 金华 市 柳 城 区 汤 溪 镇 永 湖 街 788 号"
+      },
+      {
+        "table": 0,
+        "row": 2,
+        "column": 4,
+        "expected": "片剂",
+        "actual": "Hil"
+      },
+      {
+        "table": 0,
+        "row": 3,
+        "column": 0,
+        "expected": "委托",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 3,
+        "column": 1,
+        "expected": "浙江省金华市婺城区汤溪镇永湖街788号",
+        "actual": "WL Se FT EK AR BOA 788 号"
+      },
+      {
+        "table": 0,
+        "row": 3,
+        "column": 3,
+        "expected": "搽剂生产线",
+        "actual": "PRIA HG"
+      },
+      {
+        "table": 0,
+        "row": 3,
+        "column": 4,
+        "expected": "搽剂",
+        "actual": "把 剂"
+      },
+      {
+        "table": 0,
+        "row": 4,
+        "column": 0,
+        "expected": "委托",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 4,
+        "column": 1,
+        "expected": "浙江省金华市婺城区汤溪镇永湖街788号",
+        "actual": "浙江 省 金华 市 禾 城 区 汤 溪 镇 永 湖 街 788 号"
+      },
+      {
+        "table": 0,
+        "row": 5,
+        "column": 0,
+        "expected": "委托",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 5,
+        "column": 1,
+        "expected": "浙江省金华市婺城区汤溪镇永湖街788号",
+        "actual": "浙江 省 金华 市 玫 城 区 汤 溪 镇 永 湖 街 788 号"
+      },
+      {
+        "table": 0,
+        "row": 6,
+        "column": 3,
+        "expected": "搽剂生产线3",
+        "actual": "PRAT HE 3"
+      },
+      {
+        "table": 0,
+        "row": 6,
+        "column": 4,
+        "expected": "搽剂",
+        "actual": "Perel"
+      }
+    ],
+    "pending_visual_verification": [
+      "首列第一条委托被印章部分覆盖，需放大核实"
+    ],
+    "recovery_calls": 4,
+    "resized_calls": 2,
+    "seconds": 66.125,
+    "full_text_acceptance": "not_passed"
+  },
+  {
+    "document": 2,
+    "page": 4,
+    "status": "partial",
+    "fields": [
+      {
+        "label": "限制说明",
+        "expected": "以下出口原料药在未取得我国药品批准文号（或化学原料药批准通知书）之前仅供出口，不得在国内作为原料药销售使用：",
+        "found_in_page": false
+      }
+    ],
+    "table_mismatches": [
+      {
+        "table": 0,
+        "row": 0,
+        "column": 0,
+        "expected": "原料药名称",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 0,
+        "column": 1,
+        "expected": "生产地址",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 0,
+        "column": 2,
+        "expected": "出口欧盟原料药证明文件编号",
+        "actual": "出 口 欧 盟 原 料 药\n证 明文"
+      },
+      {
+        "table": 0,
+        "row": 0,
+        "column": 3,
+        "expected": "证书有效期",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 1,
+        "column": 1,
+        "expected": "/",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 1,
+        "column": 2,
+        "expected": "/",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 1,
+        "column": 3,
+        "expected": "/",
+        "actual": ""
+      }
+    ],
+    "pending_visual_verification": [
+      "第一数据格被印章遮盖：尚未核实是空白还是斜杠，不标为不可读"
+    ],
+    "recovery_calls": 4,
+    "resized_calls": 0,
+    "seconds": 37.287,
+    "full_text_acceptance": "not_passed"
+  },
+  {
+    "document": 2,
+    "page": 5,
+    "status": "partial",
+    "fields": [
+      {
+        "label": "左标题",
+        "expected": "变更记录",
+        "found_in_page": true
+      },
+      {
+        "label": "右标题",
+        "expected": "变更记录",
+        "found_in_page": true
+      },
+      {
+        "label": "左上事项",
+        "expected": "具体变更信息见附件。",
+        "found_in_page": false
+      }
+    ],
+    "table_mismatches": [],
+    "pending_visual_verification": [
+      "左上盖章日期月日被章文覆盖，需放大核实，不根据其他页推断"
+    ],
+    "recovery_calls": 4,
+    "resized_calls": 2,
+    "seconds": 30.191,
+    "full_text_acceptance": "not_passed"
+  },
+  {
+    "document": 3,
+    "page": 1,
+    "status": "partial",
+    "fields": [
+      {
+        "label": "企业名称",
+        "expected": "浙江赛默制药有限公司",
+        "found_in_page": false
+      },
+      {
+        "label": "许可证编号",
+        "expected": "浙20210010",
+        "found_in_page": false
+      },
+      {
+        "label": "社会信用代码",
+        "expected": "91330701MA2EA5925G",
+        "found_in_page": false
+      },
+      {
+        "label": "分类码",
+        "expected": "AhChDht",
+        "found_in_page": false
+      },
+      {
+        "label": "注册地址",
+        "expected": "浙江省金华市婺城区西关街道李渔路1313号金华信息经济产业园9幢1602室（自主申报）",
+        "found_in_page": false
+      },
+      {
+        "label": "法定代表人",
+        "expected": "邵春能",
+        "found_in_page": false
+      },
+      {
+        "label": "企业负责人",
+        "expected": "陈安",
+        "found_in_page": false
+      },
+      {
+        "label": "质量负责人",
+        "expected": "吴妙兰",
+        "found_in_page": false
+      },
+      {
+        "label": "发证机关",
+        "expected": "浙江省药品监督管理局",
+        "found_in_page": false
+      },
+      {
+        "label": "发证日期",
+        "expected": "2025年7月31日",
+        "found_in_page": false
+      },
+      {
+        "label": "有效期至",
+        "expected": "2026年3月18日",
+        "found_in_page": false
+      },
+      {
+        "label": "日常监督管理机构",
+        "expected": "浙江省药品监督管理局",
+        "found_in_page": false
+      },
+      {
+        "label": "投诉举报电话",
+        "expected": "12345",
+        "found_in_page": false
+      },
+      {
+        "label": "生产地址和生产范围",
+        "expected": "浙江省金华市婺城区汤溪镇永湖街788号；冲洗剂（仅限注册申报使用）、凝胶剂、原料药、口服乳剂、口服溶液剂、吸入制剂（含激素类）、大容量注射剂（仅限注册申报使用）、小容量注射剂、片剂、眼用制剂、精神药品、胶囊剂、贴膏剂、软膏剂、颗粒剂***",
+        "found_in_page": false
+      }
+    ],
+    "table_mismatches": [],
+    "pending_visual_verification": [
+      "正本小字和分类码末尾大小写需放大复核"
+    ],
+    "recovery_calls": 1,
+    "resized_calls": 0,
+    "seconds": 132.332,
+    "full_text_acceptance": "not_passed"
+  },
+  {
+    "document": 3,
+    "page": 2,
+    "status": "partial",
+    "fields": [
+      {
+        "label": "企业名称",
+        "expected": "浙江赛默制药有限公司",
+        "found_in_page": false
+      },
+      {
+        "label": "许可证编号",
+        "expected": "浙20210010",
+        "found_in_page": false
+      },
+      {
+        "label": "社会信用代码",
+        "expected": "91330701MA2EA5925G",
+        "found_in_page": false
+      },
+      {
+        "label": "分类码",
+        "expected": "AhChDht",
+        "found_in_page": false
+      },
+      {
+        "label": "注册地址",
+        "expected": "浙江省金华市婺城区西关街道李渔路1313号金华信息经济产业园9幢1602室（自主申报）",
+        "found_in_page": false
+      },
+      {
+        "label": "法定代表人",
+        "expected": "邵春能",
+        "found_in_page": false
+      },
+      {
+        "label": "企业负责人",
+        "expected": "陈安",
+        "found_in_page": false
+      },
+      {
+        "label": "质量负责人",
+        "expected": "吴妙兰",
+        "found_in_page": false
+      },
+      {
+        "label": "发证机关",
+        "expected": "浙江省药品监督管理局",
+        "found_in_page": false
+      },
+      {
+        "label": "发证日期",
+        "expected": "2025年7月31日",
+        "found_in_page": false
+      },
+      {
+        "label": "有效期至",
+        "expected": "2026年3月18日",
+        "found_in_page": false
+      },
+      {
+        "label": "质量授权人",
+        "expected": "吴妙兰",
+        "found_in_page": false
+      },
+      {
+        "label": "生产负责人",
+        "expected": "白胜伟",
+        "found_in_page": false
+      },
+      {
+        "label": "生产范围开头",
+        "expected": "浙江省金华市婺城区汤溪镇永湖街788号；冲洗剂（仅限注册申报使用）、凝胶剂、原料药",
+        "found_in_page": false
+      },
+      {
+        "label": "生产范围结尾",
+        "expected": "企业应取得相应的药品批准文号（未实施批准文号管理的中药饮片除外），且该剂型通过GMP符合性检查后方可上市销售药品。",
+        "found_in_page": false
+      },
+      {
+        "label": "生产范围原图逐行转录草稿",
+        "expected": "浙江省金华市婺城区汤溪镇永湖街788号；冲洗剂（仅限注册申报使用）、凝\n胶剂、原料药（丁苯酞-仅限注册申报使用、丙戊酸-仅限注册申报使用、丙胺\n卡因、乙酰半胱氨酸、二氟尼柳-仅限注册申报使用、二甲硅油-仅限注册申报\n使用、氟玛贝特-仅限注册申报使用、依伏卡塞-仅限注册申报使用、克立硼\n罗、克罗米通-仅限注册申报使用、利多卡因、匹可硫酸钠、双氯芬酸二乙\n胺、吗替麦考酚、吡贝地尔-仅限注册申报使用、吲哚布芬、地氯雷他定、多索\n茶碱、妥洛特罗、富马酸伏诺拉生、富马酸卢帕他定、富马酸贝达喹啉-仅限\n注册申报使用、尼可地尔-仅限注册申报使用、左奥硝唑-仅限注册申报使用、\n布比卡因-仅限注册申报使用、布瑞哌唑-仅限注册申报使用、布美他尼-仅限\n注册申报使用、异丙托溴铵、托吡司特、氢醌-仅限注册申报使用、氨基己\n酸、氯化镁、溴芬酸钠-仅限注册申报使用、甲硫酸新斯的明、甲磺酸沙非胺-\n仅限注册申报使用、盐酸乌拉地尔、盐酸乙哌立松-仅限注册申报使用、盐酸\n伊伐布雷定-仅限注册申报使用、盐酸利多卡因、盐酸卡替洛尔-仅限注册申报\n使用、盐酸多巴胺-仅限注册申报使用、盐酸多巴酚丁胺、盐酸尼卡地平-仅限\n注册申报使用、盐酸屈他维林-仅限注册申报使用、盐酸左旋沙丁胺醇、盐酸\n替扎尼定-仅限注册申报使用、盐酸普洛利生-仅限注册申报使用、盐酸甲氧氯\n普胺、盐酸贝尼地平、盐酸达泊西汀、盐酸阿莫罗芬、硫酸沙丁胺醇、硫酸特\n布他林、硫酸钠、硫酸钾、硫酸锌-仅限注册申报使用、磷酸氯喹-仅限注册申\n报使用、立他司特、米库氯铵-仅限注册申报使用、米诺地尔、维生素C钙-仅\n限注册申报使用、罗沙司他-仅限注册申报使用、美阿沙坦钾-仅限注册申报使\n用、聚乙烯醇、聚多卡醇-仅限注册申报使用、艾拉莫德-仅限注册申报使用、\n艾普拉唑-仅限注册申报使用、艾瑞昔布-仅限注册申报使用、苯磺酸美洛加巴\n林-仅限注册申报使用、蛋白琥珀酸铁-仅限注册申报使用、西尼地平-仅限注\n册申报使用、重酒石酸卡巴拉汀-仅限注册申报使用、间苯三酚三甲醚、间苯\n三酚、雷美替胺-仅限注册申报使用、雷芬那辛-仅限注册申报使用、乌米溴铵\n（仅曲泊铵-仅限注册申报使用）、口服乳剂、口服溶液剂、吸入制剂（含激素\n类）、大容量注射剂（仅限注册申报使用）、小容量注射剂、片剂、眼用制剂\n（滴眼剂）、精神药品（吡仑帕奈-仅限注册申报使用、吡仑帕奈）、胶囊剂、\n贴膏剂、软膏剂、颗粒剂（企业应取得相应的药品批准文号（未实施批准文号\n管理的中药饮片除外），且该剂型通过GMP符合性检查后方可上市销售药品。）",
+        "found_in_page": false
+      }
+    ],
+    "table_mismatches": [],
+    "pending_visual_verification": [
+      "已按高分辨率原图逐行转录；吗替麦考酚、乌米溴铵之后括号内药名及原图小字标点仍需二次视觉核实，草稿不能作全文通过依据"
+    ],
+    "recovery_calls": 0,
+    "resized_calls": 0,
+    "seconds": 225.594,
+    "full_text_acceptance": "not_passed"
+  },
+  {
+    "document": 3,
+    "page": 3,
+    "status": "partial",
+    "fields": [
+      {
+        "label": "标题",
+        "expected": "车间和生产线情况：",
+        "found_in_page": false
+      }
+    ],
+    "table_mismatches": [
+      {
+        "table": 0,
+        "row": 0,
+        "column": 0,
+        "expected": "类型",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 0,
+        "column": 1,
+        "expected": "生产地址",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 0,
+        "column": 2,
+        "expected": "车间",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 0,
+        "column": 3,
+        "expected": "生产线",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 0,
+        "column": 4,
+        "expected": "生产范围",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 1,
+        "column": 0,
+        "expected": "自产",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 1,
+        "column": 1,
+        "expected": "浙江省金华市婺城区汤溪镇永湖街788号",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 1,
+        "column": 2,
+        "expected": "原料车间3",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 1,
+        "column": 3,
+        "expected": "米诺地尔生产线2",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 1,
+        "column": 4,
+        "expected": "原料药（米诺地尔）",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 2,
+        "column": 0,
+        "expected": "自产",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 2,
+        "column": 1,
+        "expected": "浙江省金华市婺城区汤溪镇永湖街788号",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 2,
+        "column": 2,
+        "expected": "原料车间3、原料车间7",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 2,
+        "column": 3,
+        "expected": "吲哚布芬生产线2",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 2,
+        "column": 4,
+        "expected": "原料药（吲哚布芬）",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 3,
+        "column": 0,
+        "expected": "自产",
+        "actual": "["
+      },
+      {
+        "table": 0,
+        "row": 3,
+        "column": 1,
+        "expected": "浙江省金华市婺城区汤溪镇永湖街788号",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 3,
+        "column": 2,
+        "expected": "原料车间5",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 3,
+        "column": 3,
+        "expected": "丙胺卡因生产线",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 3,
+        "column": 4,
+        "expected": "原料药（丙胺卡因）",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 4,
+        "column": 0,
+        "expected": "自产",
+        "actual": "rr"
+      },
+      {
+        "table": 0,
+        "row": 4,
+        "column": 1,
+        "expected": "浙江省金华市婺城区汤溪镇永湖街788号",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 4,
+        "column": 2,
+        "expected": "原料车间5",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 4,
+        "column": 3,
+        "expected": "乙酰半胱氨酸生产线",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 4,
+        "column": 4,
+        "expected": "原料药（乙酰半胱氨酸）",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 5,
+        "column": 0,
+        "expected": "自产",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 5,
+        "column": 1,
+        "expected": "浙江省金华市婺城区汤溪镇永湖街788号",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 5,
+        "column": 2,
+        "expected": "原料车间5",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 5,
+        "column": 3,
+        "expected": "利多卡因生产线",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 5,
+        "column": 4,
+        "expected": "原料药（利多卡因）",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 6,
+        "column": 0,
+        "expected": "自产",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 6,
+        "column": 1,
+        "expected": "浙江省金华市婺城区汤溪镇永湖街788号",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 6,
+        "column": 2,
+        "expected": "原料车间5",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 6,
+        "column": 3,
+        "expected": "吡仑帕奈生产线",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 6,
+        "column": 4,
+        "expected": "精神药品（吡仑帕奈）",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 7,
+        "column": 0,
+        "expected": "自产",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 7,
+        "column": 1,
+        "expected": "浙江省金华市婺城区汤溪镇永湖街788号",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 7,
+        "column": 2,
+        "expected": "原料车间5",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 7,
+        "column": 3,
+        "expected": "多索茶碱生产线",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 7,
+        "column": 4,
+        "expected": "原料药（多索茶碱）",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 8,
+        "column": 0,
+        "expected": "自产",
+        "actual": "rr"
+      },
+      {
+        "table": 0,
+        "row": 8,
+        "column": 1,
+        "expected": "浙江省金华市婺城区汤溪镇永湖街788号",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 8,
+        "column": 2,
+        "expected": "原料车间5",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 8,
+        "column": 3,
+        "expected": "妥洛特罗生产线",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 8,
+        "column": 4,
+        "expected": "原料药（妥洛特罗）",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 9,
+        "column": 0,
+        "expected": "自产",
+        "actual": "rr"
+      },
+      {
+        "table": 0,
+        "row": 9,
+        "column": 1,
+        "expected": "浙江省金华市婺城区汤溪镇永湖街788号",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 9,
+        "column": 2,
+        "expected": "原料车间5",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 9,
+        "column": 3,
+        "expected": "氨基己酸生产线",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 9,
+        "column": 4,
+        "expected": "原料药（氨基己酸）",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 10,
+        "column": 0,
+        "expected": "自产",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 10,
+        "column": 1,
+        "expected": "浙江省金华市婺城区汤溪镇永湖街788号",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 10,
+        "column": 2,
+        "expected": "原料车间5",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 10,
+        "column": 3,
+        "expected": "盐酸乌拉地尔生产线",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 10,
+        "column": 4,
+        "expected": "原料药（盐酸乌拉地尔）",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 11,
+        "column": 0,
+        "expected": "自产",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 11,
+        "column": 1,
+        "expected": "浙江省金华市婺城区汤溪镇永湖街788号",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 11,
+        "column": 2,
+        "expected": "原料车间5",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 11,
+        "column": 3,
+        "expected": "盐酸左旋沙丁胺醇生产线",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 11,
+        "column": 4,
+        "expected": "原料药（盐酸左旋沙丁胺醇）",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 12,
+        "column": 0,
+        "expected": "自产",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 12,
+        "column": 1,
+        "expected": "浙江省金华市婺城区汤溪镇永湖街788号",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 12,
+        "column": 2,
+        "expected": "原料车间5",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 12,
+        "column": 3,
+        "expected": "盐酸甲氧氯普胺一水合物生产线",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 12,
+        "column": 4,
+        "expected": "原料药（盐酸甲氧氯普胺）",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 13,
+        "column": 0,
+        "expected": "自产",
+        "actual": "ar"
+      },
+      {
+        "table": 0,
+        "row": 13,
+        "column": 1,
+        "expected": "浙江省金华市婺城区汤溪镇永湖街788号",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 13,
+        "column": 2,
+        "expected": "原料车间5",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 13,
+        "column": 3,
+        "expected": "盐酸达泊西汀生产线",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 13,
+        "column": 4,
+        "expected": "原料药（盐酸达泊西汀）",
+        "actual": "ane cam"
+      },
+      {
+        "table": 0,
+        "row": 14,
+        "column": 0,
+        "expected": "自产",
+        "actual": "rr"
+      },
+      {
+        "table": 0,
+        "row": 14,
+        "column": 1,
+        "expected": "浙江省金华市婺城区汤溪镇永湖街788号",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 14,
+        "column": 2,
+        "expected": "原料车间5",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 14,
+        "column": 3,
+        "expected": "硫酸沙丁胺醇生产线",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 14,
+        "column": 4,
+        "expected": "原料药（硫酸沙丁胺醇）",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 15,
+        "column": 0,
+        "expected": "自产",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 15,
+        "column": 1,
+        "expected": "浙江省金华市婺城区汤溪镇永湖街788号",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 15,
+        "column": 2,
+        "expected": "原料车间5",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 15,
+        "column": 3,
+        "expected": "硫酸钠生产线",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 15,
+        "column": 4,
+        "expected": "原料药（硫酸钠）",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 16,
+        "column": 0,
+        "expected": "自产",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 16,
+        "column": 1,
+        "expected": "浙江省金华市婺城区汤溪镇永湖街788号",
+        "actual": "ANAT ae SE rs Se eX a A TR 号"
+      },
+      {
+        "table": 0,
+        "row": 16,
+        "column": 2,
+        "expected": "原料车间5",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 16,
+        "column": 3,
+        "expected": "硫酸钾生产线",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 16,
+        "column": 4,
+        "expected": "原料药（硫酸钾）",
+        "actual": "BAA (ai"
+      },
+      {
+        "table": 0,
+        "row": 17,
+        "column": 0,
+        "expected": "自产",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 17,
+        "column": 1,
+        "expected": "浙江省金华市婺城区汤溪镇永湖街788号",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 17,
+        "column": 2,
+        "expected": "原料车间5",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 17,
+        "column": 3,
+        "expected": "聚乙烯醇生产线",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 17,
+        "column": 4,
+        "expected": "原料药（聚乙烯醇）",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 18,
+        "column": 0,
+        "expected": "自产",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 18,
+        "column": 1,
+        "expected": "浙江省金华市婺城区汤溪镇永湖街788号",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 18,
+        "column": 2,
+        "expected": "原料车间5",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 18,
+        "column": 3,
+        "expected": "间苯三酚三甲醚生产线",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 18,
+        "column": 4,
+        "expected": "原料药（间苯三酚三甲醚）",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 19,
+        "column": 0,
+        "expected": "自产",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 19,
+        "column": 1,
+        "expected": "浙江省金华市婺城区汤溪镇永湖街788号",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 19,
+        "column": 2,
+        "expected": "原料车间5",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 19,
+        "column": 3,
+        "expected": "间苯三酚生产线",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 19,
+        "column": 4,
+        "expected": "原料药（间苯三酚）",
+        "actual": ""
+      }
+    ],
+    "pending_visual_verification": [
+      "印章下首格与小字号括号字形需放大复核"
+    ],
+    "recovery_calls": 4,
+    "resized_calls": 2,
+    "seconds": 56.293,
+    "full_text_acceptance": "not_passed"
+  },
+  {
+    "document": 3,
+    "page": 4,
+    "status": "partial",
+    "fields": [
+      {
+        "label": "限制说明",
+        "expected": "以下出口原料药在未取得我国药品批准文号（或化学原料药批准通知书）之前仅供出口，不得在国内作为原料药销售使用：",
+        "found_in_page": false
+      }
+    ],
+    "table_mismatches": [
+      {
+        "table": 0,
+        "row": 0,
+        "column": 0,
+        "expected": "原料药名称",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 0,
+        "column": 1,
+        "expected": "生产地址",
+        "actual": "aie"
+      },
+      {
+        "table": 0,
+        "row": 0,
+        "column": 2,
+        "expected": "出口欧盟原料药证明文件编号",
+        "actual": "出 已 欧盟 原料 药"
+      },
+      {
+        "table": 0,
+        "row": 0,
+        "column": 3,
+        "expected": "证书有效期",
+        "actual": "aa"
+      },
+      {
+        "table": 0,
+        "row": 1,
+        "column": 1,
+        "expected": "/",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 1,
+        "column": 2,
+        "expected": "/",
+        "actual": ""
+      },
+      {
+        "table": 0,
+        "row": 1,
+        "column": 3,
+        "expected": "/",
+        "actual": ""
+      }
+    ],
+    "pending_visual_verification": [
+      "第一数据格被印章遮盖：尚未核实是空白还是斜杠，不标为不可读"
+    ],
+    "recovery_calls": 4,
+    "resized_calls": 3,
+    "seconds": 30.957,
+    "full_text_acceptance": "not_passed"
+  },
+  {
+    "document": 3,
+    "page": 5,
+    "status": "partial",
+    "fields": [
+      {
+        "label": "左标题",
+        "expected": "变更记录",
+        "found_in_page": true
+      },
+      {
+        "label": "右标题",
+        "expected": "变更记录",
+        "found_in_page": true
+      },
+      {
+        "label": "左上事项",
+        "expected": "具体变更信息见附件。",
+        "found_in_page": false
+      }
+    ],
+    "table_mismatches": [],
+    "pending_visual_verification": [
+      "左上盖章日期月日被章文覆盖，需放大核实，不根据其他页推断"
+    ],
+    "recovery_calls": 4,
+    "resized_calls": 2,
+    "seconds": 35.294,
+    "full_text_acceptance": "not_passed"
+  }
+]
