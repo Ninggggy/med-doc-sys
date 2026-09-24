@@ -633,6 +633,8 @@ def apply_resolutions(chunks, issues, items):
 def apply_compatible_resolutions(chunks, issues, items, confirmations):
     """先在原地址应用数值确认，再重建结构；同一表的两类修订不得静默覆盖。"""
     from agent.agent_backend.services.filing_numeric_revision import apply_confirmations
+    if not isinstance(items,list) or any(not isinstance(i,dict) for i in items):
+        raise ValueError('核对记录必须为对象列表')
     numeric = apply_confirmations(chunks, confirmations)
     current = {issue['issue_key']: issue for issue in issues}
     for item in items if isinstance(items, list) else []:
@@ -650,4 +652,26 @@ def apply_compatible_resolutions(chunks, issues, items, confirmations):
             if ni == ci and overlaps(bbox, rect(chunks[ni]['tables'][ti]['bbox_pdf'])):
                 raise ValueError('同一表格已有数值确认与结构修订，不能相互覆盖。请先在数值核对中撤销该表确认，再完整修订表格；当前输入未保存。')
     # 问题身份来自原始证据；数值确认可能改变表格顺序前必须先应用。
+    target_items = [i for i in items if str(i.get('issue_key', '')).startswith('target:')]
+    ordinary = [i for i in items if i not in target_items]
+    if target_items:
+        from agent.agent_backend.services.filing_review_targets import apply_targets
+        by_key = {i['issue_key']: i for i in issues}
+        for target_item in target_items:
+            target = by_key.get(target_item.get('issue_key'), {})
+            for confirmation in confirmations:
+                ni, ti, _ = map(int, confirmation['key'].split(':'))
+                if ni == target.get('chunk_index') and (target.get('target_kind') == 'chunk' or
+                    (target.get('bbox_pdf') and overlaps(rect(target['bbox_pdf']), rect(chunks[ni]['tables'][ti]['bbox_pdf'])))):
+                    raise ValueError('对象修订与已有数值确认不能相互覆盖，请先撤销旧数值确认')
+        for item in ordinary:
+            issue = by_key.get(item.get('issue_key'), {})
+            for target_item in target_items:
+                target = by_key.get(target_item.get('issue_key'), {})
+                if (issue.get('chunk_index') == target.get('chunk_index') and issue.get('bbox_pdf') and target.get('bbox_pdf')
+                        and overlaps(rect(issue.get('repair_bbox_pdf') or issue['bbox_pdf']), rect(target['bbox_pdf']))):
+                    raise ValueError('已有区域修订与当前对象重叠，请修改已有修订；原确认不能继续覆盖新内容')
+        updated, resolved, saved = apply_resolutions(numeric, issues, ordinary)
+        updated, target_resolved, target_saved = apply_targets(updated, issues, target_items)
+        return updated, resolved | target_resolved, saved + target_saved
     return apply_resolutions(numeric, issues, items)

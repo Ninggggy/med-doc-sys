@@ -16,7 +16,7 @@ FIELD_LABELS = {
  'validity_period': ['药品有效期','有效期'], 'storage_condition': ['贮藏条件','贮藏'],
  'license_no': ['许可证编号','许可证号'], 'license_valid_until': ['证照有效期','有效期至'],
  'registered_address': ['注册地址','住所'], 'production_address': ['生产地址'],
- 'production_scope': ['生产范围'], 'standard_no': ['标准编号','标准号','质量标准'],
+ 'production_scope': ['生产范围','生产地址和生产范围'], 'standard_no': ['标准编号','标准号','质量标准'],
  'standard_version': ['标准版本','版本号'], 'effective_date': ['生效日期','实施日期'],
  'revision_info': ['修订说明','修订日期','修改日期'], 'test_method': ['检验方法','检测方法'],
  'test_items': ['检测项目','检验项目','考察项目'], 'limit': ['可接受标准','限度','评价标准'],
@@ -118,7 +118,8 @@ def source_lines(chunks):
                         if (wb and box[0] <= (wb[0]+wb[2])/2 <= box[2] and box[1] <= (wb[1]+wb[3])/2 <= box[3]
                                 and word.get('numeric_verification')):
                             checks.append(word['numeric_verification'])
-                yield line.strip(), {**base, 'line': li, **({'numeric_verification': checks} if checks else {})}
+                geometry = {k: matching[0][k] for k in ('bbox', 'block_id', 'column_id') if len(matching) == 1 and k in matching[0]}
+                yield line.strip(), {**base, **geometry, 'line': li, **({'numeric_verification': checks} if checks else {})}
         for ti, table in enumerate(chunk.get('tables') or [], 1):
             rows = table.get('raw_rows') or ([table.get('headers') or []] + table.get('rows', []) if table.get('rows') else [])
             # 公共PDF表格rows已含表头，不能再插入空表头造成证据行号偏移。
@@ -136,7 +137,7 @@ def source_lines(chunks):
                 if not isinstance(row, list): continue
                 for col, cell in enumerate(row, 1):
                     text = str(cell or '').strip()
-                    loc = {**base, 'table_type':table.get('table_type',''), 'table': table.get('table_index', ci), 'row': ri, 'cell': col, 'page': table.get('page', base['page'])}
+                    loc = {**base, 'table_type':table.get('table_type',''), 'table': table.get('table_index', ti), 'row': ri, 'cell': col, 'page': table.get('page', base['page'])}
                     def cell_evidence(column):
                         return [check for source_cell in table.get('cells', [])
                                 if source_cell.get('row', -1) <= ri-1 < source_cell.get('row', -1)+source_cell.get('rowspan', 1)
@@ -174,7 +175,9 @@ def extract_document(file_name, chunks):
     all_labels = '|'.join(re.escape(x[0]) for x in labels)
     pattern = re.compile(r'(?:【(?P<bracket>'+all_labels+r')】\s*[:：]?|(?<![\w\u4e00-\u9fff])(?P<label>'+all_labels+r')\s*[:：])\s*')
     component=''
-    for line, loc in lines:
+    from agent.agent_backend.services.filing_scope_continuation import scope_lines, scope_entries
+    field_lines = scope_lines(lines, pattern, FIELD_LABELS)
+    for line, loc in field_lines:
         if re.fullmatch(r'(?:修订后|药品)?说明书(?:样稿)?[：:]?',line):component='instructions'
         elif re.fullmatch(r'(?:药品)?标签(?:样稿)?[：:]?',line):component='package_label'
         loc={**loc,'material_component':component}
@@ -189,6 +192,24 @@ def extract_document(file_name, chunks):
             context = 'proposed' if re.search(r'拟|修订后|变更后', line[:match.start()]+title) else ('approved' if 'approval' in types or re.search(r'原批准|变更前',line[:match.start()]) else 'current')
             status = 'blank' if raw in ('','/','—') else ('not_applicable' if re.match(r'^不适用[（(:：].+',raw) else 'available')
             facts.append({'field':field,'label':label,'raw_value':raw,'normalized_value':normalize(raw).replace('个月','月') if field=='validity_period' else normalize(raw),'status':status,'context':context,'source':{'file_name':file_name,**loc}})
+    for fact in facts:
+        if fact['field'] == 'production_scope':
+            fact['scope_entries'] = scope_entries(fact['raw_value'], fact['source'])
+            if fact['label'] == '生产地址和生产范围':
+                fact['attribution_status'] = 'combined_address_scope_requires_review'
+                fact['joint_block'] = {'raw_value':fact['raw_value'],'source':fact['source'],
+                    'unresolved':['subject_address_scope_not_separated']+fact['source'].get('internal_unresolved',[])}
+                for entry in fact['scope_entries']:
+                    entry['unresolved'].append('combined_address_scope_requires_review')
+            origin = fact['source']
+            addresses = [f for f in facts if f['field'] == 'production_address'
+                and all(f['source'].get(k) == origin.get(k) for k in ('chunk','page','table','row','block_id','column_id'))
+                and (origin.get('table') is not None or f['source'].get('line', 0) < origin.get('line', 0))]
+            if origin.get('table') is None and addresses:
+                addresses = [max(addresses, key=lambda f: f['source'].get('line', 0))]
+            fact['production_address_evidence'] = [{'raw_value': f['raw_value'], 'source': f['source']} for f in addresses]
+            for entry in fact['scope_entries']:
+                entry['production_address_evidence'] = fact['production_address_evidence']
     # 标准编号自身的明确格式也是原文，不从文件名或邻字段借值。
     for line, loc in lines:
         for value in re.findall(r'\b(?:YBH\d{6,}|STP-[A-Za-z0-9,，.\-]+)',line):

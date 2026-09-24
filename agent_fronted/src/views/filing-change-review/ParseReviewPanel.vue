@@ -15,7 +15,8 @@
         <el-table-column label="处理" width="90"><template slot-scope="scope"><el-button type="text" :disabled="saving" @click.stop="loadSource(scope.row)">去核对</el-button></template></el-table-column>
       </el-table>
       <el-pagination v-if="!sourceTarget" :current-page.sync="blockingIndex" :page-size="20" :total="(readiness && readiness.blocking_issues || []).length" layout="total, prev, pager, next" />
-      <el-alert v-if="context && !context.issues.length" title="本文件没有已定位的待处理问题；这不代替原件完整性人工验收。" type="info" :closable="false" />
+      <el-alert v-if="context && !context.issues.length" title="未发现自动报警；仍可在下方主动选择正文或单元格修订，无需逐项确认全部内容。" type="info" :closable="false" />
+      <p v-if="context">识别后端：{{ context.ocr_backend }} · 修订版本 {{ context.revision }}</p>
       <el-alert v-if="context && context.revision_error" :title="context.revision_error.message" type="warning" :closable="false" />
       <div v-if="context && context.items && context.items.length" class="toolbar">
         <el-button :disabled="saving || loading || dirty || !context.items.some(i => i.issue_key === selectedKey)" @click="revoke(false)">撤销本项已保存修订</el-button>
@@ -24,22 +25,24 @@
       </div>
       <div v-if="context" class="editor">
         <div class="original">
-          <p>原件：{{ context.file_name }} · 第 {{ selected && selected.page || '?' }} 页</p>
+          <p>原件：{{ context.file_name }} · {{ selected && selected.page ? '第 '+selected.page+' 页' : '文档内容（无页坐标）' }}</p>
           <el-alert v-if="imageError" :title="imageError" type="warning" :closable="false" />
           <el-button v-if="selected && selected.page" type="text" :loading="imageLoading" @click="loadImage">重读原页</el-button>
           <div v-if="preview" class="image-frame">
-            <img :src="preview.image_data_url" alt="待核对的原始PDF页面" />
+            <img v-if="preview.image_data_url" :src="preview.image_data_url" alt="待核对的原始PDF页面" @load="preview.loaded=true;$forceUpdate()" @error="preview=null;imageError='原页图片加载失败，不能确认'" />
+            <pre v-else>{{ preview.source_text }}</pre>
             <div v-if="regionStyle" class="region" :style="regionStyle" aria-label="问题区域" />
           </div>
         </div>
         <div class="correction">
           <p>原始解析状态保留；人工修订另存，不覆盖原件或历史报告。</p>
           <el-select :value="selectedKey" placeholder="选择本文件的问题" style="width:100%" @change="selectIssue">
-            <el-option v-for="issue in context.issues" :key="issue.issue_key" :value="issue.issue_key" :label="`${issue.resolved ? '已保存处理' : '待处理'} · 第${issue.page || '?'}页 · ${issue.message}`" />
+            <el-option v-for="issue in allIssues" :key="issue.issue_key" :value="issue.issue_key" :label="`${issue.resolved ? '已保存处理' : issue.blocking === false ? '可主动核对' : '待处理'} · 第${issue.page || '?'}页 · ${issue.message}`" />
           </el-select>
           <template v-if="selected">
             <p>{{ selected.message }} · {{ selected.code }}</p>
             <details><summary>查看本页识别正文</summary><pre>{{ sourceChunk.text || sourceChunk.raw_text || '无可用正文' }}</pre></details>
+            <details open><summary>当前有效内容（修订另存）</summary><pre>{{ effectiveChunk.text || effectiveChunk.raw_text || '有效正文为空；不代表已确认空白' }}</pre></details>
             <details v-if="recoveryRows.length" class="recovery-evidence">
               <summary>查看局部复核证据（{{ recoveryRows.length }}处，含未处理区域）</summary>
               <p>只读候选，不代表识别正确。定位仅改变原图高亮，不改变本项修订范围或填写内容。</p>
@@ -87,6 +90,14 @@
               <el-select v-model="draft.action" placeholder="选择处理方式">
                 <el-option v-for="action in actions" :key="action.value" :value="action.value" :label="action.label" />
               </el-select>
+              <template v-if="selected.code === 'content_review'">
+                <p>定位：{{ positionLabel }}。高亮范围来自原件区域，不代表逐字位置。</p>
+                <el-input v-if="['edit_value','confirm_value','mark_unreadable'].includes(draft.action)" v-model="draft.text" :readonly="draft.action==='confirm_value'" type="textarea" :rows="6" label="对象有效内容" />
+                <el-checkbox v-if="['edit_value','confirm_value'].includes(draft.action)" :value="draft.verified_value===draft.text && !!draft.text.trim()" @change="draft.verified_value=$event?draft.text:null">已核对当前值（修改后须重新核对）</el-checkbox>
+                <el-checkbox v-if="/[?？□]/.test(draft.text) && ['edit_value','confirm_value'].includes(draft.action)" v-model="draft.symbols_literal">这些符号确实属于原件正文，不表示无法辨认</el-checkbox>
+                <el-alert v-if="draft.action==='mark_unreadable'" title="候选文字保留，但不作为确定业务值；该项继续阻塞审评。" type="warning" :closable="false" />
+                <p v-if="draft.reviewer">上次修订人：{{ draft.reviewer.name || draft.reviewer.id }} · {{ draft.reviewed_at }}</p>
+              </template>
               <el-input v-if="draft.action === 'correct_text'" v-model="draft.text" type="textarea" :rows="8" placeholder="逐字核对原页，填写该区域的完整文字" />
               <el-checkbox v-if="draft.action === 'correct_text'" v-model="draft.numeric_text_verified">已逐字核对本区域全部数值、单位及符号；区域外问题仍保留</el-checkbox>
               <div v-if="['correct_text','correct_table'].includes(draft.action) && selected.continuation_field_options">
@@ -179,7 +190,7 @@
                 </details>
               <el-select v-if="draft.action === 'irrelevant_region'" v-model="draft.non_text_kind" placeholder="非文字区域类型"><el-option label="装饰" value="decoration" /><el-option label="无正文印章区域" value="stamp" /><el-option label="空白" value="blank" /></el-select>
               <el-input v-model="draft.reason" type="textarea" :rows="3" maxlength="2000" placeholder="必填：说明本项核对依据；缺失文字不能只点确认" />
-              <div class="toolbar"><el-button type="primary" :loading="saving" :disabled="!dirty || !draft.action || !draft.reason.trim() || !preview || imageLoading" @click="save">保存本项修订</el-button><span>{{ dirty ? '有未保存修改' : '已保存 / 未修改' }}</span></div>
+              <div class="toolbar"><el-button type="primary" :loading="saving" :disabled="!dirty || !draft.action || !draft.reason.trim() || !preview || (preview.image_data_url && !preview.loaded) || imageLoading" @click="save">保存本项修订</el-button><span>{{ dirty ? '有未保存修改' : '已保存 / 未修改' }}</span></div>
             </template>
           </template>
         </div>
@@ -192,12 +203,14 @@
 import { getFilingParseReadiness, getFilingParseReview, getFilingParseReviewPage, saveFilingParseReview } from '@/api/filingChangeReview';
 import { recoveryEvidence } from '@/utils/ocrRecoveryEvidence';
 const clone = value => JSON.parse(JSON.stringify(value));
-const emptyDraft = () => ({ action:'', reason:'', text:'', target_item_no:null, continuation_item_no:null, field_assignments:null, all_text_verified:false, numeric_text_verified:false, non_text_kind:'', outside_text:'', outside_text_verified:false, related_issues:[], tables:[], table:{row_count:1,column_count:1,cells:[{row:0,column:0,rowspan:1,colspan:1,text:''}]} });
+const emptyDraft = () => ({ action:'', reason:'', text:'', source_value:'', verified_value:null, symbols_literal:false, target_item_no:null, continuation_item_no:null, field_assignments:null, all_text_verified:false, numeric_text_verified:false, non_text_kind:'', outside_text:'', outside_text_verified:false, related_issues:[], tables:[], table:{row_count:1,column_count:1,cells:[{row:0,column:0,rowspan:1,colspan:1,text:''}]} });
 export default {
   name:'ParseReviewPanel',
   props:{ projectId:{type:String,required:true} },
   data() { return {visible:false,readiness:null,sourceTarget:null,blockingIndex:1,context:null,selectedKey:'',tableCursor:0,evidencePageIndex:1,evidenceFocus:null,draft:emptyDraft(),snapshot:JSON.stringify(emptyDraft()),loading:false,saving:false,error:'',preview:null,imageError:'',imageLoading:false,epoch:0,imageEpoch:0,disposed:false}; },
   computed:{
+    positionLabel() { return ({cell:'单元格',table_region:'整张表格区域',line_or_region:'文字行或区域',document_chunk:'文档内容块（无逐字坐标）',logical_row_column_no_page_coordinates:'表格行列（无页面坐标）'})[(this.selected || {}).position_kind] || '原件区域'; },
+    tableContent() { return JSON.stringify([this.draft.table, (this.draft.tables || []).map(t=>t.table), this.draft.outside_text]); },
     fieldTouchesTable() {
       if(!this.selected || !this.selected.field_options) return false;
       const b=this.selected.bbox_pdf;
@@ -241,14 +254,17 @@ export default {
     editingTable() { return ((this.draft.tables || [])[this.tableCursor] || {}).table || this.draft.table; },
     dirty() { return JSON.stringify(this.draft) !== this.snapshot; },
     blockingPage() { return ((this.readiness || {}).blocking_issues || []).slice((this.blockingIndex-1)*20,this.blockingIndex*20); },
-    selected() { return this.context && this.context.issues.find(i => i.issue_key === this.selectedKey); },
+    allIssues() { return this.context ? [...this.context.issues,...(this.context.targets || [])] : []; },
+    selected() { return this.allIssues.find(i => i.issue_key === this.selectedKey); },
     sourceChunk() { return this.context && this.selected && this.context.original_chunks[this.selected.chunk_index] || {}; },
+    effectiveChunk() { return this.context && this.selected && this.context.effective_chunks[this.selected.chunk_index] || {}; },
     recoveryRows() { return recoveryEvidence(this.sourceChunk, this.selected && this.selected.code); },
     recoveryPage() { return this.recoveryRows.slice((this.evidencePageIndex-1)*20,this.evidencePageIndex*20); },
     actions() {
       if (!this.selected || this.context.editable === false || !Number.isInteger(this.selected.chunk_index)) return [];
       if(this.selected.resolved && !(this.context.items || []).some(i=>i.issue_key===this.selectedKey)) return [];
       const code=this.selected.code, result=[];
+      if(code==='content_review') return [{value:'confirm_value',label:'确认当前识别正确'},{value:'edit_value',label:'修改有效内容并保存'},{value:'confirm_blank',label:'确认原件确实空白'},{value:'confirm_unfilled',label:'确认原件未填写'},{value:'mark_unreadable',label:'原件仍无法辨认'}];
       if(code==='ocr_quality' && this.selected.confirm_allowed === true) result.push({value:'confirm',label:'原文已完整且正确，逐项确认'});
       if(this.selected.field_options && this.context.source_kind==='application_form' && !this.fieldTouchesTable) result.push({value:'correct_text',label:'修订文字并明确所属字段'});
       if(code==='numeric_uncertain' && this.selected.numeric_text_review_allowed===true) result.push({value:'correct_text',label:'完整修订正文并核对数值'});
@@ -264,6 +280,9 @@ export default {
     },
   },
   watch:{
+    tableContent(value, old) { if(value!==old && this.dirty) { this.draft.all_text_verified=false;this.draft.numeric_text_verified=false;this.draft.outside_text_verified=false;for(const t of this.draft.tables || []) t.verified=false; } },
+    'draft.text'(value,old) { if(value!==old && this.draft.verified_value!==value) { this.draft.verified_value=null;this.draft.numeric_text_verified=false;this.draft.all_text_verified=false;this.draft.symbols_literal=false; } },
+    'draft.action'(value) { if(['confirm_blank','confirm_unfilled'].includes(value)) this.draft.text=''; },
     dirty(value) { this.$emit('dirty-change',value || this.saving); },
     saving(value) { this.$emit('dirty-change',value || this.dirty); },
     projectId() { this.epoch++; this.imageEpoch++; this.visible=false; this.context=null; this.readiness=null; this.preview=null; this.draft=emptyDraft(); this.snapshot=JSON.stringify(this.draft); this.loading=false; this.saving=false; this.$emit('dirty-change',false); },
@@ -348,7 +367,7 @@ export default {
       if(direct === true) { this.visible=true; this.sourceTarget={source_kind:issue.source_kind,doc_id:issue.doc_id}; this.readiness=null; }
       this.loading=true; this.error=''; this.imageEpoch++; this.preview=null;
       this.context=null; this.draft=emptyDraft(); this.snapshot=JSON.stringify(this.draft);
-      try { const res=await getFilingParseReview(project,issue.source_kind,issue.doc_id); if(!this.valid(epoch,project)) return; this.context=res.data; this.draft=emptyDraft(); this.snapshot=JSON.stringify(this.draft); const first=this.context.issues.find(i=>!i.resolved) || this.context.issues[0]; this.setIssue(issue.issue_key || (first && first.issue_key) || ''); }
+      try { const res=await getFilingParseReview(project,issue.source_kind,issue.doc_id); if(!this.valid(epoch,project)) return; this.context=res.data; this.draft=emptyDraft(); this.snapshot=JSON.stringify(this.draft); const first=this.context.issues.find(i=>!i.resolved) || this.allIssues[0]; this.setIssue(issue.issue_key || (first && first.issue_key) || ''); }
       catch(e) { if(this.valid(epoch,project)) this.error=e.message || '读取核对内容失败'; }
       finally { if(this.valid(epoch,project)) this.loading=false; }
     },
@@ -358,6 +377,7 @@ export default {
       this.tableCursor=0;
       this.selectedKey=key; this.error=''; const saved=(this.context.items || []).find(i=>i.issue_key===key);
       this.draft={...emptyDraft(),...clone(saved || {})};
+      if(!saved && this.selected && this.selected.code==='content_review') this.draft={...this.draft,text:this.selected.value,source_value:this.selected.source_value};
       if(!saved && this.selected) {
         const ti=Number.isInteger(this.selected.repair_table_index) ? this.selected.repair_table_index : this.selected.table_index;
         const table=(this.sourceChunk.tables || [])[ti] || (this.sourceChunk.tables || []).find(t=>JSON.stringify(t.bbox_pdf)===JSON.stringify(this.selected.bbox_pdf));
@@ -372,9 +392,9 @@ export default {
     async loadImage() {
       const context=this.context, selected=this.selected, project=this.projectId, epoch=this.epoch, imageEpoch=++this.imageEpoch;
       this.preview=null; this.imageError=''; this.imageLoading=false;
-      if(!context || !selected || !selected.page) { this.imageError='没有可靠页码，请查看原件并重新解析。'; return; }
+      if(!context || !selected || (!selected.page && !selected.target_kind)) { this.imageError='没有可靠页码，请查看原件并重新解析。'; return; }
       this.imageLoading=true;
-      try { const res=await getFilingParseReviewPage(project,context.source_kind,context.doc_id,selected.page,context.source_identity); if(this.valid(epoch,project) && imageEpoch===this.imageEpoch) this.preview=res.data; }
+      try { const res=await getFilingParseReviewPage(project,context.source_kind,context.doc_id,selected.page || 1,context.source_identity); if(this.valid(epoch,project) && imageEpoch===this.imageEpoch) this.preview=res.data; }
       catch(e) { if(this.valid(epoch,project) && imageEpoch===this.imageEpoch) this.imageError=e.message || '原页读取失败'; }
       finally { if(this.valid(epoch,project) && imageEpoch===this.imageEpoch) this.imageLoading=false; }
     },
@@ -400,7 +420,7 @@ export default {
       finally { if(this.valid(epoch,project)) this.saving=false; }
     },
     async save() {
-      if(this.saving || !this.context || !this.selected || !this.preview) return;
+      if(this.saving || !this.context || !this.selected || !this.preview || (this.preview.image_data_url && !this.preview.loaded)) return;
       const project=this.projectId, epoch=this.epoch, context=this.context, key=this.selectedKey;
       const submitted=clone(this.draft), submittedSnapshot=JSON.stringify(this.draft);
       const items=(context.items || []).filter(i=>i.issue_key!==key).concat([{...submitted,issue_key:key}]);
@@ -413,6 +433,8 @@ export default {
         // 保存期间继续输入保留为新草稿，不能被成功回包清除。
         this.snapshot=submittedSnapshot;
         this.$message.success('修订已保存；原始解析状态和历史报告保留'); this.$emit('saved');
+        try { const fresh=await getFilingParseReview(project,context.source_kind,context.doc_id); if(this.valid(epoch,project)) this.context=fresh.data; }
+        catch(_) { if(this.valid(epoch,project)) this.error='修订已保存，但有效内容刷新失败；当前编辑保留，请重新检查。'; }
         try { const status=await getFilingParseReadiness(project); if(this.valid(epoch,project)) this.readiness=status.data; }
         catch(_) { if(this.valid(epoch,project)) this.error='修订已保存，但就绪状态刷新失败，请重新检查。'; }
       } catch(e) { if(this.valid(epoch,project)) this.error=e.message || '保存失败，当前输入已保留'; }
@@ -428,6 +450,7 @@ export default {
 .original,.correction {min-width:0;}
 .image-frame {position:relative;line-height:0;}
 .image-frame img {width:100%;height:auto;}
+.image-frame pre {line-height:1.6;white-space:pre-wrap;overflow-wrap:anywhere;}
 .region {position:absolute;border:2px solid #e65100;background:rgba(255,160,0,.12);box-sizing:border-box;pointer-events:none;}
 pre {white-space:pre-wrap;overflow-wrap:anywhere;max-height:200px;overflow:auto;}
 .correction .el-textarea,.correction .el-select {margin:8px 0;}

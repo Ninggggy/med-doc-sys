@@ -11,6 +11,9 @@ class FilingChangeMaterialService:
         check_file(file_path)
         path = Path(file_path)
         ext = path.suffix.lower().lstrip(".")
+        if ext=='pdf':
+            from agent.agent_backend.services.filing_paddle_backend import enabled,parse_pdf
+            if enabled():return parse_pdf(str(path))
         structured_error = None
         if ext == "docx":
             try:

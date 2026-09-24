@@ -128,6 +128,15 @@ class FilingChangeReportService:
         for issue in p.get('issues') or []:
             lines += ['### ' + str(issue.get('module', '检查')), str(issue.get('status')) + '：' + str(issue.get('reason')),
                       '处理要求：' + str(issue.get('required_action'))]
+        if p.get('production_scope_evidence'):
+            lines += ['## 生产范围与原文限制', '以下内容沿用本轮有效输入；未决和原始解析状态不因生成报告而解除。']
+            for fact in p['production_scope_evidence']:
+                lines += [str(fact.get('raw_value', '')), '可用性：'+str(fact.get('availability', '未核对')),
+                          '来源：'+str(fact.get('source', {})), '地址依据：'+str(fact.get('production_address_evidence', []))]
+                if fact.get('attribution_status'):
+                    lines += ['归属：'+str(fact['attribution_status'])]
+                for entry in fact.get('scope_entries', []):
+                    lines += ['条目：'+entry['raw_value'], '限制：'+'；'.join(entry.get('restrictions', []))]
         for key, label in [('formal_review', '形式审查'), ('consistency_check', '一致性'), ('quality_standard_check', '质量'), ('stability_trend_analysis', '稳定性')]:
             data = p.get(key) or {}
             lines += ['## ' + label, str(data.get('result') or data.get('summary') or ('见逐项检查' if data else '历史结果未记录'))]

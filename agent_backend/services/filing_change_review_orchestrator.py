@@ -13,14 +13,15 @@ from agent.agent_backend.services.filing_change_technical_assessment_service imp
 
 
 class FilingChangeReviewOrchestrator:
-    def __init__(self, form_parser: Any, quality_service: Any, stability_service: Any) -> None:
+    def __init__(self, form_parser: Any, quality_service: Any, stability_service: Any, *, enable_language_summary: bool = True) -> None:
         self.form_parser = form_parser
         self.extraction = FilingChangeExtractionService()
         self.rule_review = FilingChangeRuleReviewService()
         self.technical = FilingChangeTechnicalAssessmentService(quality_service=quality_service, stability_service=stability_service)
         self.evidence = FilingChangeEvidenceService()
         self.llm_gate = FilingChangeLLMGateService()
-        self.llm_reasoning = FilingChangeLLMReasoningService()
+        self.enable_language_summary = enable_language_summary
+        self.llm_reasoning = FilingChangeLLMReasoningService() if enable_language_summary else None
 
     def run(
         self,
@@ -133,6 +134,8 @@ class FilingChangeReviewOrchestrator:
         overall_summary = {**final['overall_conclusion'], 'overall_result': overall_result}
         clauses = final['summary_points']
         gate = self.llm_gate.should_call_llm(scene='overall_summary', context={'risk_points': len(clauses)})
+        if not getattr(self, 'enable_language_summary', True):
+            gate = {**gate, 'allow': False, 'reason': '本地实验显式使用确定性审评及事实顺序，未执行语言模型综合解释'}
         call = self.llm_gate.build_call_record('overall_summary', gate, '本轮已确定事实的解释顺序')
         call['status'] = 'not_called'
         if gate.get('allow'):
@@ -221,6 +224,7 @@ class FilingChangeReviewOrchestrator:
             "evidence_refs": evidence_block.get("evidence_refs", []),
             "module_evidence": evidence_block.get("module_evidence", {}),
             "llm_calls": llm_calls,
+            "production_scope_evidence": deepcopy([f for f in extracted.get('facts', []) if f.get('field') == 'production_scope']),
             "conclusion": {"ai_judgement": overall_summary.get("overall_result", overall_result), "suggestion": final["recommended_action"]},
         }
 

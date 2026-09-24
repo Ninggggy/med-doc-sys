@@ -140,12 +140,21 @@ class FilingChangeFormParserService:
         }
 
     def _parse_pdf_form(self, file_path: str) -> Dict[str, Any]:
+        from agent.agent_backend.services.filing_paddle_backend import enabled,parse_pdf
+        if enabled():
+            from agent.agent_backend.utils.parser.drug_supplement_pdf_parser import build_pdf_form_from_pages
+            parsed=build_pdf_form_from_pages(parse_pdf(file_path),source_file=file_path)
+            parsed['ocr_backend']='ppocr_v6_medium_experimental'
+            return self.form_from_pdf_result(parsed)
         parsed = parse_drug_supplement_pdf(file_path)
         return self.form_from_pdf_result(parsed, file_path=file_path)
 
     def form_from_pdf_result(self, parsed, *, file_path=None):
         """原件解析和人工修订共用字段映射；无file_path时不允许再次OCR。"""
         raw_text = str(parsed.get("raw_text", "") or "")
+        # 显式实验后端已完成识别；后续字段消费者不得另起旧OCR覆盖证据。
+        if parsed.get('ocr_backend') == 'ppocr_v6_medium_experimental':
+            file_path = None
         structure = parsed.get('form_structure')
         body_text = structure['body_text'] if structure is not None else raw_text
         extra_blocks = parsed.get("extra_blocks", {}) if isinstance(parsed, dict) else {}

@@ -244,9 +244,14 @@
                   <el-button>上传文件夹</el-button>
                 </el-upload>
                 <el-button type="primary" :loading="uploading" @click="uploadSubmissions">上传到当前目录</el-button>
-                <el-button :loading="parsingBatch" :disabled="hasRunningSubmissionParse" @click="batchParseSubmissions">批量解析</el-button>
+                <el-button :loading="parsingBatch" :disabled="hasRunningSubmissionParse" @click="batchParseSubmissions">批量解析已上传文件</el-button>
                 <el-button :loading="checkingCompleteness" @click="runCompletenessCheck">完整性检查</el-button>
                 <el-button :loading="comparingSubmissions" @click="compareSelectedSubmissions">自动比对差异</el-button>
+              </div>
+              <div v-if="submissionFileList.length" class="meta-line">待上传 {{ submissionFileList.length }} 份文件；请先点击“上传到当前目录”。下表仅显示已上传文件。</div>
+              <div v-if="submissionParseNotice" class="meta-line">
+                {{ submissionParseNotice }}
+                <el-button type="text" size="mini" @click="loadBaseData">刷新任务状态</el-button>
               </div>
               <el-table :data="filteredSubmissions" border @selection-change="onSubmissionSelectionChange">
                 <el-table-column type="selection" width="50" />
@@ -259,7 +264,9 @@
                 <el-table-column label="解析状态" min-width="220">
                   <template slot-scope="scope">
                     <el-tag size="mini" :type="parseStatusType(scope.row.parse_status)">{{ parseContentLabel(scope.row.parse_status) }}</el-tag>
-                    <div v-if="(scope.row.latest_attempt || {}).content_status === 'failed'">本次失败；此前结果如存在仍保留，不能视为本次成功。</div>
+                    <div v-if="(scope.row.latest_attempt || {}).content_status === 'failed'">
+                      本次失败：{{ scope.row.latest_attempt.message || '请查看详情' }}；此前有效结果如存在仍保留。
+                    </div>
                     <div>{{ parseDiagnosticsLabel(scope.row.parse_diagnostics) }}</div>
                     <el-button type="text" @click="openFileParseDetails(scope.row)">查看详情</el-button>
                   </template>
@@ -276,7 +283,7 @@
                     <el-button
                       type="text"
                       :loading="isFilingParseTaskRunning(submissionParseTaskKey(scope.row))"
-                      :disabled="parsingBatch || isFilingParseTaskRunning('submission-batch')"
+                      :disabled="parsingBatch || isFilingParseTaskBlocked('submission-batch') || isFilingParseTaskBlocked(submissionParseTaskKey(scope.row))"
                       @click="parseSubmission(scope.row)"
                     >解析</el-button>
                     <el-button type="text" @click="viewParsedMarkdown(scope.row)">查看解析结果</el-button>
@@ -934,8 +941,24 @@ export default {
       if (this.parsingBatch) return true;
       return Object.keys(this.filingParseTaskStates || {}).some((key) => (
         (key === "submission-batch" || key.startsWith("submission:"))
-        && this.isFilingParseTaskRunning(key)
+        && (this.isFilingParseTaskRunning(key) || (this.filingParseTaskStates[key] || {}).status === "status_unavailable")
       ));
+    },
+    submissionParseNotice() {
+      const active = Object.entries(this.filingParseTaskStates || {}).find(([key, state]) => (
+        (key === "submission-batch" || key.startsWith("submission:"))
+        && ["starting", "pending", "running", "status_unavailable"].includes(String((state || {}).status || ""))
+      ));
+      if (!active) return this.parsingBatch ? "正在提交解析任务，请稍候。" : "";
+      const [key, state = {}] = active;
+      if (state.status === "status_unavailable") return "任务状态暂时无法读取，后台任务可能仍在执行；请刷新任务状态，勿重复上传原件。";
+      const progress = ((state.result || {}).data || {});
+      if (key === 'submission-batch' && Number(progress.total) > 0) {
+        const completed = (progress.success || []).length;
+        const failed = (progress.failed || []).length;
+        return `批量解析进度：已处理 ${completed + failed}/${progress.total} 份（已有结果 ${completed}、本次失败 ${failed}），剩余 ${Math.max(0, progress.total - completed - failed)} 份。`;
+      }
+      return `已有解析任务正在运行：${state.message || "等待任务进度"}。任务结束后请核对下表结果。`;
     },
     stabilityLimitCheck() {
       return (((this.reviewResult || {}).stability_trend_analysis || {}).limit_check) || {};
@@ -1059,6 +1082,10 @@ export default {
     isFilingParseTaskRunning(key) {
       const state = (this.filingParseTaskStates || {})[String(key || "")] || {};
       return ["starting", "pending", "running"].includes(String(state.status || "").toLowerCase());
+    },
+    isFilingParseTaskBlocked(key) {
+      const state = (this.filingParseTaskStates || {})[String(key || "")] || {};
+      return this.isFilingParseTaskRunning(key) || state.status === 'status_unavailable';
     },
     cancelFilingParseTaskPolling(key, message = "解析任务已被新操作取代") {
       const taskKey = String(key || "");
@@ -1358,6 +1385,7 @@ export default {
     },
     parseAttemptType(state) {
       if (state.status === 'failed') return 'error';
+      if (state.status === 'status_unavailable') return 'warning';
       if (['pending', 'running'].includes(state.status)) return 'info';
       const result = state.result || {}, data = result.data || {};
       const status = result.content_status || data.content_status;
@@ -1381,6 +1409,7 @@ export default {
       const data = result.data || {};
       const status = result.content_status || data.content_status;
       if (['pending', 'running'].includes(state.status)) return '解析正在进行，可稍后查看进度';
+      if (state.status === 'status_unavailable') return '任务状态暂时无法读取；后台可能仍在解析，请刷新任务状态';
       const batch = Array.isArray(data.success) || Array.isArray(data.failed);
       if (batch) {
         const good = data.success || [], failed = data.failed || [];
@@ -1431,7 +1460,10 @@ export default {
         const errors = [...(d.errors || [])];
         if (state.status === 'failed' && state.error_message && errors.length) errors.push({ stage: 'task', message: state.error_message });
         (d.failed_pages || []).filter(page => !errors.some(e => e.page === page)).forEach(page => errors.push({ page, message: '页面存在待核查问题，历史记录未提供明细' }));
-        if (!errors.length) errors.push({ message: item.error || item.message || state.error_message || this.parseContentLabel(item.content_status || result.content_status || item.parse_status) });
+        if (!errors.length) errors.push({
+          code: item.code, stage: item.stage, exception_type: item.exception_type,
+          message: item.error || item.message || state.error_message || this.parseContentLabel(item.content_status || result.content_status || item.parse_status),
+        });
         errors.forEach(error => {
           const message = this.diagnosticMessage(error);
           const key = JSON.stringify([index, error.stage || '', message]);
@@ -1452,7 +1484,22 @@ export default {
     async restoreParseTasks() {
       const token = this.beginDataRequest('restore-tasks');
       const projectId = String(this.projectId || '');
-      const response = await getFilingProjectParseTasks(projectId, { silentError: true });
+      let response;
+      try {
+        response = await getFilingProjectParseTasks(projectId, { silentError: true });
+      } catch (error) {
+        if (!this.isDataRequestCurrent('restore-tasks', token)) return;
+        Object.keys(this.filingParseTaskStates || {}).forEach(key => {
+          if (this.isFilingParseTaskRunning(key)) {
+            this.$set(this.filingParseTaskStates, key, {
+              ...this.filingParseTaskStates[key], status: 'status_unavailable',
+              message: '任务状态读取失败，请刷新任务状态',
+            });
+          }
+        });
+        this.$message.warning('解析任务状态读取失败；已上传资料仍可查看，请稍后刷新任务状态');
+        return;
+      }
       if (!this.isDataRequestCurrent('restore-tasks', token)) return;
       const seen = new Set();
       for (const task of (response.data || [])) {
@@ -1465,8 +1512,19 @@ export default {
         if (['pending', 'running'].includes(task.status)) {
           const epoch = this.beginFilingParseOperation(key, projectId);
           this.waitForFilingParseTask(task.task_id, { key, projectId, epoch })
-            .catch(() => {})
-            .finally(() => { if (this.isDataRequestCurrent('restore-tasks', token)) this.loadBaseData(); });
+            .then(() => { if (this.isDataRequestCurrent('restore-tasks', token)) this.loadBaseData(); })
+            .catch(error => {
+              if (this.isFilingParseCancellation(error) || !this.isDataRequestCurrent('restore-tasks', token)) return;
+              const state = this.filingParseTaskStates[key] || {};
+              if (['failed', 'completed', 'cancelled', 'interrupted'].includes(state.status)) {
+                this.loadBaseData();
+                return;
+              }
+              this.$set(this.filingParseTaskStates, key, {
+                ...state, status: 'status_unavailable',
+                message: '任务进度查询失败，请刷新任务状态',
+              });
+            });
         }
       }
     },
@@ -1754,6 +1812,10 @@ export default {
     },
     async batchParseSubmissions() {
       const selected = (this.selectedSubmissionRows || []).map((x) => x.doc_id).filter(Boolean);
+      if (!selected.length && (this.submissionFileList || []).some(x => x.raw)) {
+        this.$message.warning('待上传文件尚未入库；请先点击“上传到当前目录”，上传成功后再批量解析');
+        return;
+      }
       const projectId = String(this.projectId || "");
       const taskKey = "submission-batch";
       const epoch = this.beginFilingParseOperation(taskKey, projectId);

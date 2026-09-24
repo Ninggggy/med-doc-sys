@@ -4,8 +4,8 @@ from agent.agent_backend.services.filing_change_review_service import FilingChan
 
 
 class FilingChangeReviewAppService:
-    def __init__(self) -> None:
-        self.service = FilingChangeReviewService()
+    def __init__(self, service=None) -> None:
+        self.service = service if service is not None else FilingChangeReviewService()
 
     def create_project(self, payload: Dict[str, Any]) -> Tuple[bool, str, Any]:
         return self.service.create_project(payload)

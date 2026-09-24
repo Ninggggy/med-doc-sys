@@ -1,7 +1,6 @@
 import json
 from typing import Any, Dict, List
 
-from agent.agent_backend.llm.client import LLMClient
 from agent.agent_backend.llm.errors import LLMExecutionError
 
 
@@ -9,6 +8,7 @@ class FilingChangeLLMReasoningService:
     """AI 审评 LLM 推理服务：用于核心综合判断和草稿文本生成。"""
 
     def __init__(self) -> None:
+        from agent.agent_backend.llm.client import LLMClient
         self.llm = LLMClient()
 
     def _call_json(self, system_prompt: str, user_payload: Dict[str, Any], default_obj: Dict[str, Any]) -> Dict[str, Any]:

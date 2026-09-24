@@ -6,6 +6,8 @@ def effective_parse_ready(source):
     """仅供服务端已校验来源的业务输入使用；不替代启动前的逐项检查。"""
     state = (source.get('latest_attempt') or {}).get('content_status') or source.get('parse_status') or source.get('content_status')
     resolution = source.get('parse_resolution') or {}
+    if resolution.get('unresolved_count', 0):
+        return False
     return state == 'success' or (state == 'partial' and resolution.get('manually_reviewed') is True
         and type(resolution.get('revision')) is int and resolution['revision'] > 0
         and type(resolution.get('unresolved_count')) is int and resolution['unresolved_count'] == 0)

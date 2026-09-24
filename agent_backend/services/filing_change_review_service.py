@@ -149,9 +149,9 @@ class FilingChangeReviewService:
         "审评报告生成",
     ]
 
-    def __init__(self) -> None:
-        self.db_conn = MysqlConnection()
-        self.root_dir = Path(settings.upload_dir).resolve().parent / "filing_change_review"
+    def __init__(self, *, db_conn=None, root_dir=None, enable_language_summary=True) -> None:
+        self.db_conn = db_conn if db_conn is not None else MysqlConnection()
+        self.root_dir = Path(root_dir).resolve() if root_dir is not None else Path(settings.upload_dir).resolve().parent / "filing_change_review"
         self.form_parser = FilingChangeFormParserService()
         self.material_service = FilingChangeMaterialService()
         self.rule_service = FilingChangeRuleService(self.db_conn)
@@ -162,6 +162,7 @@ class FilingChangeReviewService:
             form_parser=self.form_parser,
             quality_service=self.quality_service,
             stability_service=self.stability_service,
+            enable_language_summary=enable_language_summary,
         )
         self._ensure_dirs()
 
@@ -879,8 +880,10 @@ class FilingChangeReviewService:
             return original, row.raw_text or '', {}
         from agent.agent_backend.services.filing_form_revision import merge_parse
         from agent.agent_backend.services.filing_parse_readiness import source_issues
-        _, resolved = self._apply_parse_revision(meta, source, 'application_form', path, chunks)
+        reviewed, resolved = self._apply_parse_revision(meta, source, 'application_form', path, chunks)
         pending = [i for i in source_issues(source, 'application_form', chunks) if i['issue_key'] not in resolved]
+        from agent.agent_backend.services.filing_review_targets import manual_pending
+        pending.extend(manual_pending(reviewed))
         merged = merge_parse(original, saved['form_json'], mode='replace')
         merged['_parse_attempt_id'] = original.get('_parse_attempt_id', '')
         merged['_parse_review_revision'] = saved['revision']
@@ -1861,35 +1864,37 @@ class FilingChangeReviewService:
                 ]
             finally:
                 session.close()
-            success, failed = [], []
-            task_id = parse_task_id.get()
-            def publish_progress(remaining):
-                if not task_id:
-                    return
-                from agent.agent_backend.services.runtime_task_store import RuntimeTaskStore
-                data = {'total': len(target_doc_ids), 'success': success, 'failed': failed, 'pending': remaining}
-                content_status = ('partial' if remaining or failed or any(x.get('content_status') == 'partial' for x in success) else 'success') if success else ('pending' if remaining else 'failed')
-                data.update(content_status=content_status, content_available=bool(success))
-                saved = RuntimeTaskStore(connection=self.db_conn, ensure_schema=False).update_task(
-                    task_id, payload={'doc_ids': target_doc_ids, 'all': False},
-                    result={'ok': False, 'project_id': project_id, 'task_type': 'parse_submissions_batch',
-                            'content_status': content_status, 'content_available': bool(success), 'data': data})
-                if not saved:
-                    raise RuntimeError('批量任务已中断，停止后续文件解析')
-            publish_progress(target_doc_ids)
-            for index, doc_id in enumerate(target_doc_ids):
-                ok, msg, data = self.parse_submission(project_id, doc_id)
-                if ok or (data or {}).get('content_available'):
-                    success.append({"doc_id": doc_id, 'operation_ok': bool(ok), **(data or {})})
-                else:
-                    failed.append({"doc_id": doc_id, "error": msg, **(data or {})})
-                publish_progress(target_doc_ids[index + 1:])
-            status = 'failed' if not success else ('partial' if failed or any(x.get('content_status') == 'partial' for x in success) else 'success')
-            message = {'failed': '批量解析失败，没有可用的新结果，请查看各文件原因。', 'partial': '批量解析部分成功，请查看失败文件和缺失页面。', 'success': '批量解析成功'}[status]
-            cleanup_failed = any(x.get('cleanup_failed') for x in success)
-            if cleanup_failed:
-                message = '批量解析已有内容保存，但部分文件临时备份清理失败，请联系管理员。'
-            return bool(success) and not cleanup_failed, message, {"total": len(target_doc_ids), "success": success, "failed": failed, 'content_status': status, 'content_available': bool(success)}
+        # 每份文件的写入仍由 parse_submission 自己加锁。整批持锁会使列表读取在
+        # 全部 OCR 结束前一直等待，即使任务进度已经保存了前几份结果。
+        success, failed = [], []
+        task_id = parse_task_id.get()
+        def publish_progress(remaining):
+            if not task_id:
+                return
+            from agent.agent_backend.services.runtime_task_store import RuntimeTaskStore
+            data = {'total': len(target_doc_ids), 'success': success, 'failed': failed, 'pending': remaining}
+            content_status = ('partial' if remaining or failed or any(x.get('content_status') == 'partial' for x in success) else 'success') if success else ('pending' if remaining else 'failed')
+            data.update(content_status=content_status, content_available=bool(success))
+            saved = RuntimeTaskStore(connection=self.db_conn, ensure_schema=False).update_task(
+                task_id, payload={'doc_ids': target_doc_ids, 'all': False},
+                result={'ok': False, 'project_id': project_id, 'task_type': 'parse_submissions_batch',
+                        'content_status': content_status, 'content_available': bool(success), 'data': data})
+            if not saved:
+                raise RuntimeError('批量任务已中断，停止后续文件解析')
+        publish_progress(target_doc_ids)
+        for index, doc_id in enumerate(target_doc_ids):
+            ok, msg, data = self.parse_submission(project_id, doc_id)
+            if ok or (data or {}).get('content_available'):
+                success.append({"doc_id": doc_id, 'operation_ok': bool(ok), **(data or {})})
+            else:
+                failed.append({"doc_id": doc_id, "error": msg, **(data or {})})
+            publish_progress(target_doc_ids[index + 1:])
+        status = 'failed' if not success else ('partial' if failed or any(x.get('content_status') == 'partial' for x in success) else 'success')
+        message = {'failed': '批量解析失败，没有可用的新结果，请查看各文件原因。', 'partial': '批量解析部分成功，请查看失败文件和缺失页面。', 'success': '批量解析成功'}[status]
+        cleanup_failed = any(x.get('cleanup_failed') for x in success)
+        if cleanup_failed:
+            message = '批量解析已有内容保存，但部分文件临时备份清理失败，请联系管理员。'
+        return bool(success) and not cleanup_failed, message, {"total": len(target_doc_ids), "success": success, "failed": failed, 'content_status': status, 'content_available': bool(success)}
 
     def get_submission_original_file(self, project_id: str, doc_id: str):
         """仅由资料记录定位原件，在删除锁内打开；不接受客户端文件路径。"""
@@ -2942,7 +2947,7 @@ class FilingChangeReviewService:
             if json_path.exists() and meta.get('parse_revision'):
                 original = self._safe_json_load(json_path.read_text(encoding='utf-8'), [])
                 effective, resolved = self._apply_parse_revision(meta, {**meta, 'doc_id': doc_id}, 'reference', json_path, original)
-                if resolved:
+                if resolved or any(c.get('manual_content_applied') for c in effective):
                     return True, 'success', {'doc_id': doc_id, 'original_chunks': original,
                         'parsed_chunks': effective, 'manual_resolution_count': len(resolved),
                         'markdown': self._build_submission_markdown(doc_id, effective)}
@@ -3017,7 +3022,9 @@ class FilingChangeReviewService:
                     try:
                         _, review_meta, review_source, review_path, review_pages = self._parse_review_context(
                             project_id, 'application_form', form['original_file_id'])
-                        _, resolved = self._apply_parse_revision(review_meta, review_source, 'application_form', review_path, review_pages)
+                        reviewed_pages, resolved = self._apply_parse_revision(review_meta, review_source, 'application_form', review_path, review_pages)
+                        from agent.agent_backend.services.filing_review_targets import manual_pending
+                        issues.extend(manual_pending(reviewed_pages))
                     except ValueError:
                         resolved = set()
                         issues.append({'source_kind': 'application_form', 'doc_id': form['original_file_id'],
@@ -3039,9 +3046,12 @@ class FilingChangeReviewService:
                     source = {**meta, 'doc_id': row.doc_id, 'file_name': label, 'parse_status': row.parse_status}
                     chunks = self._safe_json_load(path.read_text(encoding='utf-8'), []) if path.is_file() else []
                     problems = source_issues(source, kind, chunks if isinstance(chunks, list) else [])
+                    reviewed_chunks = chunks
                     if isinstance(chunks, list) and chunks:
                         try:
-                            _, resolved = self._apply_parse_revision(meta, source, kind, path, chunks)
+                            reviewed_chunks, resolved = self._apply_parse_revision(meta, source, kind, path, chunks)
+                            from agent.agent_backend.services.filing_review_targets import manual_pending
+                            problems.extend(manual_pending(reviewed_chunks))
                         except ValueError:
                             resolved = set()
                             problems.append({'source_kind': kind, 'doc_id': row.doc_id, 'file_name': label,
@@ -3049,10 +3059,10 @@ class FilingChangeReviewService:
                                 'message': '人工修订存在冲突或已失效，请打开解析结果重新核对；不能使用相互覆盖的修订启动审评。',
                                 'page': None, 'bbox_pdf': []})
                         problems = [issue for issue in problems if issue['issue_key'] not in resolved]
-                    if not isinstance(chunks, list) or not any(isinstance(chunk, dict) and (
+                    if not isinstance(reviewed_chunks, list) or not any(isinstance(chunk, dict) and (
                             str(chunk.get('text') or chunk.get('raw_text') or '').strip() or
                             any(str(cell.get('text') or '').strip() for table in chunk.get('tables', [])
-                                for cell in table.get('cells', []))) for chunk in chunks):
+                                for cell in table.get('cells', []))) for chunk in reviewed_chunks):
                         problems.append({'source_kind': kind, 'doc_id': row.doc_id, 'file_name': label,
                             'issue_key': 'parsed_content', 'code': 'parsed_content_missing',
                             'message': '未找到有效解析内容，请重新解析。', 'page': None, 'bbox_pdf': []})
@@ -3105,7 +3115,7 @@ class FilingChangeReviewService:
         return normalize(left) == normalize(right)
 
     def _apply_parse_revision(self, meta, source, kind, path, chunks):
-        from agent.agent_backend.services.filing_parse_readiness import source_issues
+        from agent.agent_backend.services.filing_review_targets import review_issues as source_issues
         from agent.agent_backend.services.filing_parse_resolution import apply_compatible_resolutions
         from agent.agent_backend.services.filing_numeric_revision import active_confirmations, resolved_numeric_issues
         saved = meta.get('parse_revision') or {}
@@ -3188,10 +3198,15 @@ class FilingChangeReviewService:
                         'message': '已保存修订存在冲突或已不适用，当前显示原始解析。请核对并修正修订记录；原记录仍保留，不能据此启动审评。'}
                 from agent.agent_backend.services.filing_numeric_revision import resolved_numeric_issues
                 resolved |= resolved_numeric_issues(chunks, source_issues(source, kind, chunks), meta)
+                from agent.agent_backend.services.filing_review_targets import review_targets, target_value
+                targets=review_targets(source,kind,chunks)
+                for target in targets:
+                    target.update(source_value=target['value'],value=target_value(effective,target),resolved=target['issue_key'] in resolved)
                 return True, 'success', {'source_kind': kind, 'doc_id': doc_id, 'file_name': source['file_name'],
                     'editable': True, 'revision_error': revision_error,
                     'source_identity': identity, 'revision': saved.get('revision', 0),
                     'original_chunks': chunks, 'effective_chunks': effective,
+                    'targets': targets, 'ocr_backend': next((c.get('ocr_backend') for c in chunks if c.get('ocr_backend')), 'existing_parser'),
                     'issues': [{**issue, 'resolved': issue['issue_key'] in resolved}
                                for issue in source_issues(source, kind, chunks)],
                     'items': saved.get('items', []) if self._parse_identity_matches(saved.get('source_identity'), identity) else [],
@@ -3231,6 +3246,18 @@ class FilingChangeReviewService:
                     path = self._managed_file_path(original_path, root) if original_path else None
                     if path is None or not path.is_file():
                         raise ValueError('原件不存在或无法读取')
+                    if path.suffix.lower()!='.pdf':
+                        if path.suffix.lower() in ('.doc','.docx'):
+                            from docx import Document
+                            if path.suffix.lower()=='.doc':
+                                from agent.agent_backend.utils.parser.docx_markdown_parser import convert_doc_to_docx
+                                path=Path(convert_doc_to_docx(path))
+                            document=Document(path)
+                            text='\n'.join(p.text for p in document.paragraphs)+'\n'+'\n'.join(' | '.join(c.text for c in row.cells) for table in document.tables for row in table.rows)
+                        elif path.suffix.lower() in ('.txt','.md','.csv','.json','.xml'):
+                            text=path.read_text(encoding='utf-8')
+                        else:raise ValueError('此格式暂不能预览，请查看原文件')
+                        return True,'success',dict(source_text=text,coordinate_unit='document_content_no_page_coordinates',source_identity=identity)
                     with fitz.open(path) as doc:
                         if not doc.is_pdf or doc.needs_pass:
                             raise ValueError('原页核对仅支持可读取的PDF；其他格式请查看原文件')
@@ -3261,7 +3288,7 @@ class FilingChangeReviewService:
                 return False, '原页预览失败，请查看原件或重试。', {'code': 'parse_page_unavailable'}
 
     def save_parse_review(self, project_id, kind, doc_id, payload):
-        from agent.agent_backend.services.filing_parse_readiness import source_issues
+        from agent.agent_backend.services.filing_review_targets import review_issues as source_issues, target_value
         from agent.agent_backend.services.filing_parse_resolution import apply_compatible_resolutions
         from agent.agent_backend.services.filing_numeric_revision import active_confirmations
         with self._submission_manifest_lock(project_id), self._reference_manifest_lock():
@@ -3272,13 +3299,34 @@ class FilingChangeReviewService:
                 if (not isinstance(payload, dict) or not self._parse_identity_matches(payload.get('source_identity'), identity) or
                         type(payload.get('expected_revision')) is not int or payload['expected_revision'] != saved.get('revision', 0)):
                     return False, '解析或修订已变化，请重新读取核对；当前输入未保存。', {'code': 'parse_revision_conflict'}
-                effective, resolved, items = apply_compatible_resolutions(chunks, source_issues(source, kind, chunks),
+                available=source_issues(source,kind,chunks)
+                current = None
+                for item in payload.get('items') or []:
+                    if isinstance(item,dict) and item.get('action')=='confirm_value':
+                        if current is None:
+                            current, _ = self._apply_parse_revision(meta,source,kind,path,chunks)
+                        target=next((t for t in available if t['issue_key']==item.get('issue_key') and t.get('code')=='content_review'),None)
+                        if target is None or item.get('text')!=target_value(current,target):
+                            raise ValueError('确认值与当前有效内容不同，请先修订并重新确认')
+                effective, resolved, items = apply_compatible_resolutions(chunks, available,
                     payload.get('items'), active_confirmations(meta) if kind == 'submission' else [])
+                old_by_key={i['issue_key']:i for i in saved.get('items',[])}
+                for item in items:
+                    before=old_by_key.get(item['issue_key'],{})
+                    clean=lambda x:{k:v for k,v in x.items() if k not in ('reviewer','reviewed_at')}
+                    if clean(before)==clean(item):
+                        item.update({k:before[k] for k in ('reviewer','reviewed_at') if k in before})
+                    else:
+                        item.update(reviewer={'id':'unattributed','name':'未登录操作（无法追溯个人）'},reviewed_at=self._now().isoformat())
+                # 有效区域中的核对信息也只来自服务端身份；不能留下客户端伪造的嵌套来源。
+                effective, resolved, _ = apply_compatible_resolutions(chunks, available, items,
+                    active_confirmations(meta) if kind == 'submission' else [])
                 from agent.agent_backend.services.filing_numeric_revision import resolved_numeric_issues
                 resolved |= resolved_numeric_issues(chunks, source_issues(source, kind, chunks), meta)
                 revision = {'source_identity': identity, 'revision': saved.get('revision', 0) + 1,
                             'source_status': source.get('parse_status'),
-                            'items': items, 'confirmed_at': self._now().isoformat()}
+                            'items': items, 'confirmed_at': self._now().isoformat(),
+                            'reviewer': {'id':'unattributed','name':'未登录操作（无法追溯个人）'}}
                 if saved:
                     meta.setdefault('parse_revision_history', []).append(saved)
                 meta['parse_revision'] = revision
@@ -3520,8 +3568,10 @@ class FilingChangeReviewService:
                 if saved and self._parse_identity_matches(saved.get('source_identity'), self._parse_source_identity(source, path)):
                     from agent.agent_backend.services.filing_parse_readiness import source_issues
                     original = self._safe_json_load(path.read_text(encoding='utf-8'), [])
-                    _, resolved = self._apply_parse_revision(meta, source, 'submission', path, original)
+                    reviewed, resolved = self._apply_parse_revision(meta, source, 'submission', path, original)
                     pending = [i for i in source_issues(source, 'submission', original) if i['issue_key'] not in resolved]
+                    from agent.agent_backend.services.filing_review_targets import manual_pending
+                    pending.extend(manual_pending(reviewed))
                     submission['parse_resolution'] = {'revision': saved['revision'],
                         'manually_reviewed': bool(resolved) and not pending, 'unresolved_count': len(pending),
                         'original_status': submission['parse_status']}
@@ -3534,6 +3584,8 @@ class FilingChangeReviewService:
                     if numeric_resolved:
                         resolved |= numeric_resolved
                         pending = [i for i in problems if i['issue_key'] not in resolved]
+                        from agent.agent_backend.services.filing_review_targets import manual_pending
+                        pending.extend(manual_pending(parsed_map[submission['doc_id']]))
                         submission['parse_resolution'] = {'revision': max(saved.get('revision', 0), meta['numeric_revision'].get('revision', 0)),
                             'numeric_revision': meta['numeric_revision'].get('revision', 0),
                             'manually_reviewed': not pending, 'unresolved_count': len(pending),
