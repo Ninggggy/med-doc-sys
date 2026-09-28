@@ -1,0 +1,13 @@
+{
+  "auxiliary_calls": 21,
+  "primary_line_calls": 22,
+  "full_page_ocr_calls": 0,
+  "local_detection_calls": 0,
+  "auxiliary_predict_seconds": 2.166708289878443,
+  "primary_reported_inference_seconds": 1.4189268779591657,
+  "timing_scope": "Predict/inference fields only, excludes model loading, startup, preparation and API; not total wall time",
+  "total_wall_seconds": null,
+  "peak_simultaneous_rss_bytes": null,
+  "measured_final_scoring_engine_peak_rss_bytes": 952582144,
+  "measured_final_scoring_parent_peak_rss_bytes": 68599808
+}

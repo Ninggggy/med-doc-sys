@@ -1,0 +1,398 @@
+[
+  {
+    "path": "IMPLEMENTATION_PROMPT.md",
+    "bytes": 7037
+  },
+  {
+    "path": "verify_evidence.py",
+    "bytes": 1541
+  },
+  {
+    "path": "ANALYSIS.md",
+    "bytes": 1763
+  },
+  {
+    "path": "README.md",
+    "bytes": 2928
+  },
+  {
+    "path": "LESSONS.md",
+    "bytes": 12396
+  },
+  {
+    "path": "RESULTS.md",
+    "bytes": 6901
+  },
+  {
+    "path": "evidence/density-responses.json.gz",
+    "bytes": 4523
+  },
+  {
+    "path": "evidence/value-response.json.gz",
+    "bytes": 2782
+  },
+  {
+    "path": "evidence/final-api-status.json",
+    "bytes": 6137
+  },
+  {
+    "path": "evidence/input.json.gz",
+    "bytes": 503
+  },
+  {
+    "path": "evidence/unmix-metadata.json.gz",
+    "bytes": 236
+  },
+  {
+    "path": "evidence/normalized-responses.json.gz",
+    "bytes": 4210
+  },
+  {
+    "path": "evidence/cost.json",
+    "bytes": 539
+  },
+  {
+    "path": "evidence/api-comparison.json",
+    "bytes": 1319
+  },
+  {
+    "path": "evidence/pair-responses.json.gz",
+    "bytes": 3770
+  },
+  {
+    "path": "evidence/doc3-record.json.gz",
+    "bytes": 6359
+  },
+  {
+    "path": "evidence/group-main-responses.json.gz",
+    "bytes": 5187
+  },
+  {
+    "path": "evidence/doc2-record.json.gz",
+    "bytes": 4834
+  },
+  {
+    "path": "evidence/native-response.json.gz",
+    "bytes": 4376
+  },
+  {
+    "path": "evidence/components.json.gz",
+    "bytes": 303
+  },
+  {
+    "path": "evidence/final-complete-score.json.gz",
+    "bytes": 5611
+  },
+  {
+    "path": "historical-experiments/complete_score.py",
+    "bytes": 1316
+  },
+  {
+    "path": "historical-experiments/group_recognize.py",
+    "bytes": 2666
+  },
+  {
+    "path": "historical-experiments/inspect_input.py",
+    "bytes": 1511
+  },
+  {
+    "path": "historical-experiments/unmix_once.py",
+    "bytes": 2389
+  },
+  {
+    "path": "historical-experiments/score_groups.py",
+    "bytes": 1162
+  },
+  {
+    "path": "historical-experiments/value_line.py",
+    "bytes": 1640
+  },
+  {
+    "path": "historical-experiments/check_api.py",
+    "bytes": 1951
+  },
+  {
+    "path": "historical-experiments/pair_recognize.py",
+    "bytes": 2336
+  },
+  {
+    "path": "historical-experiments/final_component_score.py",
+    "bytes": 2658
+  },
+  {
+    "path": "historical-experiments/recognize_native.py",
+    "bytes": 1307
+  },
+  {
+    "path": "historical-experiments/normalized_pairs.py",
+    "bytes": 2732
+  },
+  {
+    "path": "historical-experiments/components.py",
+    "bytes": 869
+  },
+  {
+    "path": "source/agent_backend/services/filing_review_targets.py",
+    "bytes": 17841
+  },
+  {
+    "path": "source/agent_backend/services/filing_parse_resolution.py",
+    "bytes": 52773
+  },
+  {
+    "path": "source/agent_backend/services/filing_parse_outcome.py",
+    "bytes": 24699
+  },
+  {
+    "path": "source/ocr_service/paddle_runtime/regional_adoption.py",
+    "bytes": 14421
+  },
+  {
+    "path": "source/ocr_service/paddle_runtime/bounded_review.py",
+    "bytes": 56984
+  },
+  {
+    "path": "source/ocr_service/paddle_runtime/region_recovery.py",
+    "bytes": 7139
+  },
+  {
+    "path": "source/ocr_service/paddle_runtime/model_host.py",
+    "bytes": 2057
+  },
+  {
+    "path": "source/ocr_service/paddle_runtime/layout.py",
+    "bytes": 2393
+  },
+  {
+    "path": "source/ocr_service/paddle_runtime/seal_review.py",
+    "bytes": 39921
+  },
+  {
+    "path": "source/ocr_service/paddle_runtime/product_consumer.py",
+    "bytes": 25170
+  },
+  {
+    "path": "source/ocr_service/paddle_runtime/text_coverage.py",
+    "bytes": 5057
+  },
+  {
+    "path": "source/ocr_service/paddle_runtime/sequence_adjudication.py",
+    "bytes": 21334
+  },
+  {
+    "path": "source/ocr_service/paddle_runtime/model_bridge.py",
+    "bytes": 2190
+  },
+  {
+    "path": "source/ocr_service/paddle_runtime/adoption_replay.py",
+    "bytes": 3984
+  },
+  {
+    "path": "source/ocr_service/paddle_runtime/experimental_parser.py",
+    "bytes": 4988
+  },
+  {
+    "path": "source/ocr_service/paddle_runtime/runtime_queue.py",
+    "bytes": 2261
+  },
+  {
+    "path": "source/ocr_service/paddle_runtime/content_inputs.py",
+    "bytes": 1236
+  },
+  {
+    "path": "source/ocr_service/paddle_runtime/text_roles.py",
+    "bytes": 4774
+  },
+  {
+    "path": "source/ocr_service/paddle_runtime/auxiliary_recognition.py",
+    "bytes": 3114
+  },
+  {
+    "path": "source/ocr_service/paddle_runtime/replay.py",
+    "bytes": 8620
+  },
+  {
+    "path": "source/ocr_service/paddle_runtime/observe.py",
+    "bytes": 1688
+  },
+  {
+    "path": "source/ocr_service/paddle_runtime/common.py",
+    "bytes": 2225
+  },
+  {
+    "path": "source/ocr_service/paddle_runtime/short_symbols.py",
+    "bytes": 1697
+  },
+  {
+    "path": "source/ocr_service/paddle_runtime/VERSION",
+    "bytes": 13
+  },
+  {
+    "path": "source/ocr_service/paddle_runtime/field_coverage.py",
+    "bytes": 10728
+  },
+  {
+    "path": "source/ocr_service/paddle_runtime/assembly.py",
+    "bytes": 18269
+  },
+  {
+    "path": "source/ocr_service/paddle_runtime/pipeline.py",
+    "bytes": 19152
+  },
+  {
+    "path": "source/ocr_service/paddle_runtime/imaging.py",
+    "bytes": 6181
+  },
+  {
+    "path": "source/ocr_service/paddle_runtime/diagnostic_reconciliation.py",
+    "bytes": 11139
+  },
+  {
+    "path": "source/ocr_service/paddle_runtime/content_recovery.py",
+    "bytes": 6718
+  },
+  {
+    "path": "source/ocr_service/paddle_runtime/glyph_adjudication.py",
+    "bytes": 11682
+  },
+  {
+    "path": "source/ocr_service/paddle_runtime/cell_adjudication.py",
+    "bytes": 12178
+  },
+  {
+    "path": "source/ocr_service/paddle_runtime/background_text.py",
+    "bytes": 2631
+  },
+  {
+    "path": "source/ocr_service/paddle_runtime/segmentation.py",
+    "bytes": 1373
+  },
+  {
+    "path": "source/ocr_service/paddle_runtime/adapters.py",
+    "bytes": 8074
+  },
+  {
+    "path": "evidence/assets/group-2.png",
+    "bytes": 5700
+  },
+  {
+    "path": "evidence/assets/group-3.png",
+    "bytes": 19901
+  },
+  {
+    "path": "evidence/assets/group-1.png",
+    "bytes": 20785
+  },
+  {
+    "path": "evidence/assets/group-0.png",
+    "bytes": 13837
+  },
+  {
+    "path": "evidence/assets/auto-d2p5-t1-cell0-dark_ink.png",
+    "bytes": 39429
+  },
+  {
+    "path": "evidence/assets/group-4.png",
+    "bytes": 5684
+  },
+  {
+    "path": "evidence/assets/group-5.png",
+    "bytes": 9921
+  },
+  {
+    "path": "evidence/assets/source-fitted-density.png",
+    "bytes": 124557
+  },
+  {
+    "path": "evidence/assets/doc3-record-native.png",
+    "bytes": 68658
+  },
+  {
+    "path": "evidence/assets/normalized-pair-3.png",
+    "bytes": 33759
+  },
+  {
+    "path": "evidence/assets/normalized-pair-1.png",
+    "bytes": 49381
+  },
+  {
+    "path": "evidence/assets/doc2-record-native.png",
+    "bytes": 1873354
+  },
+  {
+    "path": "evidence/assets/normalized-pair-5.png",
+    "bytes": 24445
+  },
+  {
+    "path": "evidence/assets/value-line.png",
+    "bytes": 26185
+  },
+  {
+    "path": "evidence/assets/pair-1.png",
+    "bytes": 44808
+  },
+  {
+    "path": "evidence/assets/doc2-date-native-composite.png",
+    "bytes": 397656
+  },
+  {
+    "path": "evidence/assets/pair-3.png",
+    "bytes": 49939
+  },
+  {
+    "path": "evidence/assets/components.png",
+    "bytes": 250037
+  },
+  {
+    "path": "evidence/assets/auto-d3p5-t1-cell0-dark_ink.png",
+    "bytes": 37219
+  },
+  {
+    "path": "evidence/assets/auto-d3p5-t1-cell0-red_channel.png",
+    "bytes": 384041
+  },
+  {
+    "path": "evidence/assets/doc2-date-scale3.png",
+    "bytes": 56470
+  },
+  {
+    "path": "evidence/assets/pair-5.png",
+    "bytes": 36137
+  },
+  {
+    "path": "evidence/assets/auto-d2p5-t1-cell0.png",
+    "bytes": 315155
+  },
+  {
+    "path": "evidence/assets/auto-d2p5-t1-cell0-red_channel.png",
+    "bytes": 325734
+  },
+  {
+    "path": "evidence/assets/density-group-5.png",
+    "bytes": 7144
+  },
+  {
+    "path": "evidence/assets/density-group-4.png",
+    "bytes": 3668
+  },
+  {
+    "path": "evidence/assets/density-group-0.png",
+    "bytes": 10956
+  },
+  {
+    "path": "evidence/assets/density-group-1.png",
+    "bytes": 11573
+  },
+  {
+    "path": "evidence/assets/density-group-3.png",
+    "bytes": 11290
+  },
+  {
+    "path": "evidence/assets/auto-d3p5-t1-cell0.png",
+    "bytes": 108301
+  },
+  {
+    "path": "evidence/assets/density-group-2.png",
+    "bytes": 3998
+  }
+]

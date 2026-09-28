@@ -1,0 +1,212 @@
+[
+  {
+    "document": "doc1",
+    "id": "fcs_0997b62d01f945d8",
+    "issues": 7,
+    "objects": 3,
+    "date_issues": []
+  },
+  {
+    "document": "doc2",
+    "id": "fcs_edd7103be1f64131",
+    "issues": 11,
+    "objects": 8,
+    "date_issues": [
+      {
+        "source_kind": "submission",
+        "doc_id": "fcs_edd7103be1f64131",
+        "file_name": "2-2申请人药品生产许可证及其变更记录页(1).pdf",
+        "source_attempt": {
+          "task_id": "",
+          "attempted_at": "2026-09-28T21:10:54.306342",
+          "source_file_id": "",
+          "source_doc_id": "fcs_edd7103be1f64131"
+        },
+        "parse_status": "partial",
+        "issue_key": "chunk:4:error:0",
+        "code": "ocr_overlay_conflict",
+        "message": "叠印区域的原始识别与局部候选不一致 · “事项：\n具体变更信息见附件。\n盖章\n行政许可专用章\n2025\n日”",
+        "page": 5,
+        "bbox_pdf": [
+          51.5,
+          71.16666666666667,
+          388.0,
+          234.5
+        ],
+        "chunk_index": 4,
+        "error_index": 0,
+        "cell_index": 0,
+        "text": "事项：\n具体变更信息见附件。\n盖章\n行政许可专用章\n2025\n日",
+        "candidate_evidence": {
+          "evidence_ref": "/issues/10/candidate_evidence",
+          "available": true
+        },
+        "original_result": {
+          "evidence_ref": "/issues/10/original_result",
+          "available": true
+        },
+        "role_evidence": {
+          "evidence_ref": "/issues/10/role_evidence",
+          "available": true
+        },
+        "content_role": "mixed_cell_text_object",
+        "candidate_applicability": {
+          "candidates": [
+            {
+              "valid": true,
+              "reason": "complete_scored_candidate"
+            },
+            {
+              "valid": true,
+              "reason": "complete_scored_candidate"
+            }
+          ]
+        },
+        "differences": [
+          {
+            "operation": "delete",
+            "original": "：",
+            "candidate": ""
+          },
+          {
+            "operation": "delete",
+            "original": "盖章\n行政许可专用章\n",
+            "candidate": ""
+          },
+          {
+            "operation": "replace",
+            "original": "\n日",
+            "candidate": "年8月"
+          },
+          {
+            "operation": "delete",
+            "original": "盖章\n行政许可专用章\n",
+            "candidate": ""
+          },
+          {
+            "operation": "insert",
+            "original": "",
+            "candidate": "年8月"
+          }
+        ],
+        "original_diagnostic_index": 0,
+        "exception_type": "",
+        "table_index": 1,
+        "repair_bbox_pdf": [
+          51.5,
+          71.16666666666667,
+          388.0,
+          560.8333333333334
+        ],
+        "repair_table_index": 1,
+        "edit_target_key": "target:fcs_edd7103be1f64131:4:table:1:cell:0",
+        "edit_target_kind": "cell",
+        "resolved": false
+      }
+    ]
+  },
+  {
+    "document": "doc3",
+    "id": "fcs_1b65ebf94df84d60",
+    "issues": 24,
+    "objects": 15,
+    "date_issues": [
+      {
+        "source_kind": "submission",
+        "doc_id": "fcs_1b65ebf94df84d60",
+        "file_name": "2-3生产企业药品生产许可证及其变更记录页(1).pdf",
+        "source_attempt": {
+          "task_id": "",
+          "attempted_at": "2026-09-28T21:10:57.064700",
+          "source_file_id": "",
+          "source_doc_id": "fcs_1b65ebf94df84d60"
+        },
+        "parse_status": "partial",
+        "issue_key": "chunk:4:error:1",
+        "code": "ocr_overlay_conflict",
+        "message": "叠印区域的原始识别与局部候选不一致 · “事项：\n具体变更信息见附件\n行政许可自用章\n2025\n日”",
+        "page": 5,
+        "bbox_pdf": [
+          50.333333333333336,
+          78.33333333333333,
+          464.6666666666667,
+          278.6666666666667
+        ],
+        "chunk_index": 4,
+        "error_index": 1,
+        "cell_index": 0,
+        "text": "事项：\n具体变更信息见附件\n行政许可自用章\n2025\n日",
+        "candidate_evidence": {
+          "evidence_ref": "/issues/23/candidate_evidence",
+          "available": true
+        },
+        "original_result": {
+          "evidence_ref": "/issues/23/original_result",
+          "available": true
+        },
+        "role_evidence": {
+          "evidence_ref": "/issues/23/role_evidence",
+          "available": true
+        },
+        "content_role": "mixed_cell_text_object",
+        "candidate_applicability": {
+          "candidates": [
+            {
+              "valid": true,
+              "reason": "complete_scored_candidate"
+            },
+            {
+              "valid": true,
+              "reason": "complete_scored_candidate"
+            }
+          ]
+        },
+        "differences": [
+          {
+            "operation": "delete",
+            "original": "：",
+            "candidate": ""
+          },
+          {
+            "operation": "replace",
+            "original": "\n行政许可自用章\n2025\n日",
+            "candidate": "。"
+          },
+          {
+            "operation": "insert",
+            "original": "",
+            "candidate": "。"
+          },
+          {
+            "operation": "delete",
+            "original": "行政许可自用",
+            "candidate": ""
+          },
+          {
+            "operation": "replace",
+            "original": "2",
+            "candidate": "1"
+          },
+          {
+            "operation": "insert",
+            "original": "",
+            "candidate": "年\n月1"
+          }
+        ],
+        "original_diagnostic_index": 1,
+        "exception_type": "",
+        "table_index": 1,
+        "repair_bbox_pdf": [
+          50.333333333333336,
+          78.33333333333333,
+          464.6666666666667,
+          680.1666666666666
+        ],
+        "repair_table_index": 1,
+        "edit_target_key": "target:fcs_1b65ebf94df84d60:4:table:1:cell:0",
+        "edit_target_kind": "cell",
+        "resolved": false
+      }
+    ]
+  }
+]

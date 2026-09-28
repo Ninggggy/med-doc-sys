@@ -1,0 +1,29 @@
+[
+  {
+    "document": "doc1",
+    "original_content_table_values_and_span_sources_unchanged": true,
+    "effective_content_table_values_and_span_sources_unchanged": true,
+    "issue_identity_scope_and_text_unchanged": true,
+    "target_values_and_source_ids_unchanged": true,
+    "full_payload_equal": false,
+    "note": "旧包与当前API的尝试记录和压缩证据不同；只比较列明内容投影，不宣称整个JSON相同"
+  },
+  {
+    "document": "doc2",
+    "original_content_table_values_and_span_sources_unchanged": true,
+    "effective_content_table_values_and_span_sources_unchanged": true,
+    "issue_identity_scope_and_text_unchanged": true,
+    "target_values_and_source_ids_unchanged": true,
+    "full_payload_equal": false,
+    "note": "旧包与当前API的尝试记录和压缩证据不同；只比较列明内容投影，不宣称整个JSON相同"
+  },
+  {
+    "document": "doc3",
+    "original_content_table_values_and_span_sources_unchanged": true,
+    "effective_content_table_values_and_span_sources_unchanged": true,
+    "issue_identity_scope_and_text_unchanged": true,
+    "target_values_and_source_ids_unchanged": true,
+    "full_payload_equal": false,
+    "note": "旧包与当前API的尝试记录和压缩证据不同；只比较列明内容投影，不宣称整个JSON相同"
+  }
+]
