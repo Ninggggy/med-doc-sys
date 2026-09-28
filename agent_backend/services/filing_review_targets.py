@@ -29,14 +29,40 @@ def review_targets(source, kind, chunks):
                     'bbox_pdf': cell.get('bbox_pdf') or cell.get('source_bbox_pdf') or table.get('bbox_pdf', []),
                     'position_kind': 'cell' if cell.get('bbox_pdf') else 'table_region',
                     'value': str(cell.get('text', '')), 'message': f'表{ti+1} 第{cell.get("row",0)+1}行 第{cell.get("column",0)+1}列'})
+        for ti,table in enumerate(chunk.get('tables',[])):
+            for cidx,cell in enumerate(table.get('cells',[])):
+                roles={e['span_id'] for e in cell.get('role_evidence',[]) if e.get('role')=='red_overlay'}
+                for span in cell.get('result',{}).get('spans',[]):
+                    if span.get('span_id') not in roles or not span.get('polygon_page'):continue
+                    poly=span['polygon_page'];box=[min(v[0] for v in poly),min(v[1] for v in poly),max(v[0] for v in poly),max(v[1] for v in poly)]
+                    result.append({**base,'issue_key':f'target:{doc_id}:{ci}:overlay:{ti}:{cidx}:{span["span_id"]}',
+                        'target_kind':'overlay','table_index':ti,'cell_index':cidx,'source_span_ids':[span['span_id']],
+                        'bbox_pdf':box,'position_kind':'overlay','value':span['text_raw'],'message':'印章/叠印片段：'+span['text_raw']})
         lines = chunk.get('lines') or chunk.get('words') or []
-        for li, line in enumerate(lines):
-            box = line.get('bbox')
-            if not box or any(contains(rect(t['bbox_pdf']), rect(box)) for t in chunk.get('tables', []) if t.get('bbox_pdf')):
-                continue
-            result.append({**base, 'issue_key': f'target:{doc_id}:{ci}:line:{li}', 'target_kind': 'line',
-                'line_index': li, 'bbox_pdf': list(box), 'position_kind': 'line_or_region',
-                'value': str(line.get('text', '')), 'message': f'正文区域{li+1}：{str(line.get("text", ""))[:45]}'})
+        used=set()
+        for ei,element in enumerate(chunk.get('readable_elements',[])):
+            ids=element.get('source_span_ids') or []
+            if element.get('kind') not in ('field','paragraph') or not ids:continue
+            used.update(ids)
+            result.append({**base,'issue_key':f'target:{doc_id}:{ci}:element:{ei}','target_kind':'element',
+                'element_index':ei,'region_id':element['region_id'],'source_span_ids':ids,
+                'bbox_pdf':element['bbox_pdf'],'position_kind':'field_or_paragraph','value':element['text'],
+                'message':(element.get('label') or '段落')+'：'+element['text'][:45]})
+        for li,line in enumerate(lines):
+            box=line.get('bbox')
+            if line.get('source_span_id') in used or not box or any(contains(rect(t['bbox_pdf']),rect(box)) for t in chunk.get('tables',[]) if t.get('bbox_pdf')):continue
+            result.append({**base,'issue_key':f'target:{doc_id}:{ci}:line:{li}','target_kind':'line',
+                'line_index':li,'source_span_ids':[line.get('source_span_id')],'bbox_pdf':list(box),'position_kind':'line_or_region',
+                'value':str(line.get('text','')),'message':'正文区域：'+str(line.get('text',''))[:45]})
+        # 已有布局区域没有文字对象时，复用区域文字修订目标；不挂到整页。
+        for region in chunk.get('layout_regions',[]):
+            rid=region['region_id'];box=region['bbox_pdf']
+            if any(t.get('region_id')==rid for t in result if t['chunk_index']==ci):continue
+            related=[e for e in chunk.get('errors',[]) if e.get('region_id')==rid and e.get('code')=='ocr_coverage']
+            if not related or any(overlaps(rect(box),rect(l['bbox'])) for l in lines if l.get('bbox')):continue
+            result.append({**base,'issue_key':f'target:{doc_id}:{ci}:region:{rid}','target_kind':'line',
+                'region_id':rid,'source_span_ids':[],'bbox_pdf':box,'position_kind':'line_or_region',
+                'value':'','message':'未读出文字的版面区域'})
         if not lines and not chunk.get('tables') and str(chunk.get('text') or chunk.get('raw_text') or '').strip():
             result.append({**base, 'issue_key': f'target:{doc_id}:{ci}:chunk', 'target_kind': 'chunk',
                 'bbox_pdf': chunk.get('page_bbox') or [], 'position_kind': 'document_chunk',
@@ -46,7 +72,11 @@ def review_targets(source, kind, chunks):
 
 def review_issues(source, kind, chunks):
     from agent.agent_backend.services.filing_parse_readiness import source_issues
-    return source_issues(source, kind, chunks) + review_targets(source, kind, chunks)
+    diagnostics=source_issues(source,kind,chunks)
+    targets=review_targets(source,kind,chunks)
+    for target in targets:
+        target['related_diagnostics']=[deepcopy(i) for i in diagnostics if i.get('edit_target_key')==target['issue_key']]
+    return diagnostics+targets
 
 
 def manual_pending(chunks):
@@ -55,6 +85,12 @@ def manual_pending(chunks):
 
 def target_value(chunks, target):
     chunk=chunks[target['chunk_index']]
+    if target['target_kind']=='overlay':
+        return str(chunk.get('effective_overlays',{}).get(target['issue_key'],{}).get('text',target['value']))
+    if target['target_kind']=='element':
+        for e in chunk.get('readable_elements',[]):
+            if e.get('region_id')==target.get('region_id') or any(l.get('manual_target_key')==target['issue_key'] for l in e.get('source_lines',[])):return e['text']
+        return ''
     if target['target_kind']=='logical_cell':
         table=chunk['tables'][target['table_index']]
         return str((table.get('raw_rows') or table.get('rows'))[target['row']][target['column']])
@@ -101,7 +137,24 @@ def apply_targets(chunks, issues, items):
             chunk.setdefault('manual_unreadable',[]).append({**target,'blocking':True,'code':'manual_unreadable',
                 'message':'核对人标记原件仍无法辨认，待处理','candidate_text':value})
         else:resolved.add(item['issue_key'])
-        if target['target_kind']=='logical_cell':
+        if target['target_kind']=='overlay':
+            chunk.setdefault('effective_overlays',{})[target['issue_key']]=dict(text=effective,bbox_pdf=box,content_state=state,manual_confirmation=deepcopy(record))
+        elif target['target_kind']=='element':
+            ids=set(target['source_span_ids'])
+            for collection in ('words','lines'):
+                old=chunk.get(collection,[]);revised=[];inserted=False
+                for word in old:
+                    if word.get('source_span_id') in ids:
+                        if not inserted:
+                            revised.append(dict(text=effective,bbox=box,source='manual_revision',
+                                source_span_id=word.get('source_span_id'),source_span_ids=list(target['source_span_ids']),
+                                original_source_lines=deepcopy([w for w in old if w.get('source_span_id') in ids]),
+                                manual_target_key=target['issue_key'],position_kind='review_region_not_glyph',
+                                manual_confirmation=deepcopy(record)))
+                            inserted=True
+                    else:revised.append(word)
+                chunk[collection]=revised
+        elif target['target_kind']=='logical_cell':
             table=chunk['tables'][target['table_index']]
             rows=deepcopy(table.get('raw_rows') or table.get('rows'))
             rows[target['row']][target['column']]=effective
@@ -111,7 +164,7 @@ def apply_targets(chunks, issues, items):
             table.update(raw_rows=rows,rows=structured.get('rows',[]),headers=structured.get('headers',[]),
                          structured_data=structured,markdown=parser._table_to_markdown(rows))
             table.setdefault('manual_cell_states',{})[f"{target['row']}:{target['column']}"]=record
-            chunk['text']=chunk['raw_text']='\n'.join([chunk.get('section_name','')]+[t.get('markdown','') for t in chunk['tables']])
+            # 有位置的正文和表格仍按统一区域投影，不能只留下表格。
         elif target['target_kind']=='cell':
             table=chunk['tables'][target['table_index']];cell=table['cells'][target['cell_index']]
             cell.update(text=effective,content_state=state,manual_confirmation=deepcopy(record))
@@ -136,17 +189,57 @@ def apply_targets(chunks, issues, items):
                 old=chunk.get(field,[])
                 if any(overlaps(box,rect(w['bbox'])) and not contains(box,rect(w['bbox'])) for w in old):
                     raise ValueError('区域与相邻正文交叠，请使用已有完整区域修订')
-                chunk[field]=[w for w in old if not contains(box,rect(w['bbox']))]
-                if effective:chunk[field].append(dict(text=effective,bbox=box,source='manual_revision',position_kind='review_region_not_glyph',manual_confirmation=deepcopy(record)))
-                chunk[field].sort(key=lambda w:(w['bbox'][1],w['bbox'][0]))
+                replacement=dict(text=effective,bbox=box,source='manual_revision',position_kind='review_region_not_glyph',manual_confirmation=deepcopy(record))
+                revised=[]; inserted=False
+                for word in old:
+                    if contains(box,rect(word['bbox'])):
+                        if not inserted and effective: revised.append({**word, **replacement})
+                        inserted=True
+                    else: revised.append(word)
+                if not inserted and effective: revised.append(replacement)
+                chunk[field]=revised
         else:
             chunk['text']=effective;chunk['raw_text']=effective
-        if target['target_kind'] not in ('chunk','logical_cell'):
-            tables=chunk.get('tables',[])
-            outside=[l for l in (chunk.get('lines') or chunk.get('words',[])) if not any(contains(rect(t['bbox_pdf']),rect(l['bbox'])) for t in tables if t.get('bbox_pdf'))]
-            parts=[(l['bbox'][1],l['bbox'][0],l['text']) for l in outside]+[(t['bbox_pdf'][1],t['bbox_pdf'][0],t.get('markdown','')) for t in tables]
-            chunk['text']=chunk['raw_text']='\n'.join(v for _,__,v in sorted(parts))
+        if target['target_kind'] != 'chunk':
+            from agent.ocr_service.paddle_runtime.assembly import assemble_chunk
+            assemble_chunk(chunk, effective_revision=True, preserve_objects=target['target_kind'] in ('element','cell','logical_cell','overlay'))
         chunk.setdefault('manual_content_states',{})[item['issue_key']]=state
         chunk['manual_content_applied']=True
+        related=item.get('related_issues',[])
+        if not isinstance(related,list):raise ValueError('关联问题格式无效')
+        reviewed=set()
+        for entry in related:
+            key=entry.get('issue_key') if isinstance(entry,dict) else None
+            issue=next((i for i in issues if i['issue_key']==key),None)
+            if (not issue or issue.get('edit_target_key')!=target['issue_key'] or key in reviewed
+                    or not isinstance(entry.get('reason'),str) or not entry['reason'].strip()):
+                raise ValueError('只能逐项处理明确归属本对象的问题，并填写核对依据')
+            if state=='unreadable':raise ValueError('仍无法辨认时不能解除原问题')
+            reviewed.add(key);resolved.add(key)
+        record['related_issues']=deepcopy(related)
         saved.append(record)
     return output,resolved,saved
+
+
+def attach_edit_targets(issues,source,kind,chunks):
+    """字符来源优先；只有唯一完整对象才能接通动作，不能仅凭区域相交解除诊断。"""
+    targets=review_targets(source,kind,chunks)
+    supported={'ocr_quality','ocr_empty','ocr_score_unavailable','ocr_candidate_conflict','ocr_overlay_conflict','ocr_coverage','text_assembly_unresolved'}
+    for issue in issues:
+        if issue.get('code') not in supported:continue
+        candidates=[t for t in targets if t['chunk_index']==issue.get('chunk_index')]
+        sid=issue.get('source_span_id')
+        exact=[t for t in candidates if sid and sid in t.get('source_span_ids',[])]
+        if not exact and issue.get('original_lines'):
+            ids={l.get('source_span_id') for l in issue['original_lines'] if l.get('source_span_id')}
+            exact=[t for t in candidates if ids and ids.issubset(set(t.get('source_span_ids',[])))]
+        if not exact and type(issue.get('cell_index')) is int:
+            exact=[t for t in candidates if t['target_kind']=='cell' and t.get('table_index')==issue.get('table_index') and t.get('cell_index')==issue['cell_index']]
+        if not exact and issue.get('region_id'):
+            exact=[t for t in candidates if t.get('region_id')==issue['region_id']]
+        if not exact and issue.get('bbox_pdf'):
+            b=rect(issue['bbox_pdf'])
+            exact=[t for t in candidates if t.get('bbox_pdf') and contains(rect(t['bbox_pdf']),b)]
+        if len(exact)==1:
+            issue['edit_target_key']=exact[0]['issue_key'];issue['edit_target_kind']=exact[0]['target_kind']
+    return issues

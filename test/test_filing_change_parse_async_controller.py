@@ -30,6 +30,7 @@ class _DummyBlueprint:
 
     post = _decorator
     get = _decorator
+    route = _decorator
 
 
 class _ResponseMessage:

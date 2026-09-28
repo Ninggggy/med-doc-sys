@@ -6,8 +6,8 @@ export function getFilingParseReadiness(projectId) {
 function parseReviewUrl(projectId, kind, docId) {
   return `/filing-change-review/projects/${encodeURIComponent(projectId)}/parse-review/${encodeURIComponent(kind)}/${encodeURIComponent(docId)}`;
 }
-export function getFilingParseReview(projectId, kind, docId) {
-  return http.get(parseReviewUrl(projectId, kind, docId), { silentError: true });
+export function getFilingParseReview(projectId, kind, docId, fullEvidence = false) {
+  return http.get(parseReviewUrl(projectId, kind, docId), { silentError: true, params: fullEvidence ? {evidence:'full'} : {} });
 }
 export function saveFilingParseReview(projectId, kind, docId, payload) {
   return http.post(parseReviewUrl(projectId, kind, docId), payload, { silentError: true });

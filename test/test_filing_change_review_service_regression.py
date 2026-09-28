@@ -7,6 +7,7 @@ import tempfile
 import threading
 import time
 import unittest
+from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timedelta
 from pathlib import Path
 from unittest import mock
@@ -626,6 +627,35 @@ class FilingChangeReviewServiceRegressionTest(unittest.TestCase):
         self.assertEqual('empty_result', result['failed'][0]['code'])
         self.assertFalse((self.service._project_path('p-batch') / 'parsed' / 'empty.json').exists())
         self.assertEqual('success', result['success'][0]['content_status'])
+
+    def test_batch_allows_listing_completed_files_while_next_file_runs(self):
+        project_id = 'p-batch-progress-read'
+        self._add_project(project_id)
+        for doc_id in ('first', 'second'):
+            self._add_submission(project_id, doc_id, created_at=datetime(2026, 1, 1))
+        original_parse = self.service.parse_submission
+        second_started = threading.Event()
+        finish_second = threading.Event()
+
+        def staged_parse(current_project, doc_id):
+            if doc_id == 'second':
+                second_started.set()
+                if not finish_second.wait(5):
+                    raise TimeoutError('test did not release second parse')
+            return original_parse(current_project, doc_id)
+
+        with mock.patch.object(self.service, 'parse_submission', side_effect=staged_parse):
+            with ThreadPoolExecutor(max_workers=2) as executor:
+                batch = executor.submit(self.service.batch_parse_submissions, project_id, {'doc_ids': ['first', 'second']})
+                self.assertTrue(second_started.wait(3), 'second file did not start')
+                listing = executor.submit(self.service.list_submissions, project_id, {})
+                try:
+                    rows = {row['doc_id']: row for row in listing.result(timeout=2)['list']}
+                    self.assertEqual('success', rows['first']['parse_status'])
+                    self.assertEqual('pending', rows['second']['parse_status'])
+                finally:
+                    finish_second.set()
+                self.assertTrue(batch.result(timeout=5)[0])
 
     def test_parser_exception_preserves_source_and_logs_only_safe_diagnostics(self):
         self._add_project('p-parser-error')

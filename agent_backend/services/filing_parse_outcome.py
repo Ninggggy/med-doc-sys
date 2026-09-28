@@ -48,6 +48,10 @@ MESSAGES = {
     'ocr_http': 'OCR 服务请求失败，请联系管理员核对服务状态。',
     'ocr_busy': 'OCR 服务繁忙或排队超时，请稍后重试；此前有效结果保留。',
     'ocr_invalid_response': 'OCR 响应格式或坐标数据不完整，请联系管理员检查接口兼容性。',
+    'ocr_score_unavailable': '识别分数缺失或不可用，不能判断为高分或低分。',
+    'ocr_candidate_conflict': '同一区域的识别候选存在差异，请查看具体文字与来源。',
+    'ocr_overlay_conflict': '正文与叠印文字存在冲突，请查看局部证据。',
+    'table_review_required': '表格存在具体未解决问题，请查看单元格证据。',
     'ocr_quality': '文字已识别，但部分文字置信度较低，请核对原页。',
     'ocr_coverage': '已有可用文字，但部分可见区域尚未完整识别，请核对原页。',
     'numeric_uncertain': '数值核验存在分歧或尚未完成，请核对原页的符号、数字和单位。',
@@ -187,16 +191,22 @@ def outcome(rows):
             error['code'] = code
             match = re.match(r'^([A-Za-z][A-Za-z0-9_]*):', str(error.get('reason', '')))
             error['exception_type'] = error.get('exception_type') or (match.group(1) if match else '')
-            errors.append({'page': row.get('page'), 'stage': stage, 'code': code, 'message': MESSAGES[code], 'exception_type': error['exception_type'],
-                           **({'http_status': error['http_status']} if isinstance(error.get('http_status'), int) else {}),
-                           **({'bbox_pdf':error['bbox_pdf'], 'coordinate_unit':'pdf_point'} if error.get('bbox_pdf') else {}),
-                           **({'numeric_verification': error['numeric_verification']} if code == 'numeric_uncertain' and error.get('numeric_verification') else {}),
-                           **({'quality_evidence': error['quality_evidence']} if code == 'ocr_quality' and error.get('quality_evidence') else {}),
-                           **({key: error[key] for key in ('recovery_conflicts', 'uncovered_components', 'low_confidence_words')
-                               if key in error} if code in ('ocr_quality', 'ocr_coverage') else {}),
-                           **({key: error[key] for key in ('text', 'candidate_items', 'source_regions') if key in error}
-                              if code in ('field_region_crossing', 'field_region_unassigned') else {})})
-            error['reason'] = MESSAGES[code]
+            if error['exception_type'] and code in ('ocr_timeout','ocr_unreachable','ocr_http','ocr_response','parser_failed','diagnostic_unknown'):
+                # 传输异常消息可能包含鉴权信息，保留异常类型/状态并沿用脱敏边界。
+                error['reason'] = f"{error['exception_type']} · {MESSAGES[code]}"
+                error.pop('message', None)
+            elif not error.get('reason'):
+                error['reason'] = error.get('message') or MESSAGES[code]
+            # 汇总保留完整证据；reason 是事实，不是可被通用提示覆盖的模板。
+            from copy import deepcopy
+            detail = deepcopy(error)
+            detail.update(page=row.get('page'), stage=stage, code=code,
+                          reason=error.get('reason') or MESSAGES[code],
+                          message=error.get('reason') or error.get('message') or MESSAGES[code],
+                          summary=MESSAGES[code])
+            if error.get('bbox_pdf'):
+                detail['coordinate_unit'] = 'pdf_point'
+            errors.append(detail)
     diagnostics['errors'] = errors
     diagnostics['failed_pages'] = sorted(set(diagnostics.get('failed_pages', [])) | {e['page'] for e in errors if isinstance(e['page'], int)})
     diagnostics.setdefault('available_pages', [p for p in usable if p is not None])

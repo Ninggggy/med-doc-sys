@@ -840,6 +840,9 @@ def parse_review(project_id, kind, doc_id):
         ok, message, data = get_service().get_parse_review(project_id, kind, doc_id)
     else:
         ok, message, data = get_service().save_parse_review(project_id, kind, doc_id, request.get_json(silent=True))
+    if ok and isinstance(data, dict) and 'original_chunks' in data and request.args.get('evidence') != 'full':
+        from agent.agent_backend.services.filing_review_evidence import compact_review_evidence
+        data = compact_review_evidence(data)
     status = 200 if ok else (409 if (data or {}).get('code') == 'parse_revision_conflict' else 400)
     return ResponseMessage(status, message, data).to_json(), status, {'Content-Type': 'application/json'}
 

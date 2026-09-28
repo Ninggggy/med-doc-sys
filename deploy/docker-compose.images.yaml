@@ -1,0 +1,54 @@
+services:
+  agent-backend:
+    image: local/agent-backend:linux-amd64
+    container_name: agent-backend
+    environment:
+      # 容器内地址/端口固定，对外端口仅通过 BACKEND_PORT 调整。
+      APP_HOST: "0.0.0.0"
+      APP_PORT: "5002"
+      # 镜像部署禁用 Flask reloader，避免长任务被进程重启中断。
+      DEBUG: "false"
+      AUTO_START_LLM: ${AUTO_START_LLM}
+      LLM_HOST: ${LLM_HOST}
+      LLM_PORT: ${LLM_PORT}
+      MYSQL_URL: mysql+pymysql://${MYSQL_USER}:${MYSQL_PASSWORD}@${MYSQL_HOST}:${MYSQL_SERVER_PORT}/${MYSQL_DATABASE}?charset=utf8mb4
+      REDIS_HOST: ${REDIS_HOST}
+      REDIS_PORT: ${REDIS_PORT}
+      REDIS_DB: ${REDIS_DB}
+      ES_URL: ${ES_URL}
+      VECTOR_BACKEND: ${VECTOR_BACKEND}
+      VECTOR_COLLECTION: ${VECTOR_COLLECTION}
+      MILVUS_URI: ${MILVUS_URI}
+      MILVUS_TOKEN: ${MILVUS_TOKEN}
+      MILVUS_DB_NAME: ${MILVUS_DB_NAME}
+      OCR_SERVICE_URL: ${OCR_SERVICE_URL}
+      OCR_TIMEOUT_SECONDS: ${OCR_TIMEOUT_SECONDS}
+      OCR_LANG: ${OCR_LANG}
+      EMBEDDING_LOCAL_MODEL_ID: ${EMBEDDING_LOCAL_MODEL_ID}
+      EMBEDDING_LOCAL_SEQUENCE_LENGTH: ${EMBEDDING_LOCAL_SEQUENCE_LENGTH}
+      MODELSCOPE_CACHE: ${MODELSCOPE_CACHE}
+      MODELSCOPE_CACHE_SEED: ${MODELSCOPE_CACHE_SEED}
+      LLM_CHAT_MODEL: ${LLM_CHAT_MODEL}
+      LLM_PARSE_MODEL: ${LLM_PARSE_MODEL}
+      LLM_EMBEDDING_MODEL: ${LLM_EMBEDDING_MODEL}
+      LLM_RERANK_MODEL: ${LLM_RERANK_MODEL}
+      LLM_TIMEOUT_SECONDS: ${LLM_TIMEOUT_SECONDS}
+      LLM_PARSE_TIMEOUT_SECONDS: ${LLM_PARSE_TIMEOUT_SECONDS}
+      LLM_QWEN_LOCAL_CHAT_MODEL: ${LLM_QWEN_LOCAL_CHAT_MODEL}
+      LLM_QWEN_LOCAL_CHAT_BASE_URL: ${LLM_QWEN_LOCAL_CHAT_BASE_URL}
+      LLM_QWEN_LOCAL_CHAT_API_KEY_PATH: ${LLM_QWEN_LOCAL_CHAT_API_KEY_PATH}
+      LLM_QWEN_LOCAL_CHAT_TIMEOUT_SECONDS: ${LLM_QWEN_LOCAL_CHAT_TIMEOUT_SECONDS}
+    ports:
+      - "${BACKEND_PORT}:5002"
+    volumes:
+      - ../agent_backend/data:/app/agent/agent_backend/data
+      - ../agent_backend/llm/temp/key:/app/agent/agent_backend/llm/temp/key:ro
+      - ../agent_backend/llm/log:/app/agent/agent_backend/llm/log
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    healthcheck:
+      test: ["CMD-SHELL", "python -c \"import socket; s=socket.create_connection(('127.0.0.1', 5002), 2); s.close()\""]
+      interval: 15s
+      timeout: 5s
+      retries: 12
+      start_period: 40s

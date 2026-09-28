@@ -18,7 +18,9 @@ def enabled():
 
 class LocalPaddle:
     def __init__(self):
-        code=Path(os.environ['FILING_PADDLE_CODE']).resolve()
+        # 产品默认使用仓库内实际运行实现；显式覆盖路径仍记录进运行清单。
+        bundled=Path(__file__).resolve().parents[2]/'ocr_service/paddle_runtime'
+        code=Path(os.environ.get('FILING_PADDLE_CODE') or bundled).resolve()
         private=Path(os.environ['FILING_PADDLE_PRIVATE']).resolve()
         root=Path(os.environ['FILING_PADDLE_RUNTIME']).resolve()
         repo=Path(__file__).resolve().parents[2]
@@ -28,7 +30,14 @@ class LocalPaddle:
             model_det='PP-OCRv6_medium_det',model_rec='PP-OCRv6_medium_rec',scale=3,page_scale=3,geometry_scale=3,
             crop_timeout=60,page_timeout=300,document_timeout=1800,total_timeout=7200,cpu_threads=2,
             max_pixels=16000000,concurrency=1,model_load_timeout=300,content_recovery=True,text_roles=True,
-            sparse_ink_diagnostic=True,consumer='product')
+            sparse_ink_diagnostic=True,consumer='product',runtime_code=str(code),
+            runtime_version=(code/'VERSION').read_text().strip() if (code/'VERSION').is_file() else 'external_unversioned',
+            layout_model='PP-DocLayoutV3',
+            layout_model_dir=os.environ.get('FILING_LAYOUT_MODEL_DIR',str(private/'models/official_models/PP-DocLayoutV3')))
+        if os.environ.get('FILING_LOCAL_ADJUDICATION_MODEL_DIR'):
+            config['local_adjudication_model_dir']=os.environ['FILING_LOCAL_ADJUDICATION_MODEL_DIR']
+        if os.environ.get('FILING_SEAL_DETECTION_MODEL_DIR'):
+            config['seal_detection_model_dir']=os.environ['FILING_SEAL_DETECTION_MODEL_DIR']
         (self.run/'config.effective.json').write_text(json.dumps(config,ensure_ascii=False,indent=2))
         sys.path.insert(0,str(code))
         spec=importlib.util.spec_from_file_location('filing_local_model_bridge',code/'model_bridge.py')

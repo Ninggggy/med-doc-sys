@@ -1,19 +1,19 @@
 [
   {
-    "path": "IMPLEMENTATION_PROMPT.md",
-    "bytes": 7037
+    "path": "upload-validation.json",
+    "bytes": 302
+  },
+  {
+    "path": "EXPERT_REVIEW_PROMPT.md",
+    "bytes": 4433
   },
   {
     "path": "verify_evidence.py",
     "bytes": 1541
   },
   {
-    "path": "ANALYSIS.md",
-    "bytes": 1763
-  },
-  {
     "path": "README.md",
-    "bytes": 2928
+    "bytes": 3282
   },
   {
     "path": "LESSONS.md",
@@ -22,6 +22,14 @@
   {
     "path": "RESULTS.md",
     "bytes": 6901
+  },
+  {
+    "path": ".gitignore",
+    "bytes": 19
+  },
+  {
+    "path": "source-sync-inventory.json",
+    "bytes": 27414
   },
   {
     "path": "evidence/density-responses.json.gz",

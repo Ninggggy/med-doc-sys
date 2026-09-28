@@ -71,7 +71,7 @@ def quality_confirmation_available(chunk, issue):
 
 def assembly_table_scope(chunk, issue):
     """由服务器原始证据确定完整核对范围，不接受客户端扩大/缩小坐标。"""
-    if issue.get('code') not in ('text_assembly_unresolved', 'ocr_coverage', 'ocr_quality'):
+    if issue.get('code') not in ('text_assembly_unresolved', 'ocr_coverage', 'ocr_quality', 'ocr_empty', 'ocr_candidate_conflict', 'ocr_overlay_conflict', 'ocr_score_unavailable'):
         return None
     box = rect(issue.get('bbox_pdf'))
     tables = chunk.get('tables', [])
@@ -93,6 +93,22 @@ def assembly_table_scope(chunk, issue):
     indices = [i for i, table in enumerate(tables) if overlaps(box, rect(table['bbox_pdf']))]
     return {'repair_bbox_pdf': box, **({'repair_table_index': indices[0]} if len(indices) == 1
                                       else {'repair_table_indices': indices})}
+
+
+def text_repair_scope(chunk,issue):
+    """候选框只定位；正文编辑范围闭合到完整现有行，不能截断邻行。"""
+    if issue.get('code') not in ('ocr_candidate_conflict','ocr_overlay_conflict','ocr_empty','ocr_score_unavailable','ocr_coverage'):
+        return None
+    box=rect(issue.get('bbox_pdf'))
+    words=[w for w in chunk.get('words',[]) if w.get('bbox')]
+    for _ in range(len(words)+1):
+        old=list(box)
+        for word in words:
+            b=rect(word['bbox'])
+            if overlaps(box,b):box=[min(box[0],b[0]),min(box[1],b[1]),max(box[2],b[2]),max(box[3],b[3])]
+        if old==box:break
+    if any(overlaps(box,rect(t['bbox_pdf'])) for t in chunk.get('tables',[]) if t.get('bbox_pdf')):return None
+    return {'repair_text_bbox_pdf':box}
 
 
 def manual_table(value, bbox, page, reason):
@@ -175,6 +191,16 @@ def apply_resolutions(chunks, issues, items):
                 raise ValueError('本区域缺少可定位文字或存在冲突候选，不能直接确认；请完整修订文字或表格，或重新解析')
         elif action in ('correct_text', 'irrelevant_region', 'correct_table'):
             bbox = rect(issue.get('bbox_pdf'))
+            if action=='correct_text':
+                scope=text_repair_scope(chunks[ci],issue)
+                if scope:
+                    expanded=scope['repair_text_bbox_pdf']
+                    if expanded!=bbox:
+                        if (item.get('complete_text_scope_verified') is not True or
+                                item.get('reviewed_text_bbox_pdf')!=expanded):
+                            raise ValueError('疑点框截断现有文字；必须查看并明确确认完整正文编辑范围')
+                        record.update(complete_text_scope_verified=True,reviewed_text_bbox_pdf=list(expanded))
+                    bbox=expanded
             if str(chunk.get('raw_text') or chunk.get('text') or '').strip() and not chunk.get('words'):
                 raise ValueError('历史正文没有可定位文字块，不能局部覆盖；请重新解析后核对')
             if action == 'correct_table':
@@ -276,7 +302,7 @@ def apply_resolutions(chunks, issues, items):
                     if (action != 'correct_text' or item.get('numeric_text_verified') is not True
                             or not numeric_text_review_available(chunks[ci], issue)):
                         raise ValueError('须完整修订原正文区域并明确核对全部数值、单位及符号；位置不完整或涉及表格时不能直接覆盖')
-                elif code not in ('ocr_quality', 'ocr_coverage', 'ocr_empty', 'text_assembly_unresolved'):
+                elif code not in ('ocr_quality', 'ocr_coverage', 'ocr_empty', 'ocr_candidate_conflict', 'ocr_overlay_conflict', 'ocr_score_unavailable', 'text_assembly_unresolved'):
                     raise ValueError('服务故障或未定位的问题须先重新解析')
                 affected = [w for w in chunk.get('words', []) if overlaps(bbox, w['bbox'])]
                 if any(not contains(bbox, w['bbox']) for w in affected):
@@ -319,7 +345,7 @@ def apply_resolutions(chunks, issues, items):
                 other = current.get(key) if isinstance(key, str) else None
                 if (not other or key == item['issue_key'] or key in reviewed or key in resolved
                         or other.get('chunk_index') != ci
-                        or other.get('code') not in ('ocr_quality', 'ocr_coverage', 'ocr_empty', 'text_assembly_unresolved',
+                        or other.get('code') not in ('ocr_quality', 'ocr_coverage', 'ocr_empty', 'ocr_candidate_conflict', 'ocr_overlay_conflict', 'ocr_score_unavailable', 'text_assembly_unresolved',
                                                    'field_region_crossing', 'field_region_unassigned')
                         or not contains(bbox, rect(other.get('bbox_pdf')))
                         or not isinstance(explanation, str) or not explanation.strip() or len(explanation) > 2000):
@@ -531,10 +557,29 @@ def apply_resolutions(chunks, issues, items):
     for ci, chunk in enumerate(output):
         if not chunk.pop('_manual_content_changed', False):
             continue
+        if chunk.get('layout_regions'):
+            from agent.ocr_service.paddle_runtime.assembly import assemble_chunk
+            regions = chunk.pop('_manual_regions', [])
+            outside = chunk.pop('_manual_outside_blocks', [])
+            original_lines = chunks[ci].get('lines') or chunks[ci].get('words', [])
+            kept = []
+            for line in original_lines:
+                box = rect(line.get('bbox'))
+                if any(contains(region, box) for region in regions):
+                    continue
+                if any(overlaps(region, box) for region in regions):
+                    raise ValueError('修订区域截断原文行，请核对完整对象')
+                kept.append(deepcopy(line))
+            kept.extend(w for w in chunk.get('words', []) if w.get('source')=='manual_revision'
+                        and any(contains(r,w['bbox']) for r in regions))
+            kept.extend(outside)
+            chunk['lines'] = kept
+            assemble_chunk(chunk, effective_revision=True)
+            chunk.pop('structured_data', None)
+            chunk['manual_content_applied'] = True
+            continue
         tables = chunk.get('tables', [])
-        elements = [(t['bbox_pdf'][1], t['bbox_pdf'][0], t['markdown']) for t in tables]
         outside_blocks = chunk.pop('_manual_outside_blocks', [])
-        elements.extend((block['bbox'][1], block['bbox'][0], block['text']) for block in outside_blocks)
         regions = chunk.pop('_manual_regions', [])
         preserved_lines = []
         compact = lambda text: ''.join(str(text).split())
@@ -551,7 +596,6 @@ def apply_resolutions(chunks, issues, items):
             if any(overlaps(region, box) for region in regions):
                 raise ValueError('修订区域截断无法逐词对应的原文行，请核对完整区域后重新处理')
             preserved_lines.append(deepcopy(line))
-            elements.append((box[1], box[0], line.get('text', '')))
         # 修订后的副本按词框保留全部非表格内容，不按整行中心点丢弃表外文字。
         groups = []
         # 人工完整补录只有区域坐标，不是单词坐标；不得与邻近词按行距合并。
@@ -559,12 +603,17 @@ def apply_resolutions(chunks, issues, items):
             return (word.get('source') == 'manual_revision'
                     and word.get('position_kind') == 'review_region_not_glyph'
                     and not word.get('manual_target_item_no'))
-        for word in sorted(chunk.get('words', []), key=lambda w: (w['bbox'][1], w['bbox'][0])):
+        source_order = chunks[ci].get('lines') or chunks[ci].get('words', [])
+        def source_position(value):
+            box=value['bbox']
+            return next((i for i,old in enumerate(source_order) if overlaps(rect(old['bbox']),rect(box))),len(source_order))
+        for word in sorted(chunk.get('words', []), key=source_position):
             box = word['bbox']
             if any(contains(line['bbox'], box) for line in preserved_lines):
                 continue
             if not any(contains(t['bbox_pdf'], box) for t in tables):
-                if (not groups or complete_manual_region(word) or complete_manual_region(groups[-1][0])
+                if (not groups or source_position(word) != source_position(groups[-1][0])
+                        or complete_manual_region(word) or complete_manual_region(groups[-1][0])
                         or abs(box[1] - groups[-1][0]['bbox'][1]) > max(2, (box[3] - box[1]) * .5)):
                     groups.append([])
                 groups[-1].append(word)
@@ -574,17 +623,16 @@ def apply_resolutions(chunks, issues, items):
             text = ' '.join(w['text'] for w in group)
             bbox = [min(w['bbox'][0] for w in group), min(w['bbox'][1] for w in group),
                     max(w['bbox'][2] for w in group), max(w['bbox'][3] for w in group)]
-            elements.append((bbox[1], bbox[0], text))
             body_lines.append({'text': text, 'bbox': bbox, 'source': 'revision_view',
                                **({'source': 'manual_revision', 'position_kind': 'review_region_not_glyph'}
                                   if len(group) == 1 and complete_manual_region(group[0]) else {}),
                                **({'manual_continuation_item_no': group[0]['manual_continuation_item_no']}
                                   if len(group) == 1 and group[0].get('manual_continuation_item_no') else {})})
-        chunk['text'] = '\n\n'.join(text for _, _, text in sorted(elements))
-        chunk['raw_text'] = chunk['text']
-        chunk['lines'] = preserved_lines + body_lines + outside_blocks
+        chunk['lines'] = sorted(preserved_lines + body_lines + outside_blocks, key=source_position)
         chunk['lines'].extend({'text': t['markdown'], 'bbox': t['bbox_pdf'], 'source': t.get('source', 'native')}
                               for t in tables)
+        from agent.ocr_service.paddle_runtime.assembly import assemble_chunk
+        assemble_chunk(chunk, effective_revision=True)
         chunk.pop('structured_data', None)
         chunk['manual_content_applied'] = True
         # 原始status/errors保持不变；是否就绪由独立的解决记录判定。

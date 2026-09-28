@@ -3200,6 +3200,9 @@ class FilingChangeReviewService:
                 resolved |= resolved_numeric_issues(chunks, source_issues(source, kind, chunks), meta)
                 from agent.agent_backend.services.filing_review_targets import review_targets, target_value
                 targets=review_targets(source,kind,chunks)
+                diagnostics=source_issues(source,kind,chunks)
+                for target in targets:
+                    target['related_diagnostics']=[{**i,'resolved':i['issue_key'] in resolved} for i in diagnostics if i.get('edit_target_key')==target['issue_key']]
                 for target in targets:
                     target.update(source_value=target['value'],value=target_value(effective,target),resolved=target['issue_key'] in resolved)
                 return True, 'success', {'source_kind': kind, 'doc_id': doc_id, 'file_name': source['file_name'],
@@ -3207,6 +3210,10 @@ class FilingChangeReviewService:
                     'source_identity': identity, 'revision': saved.get('revision', 0),
                     'original_chunks': chunks, 'effective_chunks': effective,
                     'targets': targets, 'ocr_backend': next((c.get('ocr_backend') for c in chunks if c.get('ocr_backend')), 'existing_parser'),
+                    'diagnostic_counts': {
+                        'raw_diagnostics': sum(c.get('raw_diagnostic_count',len(c.get('errors',[]))) for c in chunks),
+                        'unresolved_subissues': sum(i['issue_key'] not in resolved for i in diagnostics),
+                        'operation_targets': len({i.get('edit_target_key') or i['issue_key'] for i in diagnostics if i['issue_key'] not in resolved})},
                     'issues': [{**issue, 'resolved': issue['issue_key'] in resolved}
                                for issue in source_issues(source, kind, chunks)],
                     'items': saved.get('items', []) if self._parse_identity_matches(saved.get('source_identity'), identity) else [],

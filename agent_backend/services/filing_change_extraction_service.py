@@ -107,7 +107,9 @@ def source_lines(chunks):
         base = {'chunk': ci, 'page': chunk.get('page'), 'section': ' > '.join(chunk.get('section_path') or [])}
         for li, line in enumerate(str(chunk.get('text') or '').splitlines(), 1):
             if line.strip() and not line.strip().startswith('|'):
-                matching = [entry for entry in chunk.get('lines', []) if str(entry.get('text', '')).strip() == line.strip()]
+                projected = [dict(text=e['text'],bbox=e.get('bbox_pdf'),region_id=e['region_id'])
+                             for e in chunk.get('readable_elements',[]) if e.get('kind')!='table']
+                matching = [entry for entry in (projected or chunk.get('lines', [])) if str(entry.get('text', '')).strip() == line.strip()]
                 checks = []
                 for entry in matching:
                     box = entry.get('bbox')
@@ -118,7 +120,7 @@ def source_lines(chunks):
                         if (wb and box[0] <= (wb[0]+wb[2])/2 <= box[2] and box[1] <= (wb[1]+wb[3])/2 <= box[3]
                                 and word.get('numeric_verification')):
                             checks.append(word['numeric_verification'])
-                geometry = {k: matching[0][k] for k in ('bbox', 'block_id', 'column_id') if len(matching) == 1 and k in matching[0]}
+                geometry = {k: matching[0][k] for k in ('bbox', 'block_id', 'column_id','region_id') if len(matching) == 1 and k in matching[0]}
                 yield line.strip(), {**base, **geometry, 'line': li, **({'numeric_verification': checks} if checks else {})}
         for ti, table in enumerate(chunk.get('tables') or [], 1):
             rows = table.get('raw_rows') or ([table.get('headers') or []] + table.get('rows', []) if table.get('rows') else [])

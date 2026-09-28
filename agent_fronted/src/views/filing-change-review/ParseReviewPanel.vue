@@ -17,6 +17,7 @@
       <el-pagination v-if="!sourceTarget" :current-page.sync="blockingIndex" :page-size="20" :total="(readiness && readiness.blocking_issues || []).length" layout="total, prev, pager, next" />
       <el-alert v-if="context && !context.issues.length" title="未发现自动报警；仍可在下方主动选择正文或单元格修订，无需逐项确认全部内容。" type="info" :closable="false" />
       <p v-if="context">识别后端：{{ context.ocr_backend }} · 修订版本 {{ context.revision }}</p>
+      <p v-if="context" class="diagnostic-counts">原始诊断 {{ diagnosticCounts.raw }} · 当前未决子问题 {{ diagnosticCounts.unresolved }} · 操作目标 {{ diagnosticCounts.targets }}。同对象归并不代表内容错误已修复。</p>
       <el-alert v-if="context && context.revision_error" :title="context.revision_error.message" type="warning" :closable="false" />
       <div v-if="context && context.items && context.items.length" class="toolbar">
         <el-button :disabled="saving || loading || dirty || !context.items.some(i => i.issue_key === selectedKey)" @click="revoke(false)">撤销本项已保存修订</el-button>
@@ -28,21 +29,40 @@
           <p>原件：{{ context.file_name }} · {{ selected && selected.page ? '第 '+selected.page+' 页' : '文档内容（无页坐标）' }}</p>
           <el-alert v-if="imageError" :title="imageError" type="warning" :closable="false" />
           <el-button v-if="selected && selected.page" type="text" :loading="imageLoading" @click="loadImage">重读原页</el-button>
-          <div v-if="preview" class="image-frame">
+          <div v-if="preview" class="zoom-controls"><el-button size="mini" @click="imageZoom=Math.max(50,imageZoom-25)">缩小</el-button><span>{{ imageZoom }}%</span><el-button size="mini" @click="imageZoom=Math.min(300,imageZoom+25)">放大</el-button><el-button size="mini" @click="imageZoom=100">适合宽度</el-button></div>
+          <div class="image-scroll"><div v-if="preview" class="image-frame" :style="{width:imageZoom+'%'}">
             <img v-if="preview.image_data_url" :src="preview.image_data_url" alt="待核对的原始PDF页面" @load="preview.loaded=true;$forceUpdate()" @error="preview=null;imageError='原页图片加载失败，不能确认'" />
             <pre v-else>{{ preview.source_text }}</pre>
             <div v-if="regionStyle" class="region" :style="regionStyle" aria-label="问题区域" />
-          </div>
+          </div></div>
         </div>
         <div class="correction">
           <p>原始解析状态保留；人工修订另存，不覆盖原件或历史报告。</p>
           <el-select :value="selectedKey" placeholder="选择本文件的问题" style="width:100%" @change="selectIssue">
-            <el-option v-for="issue in allIssues" :key="issue.issue_key" :value="issue.issue_key" :label="`${issue.resolved ? '已保存处理' : issue.blocking === false ? '可主动核对' : '待处理'} · 第${issue.page || '?'}页 · ${issue.message}`" />
+            <el-option v-for="issue in operationChoices" :key="issue.issue_key" :value="issue.issue_key" :label="`${issue.resolved ? '已保存处理' : (issue.related_diagnostics || []).some(d=>!d.resolved) || issue.blocking !== false ? '待处理' : '可主动核对'} · 第${issue.page || '?'}页 · ${issue.message} · ${(issue.related_diagnostics || []).filter(d=>!d.resolved).length}个未决子问题`" />
           </el-select>
+          <el-checkbox v-model="showAllTargets">显示全部可编辑对象</el-checkbox>
           <template v-if="selected">
             <p>{{ selected.message }} · {{ selected.code }}</p>
-            <details><summary>查看本页识别正文</summary><pre>{{ sourceChunk.text || sourceChunk.raw_text || '无可用正文' }}</pre></details>
-            <details open><summary>当前有效内容（修订另存）</summary><pre>{{ effectiveChunk.text || effectiveChunk.raw_text || '有效正文为空；不代表已确认空白' }}</pre></details>
+            <div class="diagnostic-detail">
+              <p v-if="selected.text">疑点片段：{{ selected.text }}</p>
+              <p v-if="selected.adoption_reason">采用判断：{{ adoptionReason(selected.adoption_reason) }}</p>
+              <p v-for="(line,li) in selected.original_lines || []" :key="'original'+li">保留原文：{{ line.text }} · 分数 {{ line.recognition_evidence && line.recognition_evidence.score_available ? line.recognition_evidence.score : '未取得' }}</p>
+              <template v-if="selected.candidate_evidence && selected.candidate_evidence.result"><p v-for="span in selected.candidate_evidence.result.spans || []" :key="span.span_id">局部候选：{{ span.text_raw }} · 分数 {{ span.score_raw == null ? '未取得' : span.score_raw }}（阈值 0.8）</p></template>
+              <p v-if="selected.score_available">识别分数 {{ selected.score }} / 1 · 阈值 {{ selected.threshold }}；{{ selected.code==='ocr_quality' ? '模型真实低分' : '本项不是由低分触发' }}</p>
+              <p v-else-if="selected.code==='ocr_score_unavailable'">分数不可用，不等同于低分。</p>
+              <p v-if="selected.score_applies_to==='original_line'">该分数对应原始行“{{ selected.score_text }}”，不是替换候选的整体分数。</p>
+              <p v-if="selected.bbox_pdf && selected.bbox_pdf.length">原页区域（PDF 点）：{{ selected.bbox_pdf.join(', ') }}</p>
+              <p v-for="(diff,di) in selected.differences || []" :key="'diff'+di">具体差异：原文「{{ diff.original || '无' }}」→候选「{{ diff.candidate || '无' }}」</p>
+              <p v-if="selected.repair_text_bbox_pdf">完整正文编辑范围：{{ selected.repair_text_bbox_pdf.join(', ') }} <el-button type="text" @click="evidenceFocus=selected.repair_text_bbox_pdf">查看完整文字行范围</el-button><el-button type="text" @click="evidenceFocus=null">回到疑点</el-button></p>
+              <p v-if="selected.repair_bbox_pdf">完整编辑范围另保留：{{ selected.repair_bbox_pdf.join(', ') }} <el-button type="text" @click="evidenceFocus=selected.repair_bbox_pdf">查看编辑范围</el-button><el-button type="text" @click="evidenceFocus=null">回到疑点</el-button></p>
+              <el-button v-if="selected.edit_target_key" type="primary" size="small" @click="selectIssue(selected.edit_target_key)">核对对应{{ selected.edit_target_kind==='overlay' ? '印章/叠印片段' : selected.edit_target_kind==='cell' ? '单元格' : '字段/段落' }}</el-button>
+              <details v-if="selected.candidate_evidence || selected.role_evidence" @toggle="loadEvidence"><summary>候选与叠印原始证据</summary><pre>{{ JSON.stringify(selected.candidate_evidence || selected.role_evidence,null,2) }}</pre></details>
+            </div>
+            <el-tabs value="readable" @tab-click="tab => tab.name === 'raw' && loadEvidence()">
+              <el-tab-pane label="可读正文与字段" name="readable"><ReadablePage :chunk="effectiveChunk" @locate="evidenceFocus=$event" /></el-tab-pane>
+              <el-tab-pane label="原始识别与位置" name="raw"><pre>{{ sourceChunk.raw_text || sourceChunk.text || '无可用正文' }}</pre><details><summary>原始行与坐标</summary><pre>{{ JSON.stringify(sourceChunk.original_lines || sourceChunk.lines,null,2) }}</pre></details><details><summary>版面与叠印工程观察（不等同于内容错误）</summary><pre>{{ JSON.stringify(sourceChunk.diagnostic_observations || [],null,2) }}</pre></details></el-tab-pane>
+            </el-tabs>
             <details v-if="recoveryRows.length" class="recovery-evidence">
               <summary>查看局部复核证据（{{ recoveryRows.length }}处，含未处理区域）</summary>
               <p>只读候选，不代表识别正确。定位仅改变原图高亮，不改变本项修订范围或填写内容。</p>
@@ -85,7 +105,7 @@
               <el-alert title="本字段涉及表格，不能用正文覆盖。请进入完整表格修订，并在关联问题中逐项确认字段归属；无法唯一对应时仍需重新解析或更换原件。" type="info" :closable="false" />
               <el-button v-for="issue in tableRepairChoices" :key="issue.issue_key" type="text" :disabled="saving || loading" @click="selectIssue(issue.issue_key)">转到完整表格核对：{{ issue.message || issue.code }}</el-button>
             </div>
-            <el-alert v-if="!actions.length && !tableRepairChoices.length" :title="selected.resolved ? '该问题已由有效修订处理；如需更改，请选择原已保存修订项。' : '该问题需重新解析、更换清晰原件或使用现有数值核对入口，不能忽略后继续。'" type="warning" :closable="false" />
+            <el-alert v-if="!actions.length && !tableRepairChoices.length && !selected.edit_target_key" :title="selected.resolved ? '该问题已由有效修订处理；如需更改，请选择原已保存修订项。' : '该问题需重新解析、更换清晰原件或使用现有数值核对入口，不能忽略后继续。'" type="warning" :closable="false" />
             <template v-if="actions.length">
               <el-select v-model="draft.action" placeholder="选择处理方式">
                 <el-option v-for="action in actions" :key="action.value" :value="action.value" :label="action.label" />
@@ -96,9 +116,21 @@
                 <el-checkbox v-if="['edit_value','confirm_value'].includes(draft.action)" :value="draft.verified_value===draft.text && !!draft.text.trim()" @change="draft.verified_value=$event?draft.text:null">已核对当前值（修改后须重新核对）</el-checkbox>
                 <el-checkbox v-if="/[?？□]/.test(draft.text) && ['edit_value','confirm_value'].includes(draft.action)" v-model="draft.symbols_literal">这些符号确实属于原件正文，不表示无法辨认</el-checkbox>
                 <el-alert v-if="draft.action==='mark_unreadable'" title="候选文字保留，但不作为确定业务值；该项继续阻塞审评。" type="warning" :closable="false" />
+                <div v-if="selected.related_diagnostics && selected.related_diagnostics.length" class="object-diagnostics">
+                  <p>本对象的子问题（逐项核对差异；未勾选的仍保留）：</p>
+                  <div v-for="issue in selected.related_diagnostics" :key="issue.issue_key">
+                    <el-button type="text" @click="evidenceFocus=issue.bbox_pdf">定位：{{ issue.code }} · {{ issue.text || issue.message }}</el-button>
+                    <p>{{ issue.message }} · {{ issue.issue_key }} · {{ issue.resolved ? '已处理' : '未决' }}</p>
+                    <p v-if="issue.score != null || issue.threshold != null">识别分数：{{ issue.score == null ? '未取得' : issue.score }}；触发阈值：{{ issue.threshold == null ? '未取得' : issue.threshold }}</p>
+                    <p v-for="(diff,di) in issue.differences || []" :key="di">「{{ diff.original || '无' }}」→「{{ diff.candidate || '无' }}」</p>
+                    <el-checkbox :value="draft.related_issues.some(e=>e.issue_key===issue.issue_key)" @change="toggleTargetDiagnostic(issue,$event)">已核对本项（{{ issue.resolved ? '已有处理' : '待处理' }}）</el-checkbox>
+                    <el-input v-if="draft.related_issues.some(e=>e.issue_key===issue.issue_key)" v-model="draft.related_issues.find(e=>e.issue_key===issue.issue_key).reason" placeholder="本项核对依据" />
+                  </div>
+                </div>
                 <p v-if="draft.reviewer">上次修订人：{{ draft.reviewer.name || draft.reviewer.id }} · {{ draft.reviewed_at }}</p>
               </template>
               <el-input v-if="draft.action === 'correct_text'" v-model="draft.text" type="textarea" :rows="8" placeholder="逐字核对原页，填写该区域的完整文字" />
+              <el-checkbox v-if="draft.action === 'correct_text' && selected.repair_text_bbox_pdf" :value="draft.complete_text_scope_verified" @change="confirmTextScope">已查看并核对完整正文编辑范围（包括疑点框外的文字）</el-checkbox>
               <el-checkbox v-if="draft.action === 'correct_text'" v-model="draft.numeric_text_verified">已逐字核对本区域全部数值、单位及符号；区域外问题仍保留</el-checkbox>
               <div v-if="['correct_text','correct_table'].includes(draft.action) && selected.continuation_field_options">
                 <p>仅当本区域开头是上一页字段的无标题续文时选择；须对照前页核对，不要在原文中补造标题。选择只作用于首个明确标题之前的文字。</p>
@@ -200,16 +232,18 @@
 </template>
 
 <script>
+import ReadablePage from './ReadablePage.vue';
 import { getFilingParseReadiness, getFilingParseReview, getFilingParseReviewPage, saveFilingParseReview } from '@/api/filingChangeReview';
 import { recoveryEvidence } from '@/utils/ocrRecoveryEvidence';
 const clone = value => JSON.parse(JSON.stringify(value));
-const emptyDraft = () => ({ action:'', reason:'', text:'', source_value:'', verified_value:null, symbols_literal:false, target_item_no:null, continuation_item_no:null, field_assignments:null, all_text_verified:false, numeric_text_verified:false, non_text_kind:'', outside_text:'', outside_text_verified:false, related_issues:[], tables:[], table:{row_count:1,column_count:1,cells:[{row:0,column:0,rowspan:1,colspan:1,text:''}]} });
+const emptyDraft = () => ({ action:'', reason:'', text:'', source_value:'', verified_value:null, complete_text_scope_verified:false, reviewed_text_bbox_pdf:null, symbols_literal:false, target_item_no:null, continuation_item_no:null, field_assignments:null, all_text_verified:false, numeric_text_verified:false, non_text_kind:'', outside_text:'', outside_text_verified:false, related_issues:[], tables:[], table:{row_count:1,column_count:1,cells:[{row:0,column:0,rowspan:1,colspan:1,text:''}]} });
 export default {
   name:'ParseReviewPanel',
+  components:{ReadablePage},
   props:{ projectId:{type:String,required:true} },
-  data() { return {visible:false,readiness:null,sourceTarget:null,blockingIndex:1,context:null,selectedKey:'',tableCursor:0,evidencePageIndex:1,evidenceFocus:null,draft:emptyDraft(),snapshot:JSON.stringify(emptyDraft()),loading:false,saving:false,error:'',preview:null,imageError:'',imageLoading:false,epoch:0,imageEpoch:0,disposed:false}; },
+  data() { return {evidenceLoading:false,visible:false,showAllTargets:false,imageZoom:100,readiness:null,sourceTarget:null,blockingIndex:1,context:null,selectedKey:'',tableCursor:0,evidencePageIndex:1,evidenceFocus:null,draft:emptyDraft(),snapshot:JSON.stringify(emptyDraft()),loading:false,saving:false,error:'',preview:null,imageError:'',imageLoading:false,epoch:0,imageEpoch:0,disposed:false}; },
   computed:{
-    positionLabel() { return ({cell:'单元格',table_region:'整张表格区域',line_or_region:'文字行或区域',document_chunk:'文档内容块（无逐字坐标）',logical_row_column_no_page_coordinates:'表格行列（无页面坐标）'})[(this.selected || {}).position_kind] || '原件区域'; },
+    positionLabel() { return ({field_or_paragraph:'完整字段或段落',overlay:'印章/叠印片段',cell:'单元格',table_region:'整张表格区域',line_or_region:'文字行或区域',document_chunk:'文档内容块（无逐字坐标）',logical_row_column_no_page_coordinates:'表格行列（无页面坐标）'})[(this.selected || {}).position_kind] || '原件区域'; },
     tableContent() { return JSON.stringify([this.draft.table, (this.draft.tables || []).map(t=>t.table), this.draft.outside_text]); },
     fieldTouchesTable() {
       if(!this.selected || !this.selected.field_options) return false;
@@ -237,7 +271,7 @@ export default {
       return this.context.issues.filter(issue=>{
         const b=issue.bbox_pdf, saved=this.draft.related_issues.some(entry=>entry.issue_key===issue.issue_key);
         return issue.issue_key!==this.selectedKey && (!issue.resolved || saved) && issue.chunk_index===this.selected.chunk_index
-          && (['ocr_quality','ocr_coverage','ocr_empty','text_assembly_unresolved'].includes(issue.code)
+          && (['ocr_quality','ocr_coverage','ocr_empty','ocr_candidate_conflict','ocr_overlay_conflict','ocr_score_unavailable','text_assembly_unresolved'].includes(issue.code)
             || (this.context.source_kind==='application_form' && (this.draft.action==='correct_text'
               || (this.draft.action==='correct_table'
                 && Array.isArray(b) && b.length===4 && b.every(Number.isFinite)
@@ -255,6 +289,18 @@ export default {
     dirty() { return JSON.stringify(this.draft) !== this.snapshot; },
     blockingPage() { return ((this.readiness || {}).blocking_issues || []).slice((this.blockingIndex-1)*20,this.blockingIndex*20); },
     allIssues() { return this.context ? [...this.context.issues,...(this.context.targets || [])] : []; },
+    diagnosticCounts() {
+      const issues=(this.context && this.context.issues || []).filter(i=>!i.resolved);
+      const counts=this.context && this.context.diagnostic_counts || {};
+      return {raw:counts.raw_diagnostics == null ? (this.context && this.context.issues || []).length : counts.raw_diagnostics,
+        unresolved:issues.length,targets:new Set(issues.map(i=>i.edit_target_key || i.issue_key)).size};
+    },
+    operationChoices() {
+      if(!this.context) return [];
+      const targets=this.context.targets || [], keys=new Set(targets.map(t=>t.issue_key));
+      return [...targets.filter(t=>this.showAllTargets || (t.related_diagnostics || []).length || t.resolved),
+        ...(this.context.issues || []).filter(i=>!keys.has(i.edit_target_key))];
+    },
     selected() { return this.allIssues.find(i => i.issue_key === this.selectedKey); },
     sourceChunk() { return this.context && this.selected && this.context.original_chunks[this.selected.chunk_index] || {}; },
     effectiveChunk() { return this.context && this.selected && this.context.effective_chunks[this.selected.chunk_index] || {}; },
@@ -265,23 +311,24 @@ export default {
       if(this.selected.resolved && !(this.context.items || []).some(i=>i.issue_key===this.selectedKey)) return [];
       const code=this.selected.code, result=[];
       if(code==='content_review') return [{value:'confirm_value',label:'确认当前识别正确'},{value:'edit_value',label:'修改有效内容并保存'},{value:'confirm_blank',label:'确认原件确实空白'},{value:'confirm_unfilled',label:'确认原件未填写'},{value:'mark_unreadable',label:'原件仍无法辨认'}];
+      if(this.selected.edit_target_key) return [];
       if(code==='ocr_quality' && this.selected.confirm_allowed === true) result.push({value:'confirm',label:'原文已完整且正确，逐项确认'});
       if(this.selected.field_options && this.context.source_kind==='application_form' && !this.fieldTouchesTable) result.push({value:'correct_text',label:'修订文字并明确所属字段'});
       if(code==='numeric_uncertain' && this.selected.numeric_text_review_allowed===true) result.push({value:'correct_text',label:'完整修订正文并核对数值'});
-      if(['ocr_quality','ocr_coverage','ocr_empty','text_assembly_unresolved'].includes(code) && !this.selected.repair_bbox_pdf) result.push({value:'correct_text',label:'补录或修订区域文字'});
+      if(['ocr_quality','ocr_coverage','ocr_empty','ocr_candidate_conflict','ocr_overlay_conflict','ocr_score_unavailable','text_assembly_unresolved'].includes(code) && !this.selected.repair_bbox_pdf) result.push({value:'correct_text',label:'补录或修订区域文字'});
       if(['table_review_required','table_structure_unresolved'].includes(code) || this.selected.repair_bbox_pdf) result.push({value:'correct_table',label:'修订表格结构与内容'});
       if(code==='ocr_coverage') result.push({value:'irrelevant_region',label:'确认确属无正文的非文字区域'});
       return result;
     },
     regionStyle() {
-      const b=this.evidenceFocus || (this.selected && (this.selected.repair_bbox_pdf || this.selected.bbox_pdf)), p=this.preview && this.preview.page_bbox;
+      const b=this.evidenceFocus || (this.selected && this.selected.bbox_pdf), p=this.preview && this.preview.page_bbox;
       if(!b || b.length!==4 || !p || p[2]<=p[0] || p[3]<=p[1]) return null;
       return {left:`${100*(b[0]-p[0])/(p[2]-p[0])}%`,top:`${100*(b[1]-p[1])/(p[3]-p[1])}%`,width:`${100*(b[2]-b[0])/(p[2]-p[0])}%`,height:`${100*(b[3]-b[1])/(p[3]-p[1])}%`};
     },
   },
   watch:{
     tableContent(value, old) { if(value!==old && this.dirty) { this.draft.all_text_verified=false;this.draft.numeric_text_verified=false;this.draft.outside_text_verified=false;for(const t of this.draft.tables || []) t.verified=false; } },
-    'draft.text'(value,old) { if(value!==old && this.draft.verified_value!==value) { this.draft.verified_value=null;this.draft.numeric_text_verified=false;this.draft.all_text_verified=false;this.draft.symbols_literal=false; } },
+    'draft.text'(value,old) { if(value!==old && this.draft.verified_value!==value) { this.draft.verified_value=null;this.draft.complete_text_scope_verified=false;this.draft.reviewed_text_bbox_pdf=null;this.draft.numeric_text_verified=false;this.draft.all_text_verified=false;this.draft.symbols_literal=false; } },
     'draft.action'(value) { if(['confirm_blank','confirm_unfilled'].includes(value)) this.draft.text=''; },
     dirty(value) { this.$emit('dirty-change',value || this.saving); },
     saving(value) { this.$emit('dirty-change',value || this.dirty); },
@@ -289,6 +336,25 @@ export default {
   },
   beforeDestroy() { this.disposed=true; this.epoch++; this.imageEpoch++; },
   methods:{
+    async loadEvidence(event) {
+      if(event && event.target && !event.target.open) return;
+      const current=this.context, project=this.projectId, epoch=this.epoch;
+      if(!current || !current.evidence_delivery || this.evidenceLoading) return;
+      this.evidenceLoading=true;
+      try {
+        const response=await getFilingParseReview(project,current.source_kind,current.doc_id,true);
+        if(this.valid(epoch,project) && this.context===current) {
+          if(JSON.stringify(response.data.source_identity)!==JSON.stringify(current.source_identity) || response.data.revision!==current.revision) {
+            this.error='内容版本已变化，请重新打开核对页后查看证据。'; return;
+          }
+          this.context=response.data;
+        }
+      } catch(e) { if(this.valid(epoch,project)) this.error=e.message || '读取原始证据失败'; }
+      finally {this.evidenceLoading=false;}
+    },
+    confirmTextScope(checked) { this.draft.complete_text_scope_verified=checked;this.draft.reviewed_text_bbox_pdf=checked?clone(this.selected.repair_text_bbox_pdf):null;if(checked)this.evidenceFocus=this.selected.repair_text_bbox_pdf; },
+    adoptionReason(reason) { return ({'existing_text_differs; original_retained':'已有文字与候选存在字符差异，保留原文','candidate_touches_crop_edge':'候选框触及输入边缘，字形完整性尚有疑点','new_candidate_score_unavailable_or_below_0.8; not_adopted':'新增候选分数不可用或低于0.8，未写入有效正文','candidate_intersects_existing_object':'候选与已有对象重叠，未覆盖原对象'})[reason] || reason; },
+    toggleTargetDiagnostic(issue,checked) { this.draft.related_issues=this.draft.related_issues.filter(e=>e.issue_key!==issue.issue_key); if(checked) this.draft.related_issues.push({issue_key:issue.issue_key,reason:''}); },
     expandedTableReviewAvailable(issue) {
       const b=issue && issue.bbox_pdf,scope=this.selected && this.selected.repair_bbox_pdf;
       if(!this.context || this.context.source_kind!=='application_form' || this.draft.action!=='correct_table'
@@ -373,7 +439,13 @@ export default {
     },
     async selectIssue(key) { if(await this.canDiscard()) this.setIssue(key); },
     setIssue(key) {
-      this.evidencePageIndex=1; this.evidenceFocus=null;
+      const requested=this.allIssues.find(i=>i.issue_key===key);
+      if(requested && requested.edit_target_key && this.allIssues.some(i=>i.issue_key===requested.edit_target_key)) key=requested.edit_target_key;
+      this.evidencePageIndex=1; this.evidenceFocus=requested && requested.edit_target_key ? requested.bbox_pdf : null;
+      if(!this.evidenceFocus && requested && requested.related_diagnostics) {
+        const child=requested.related_diagnostics.find(i=>!i.resolved && i.bbox_pdf);
+        if(child) this.evidenceFocus=child.bbox_pdf;
+      }
       this.tableCursor=0;
       this.selectedKey=key; this.error=''; const saved=(this.context.items || []).find(i=>i.issue_key===key);
       this.draft={...emptyDraft(),...clone(saved || {})};
@@ -412,7 +484,12 @@ export default {
         if(!this.valid(epoch,project)) return;
         const resolved=res.data.resolved_issue_keys || [];
         this.context={...context,revision:res.data.revision,revision_error:null,items,issues:context.issues.map(i=>({...i,resolved:resolved.includes(i.issue_key)}))};
-        if(JSON.stringify(this.draft)===before) this.setIssue(key);
+        try {
+          const fresh=await getFilingParseReview(project,context.source_kind,context.doc_id);
+          if(!this.valid(epoch,project)) return;
+          this.context=fresh.data;
+          if(JSON.stringify(this.draft)===before) this.setIssue(key);
+        } catch(_) { if(this.valid(epoch,project)) this.error='撤销已保存，但有效内容刷新失败，请重新检查。'; }
         this.$message.success('修订已撤销，原件和历史记录保留'); this.$emit('saved');
         try { const status=await getFilingParseReadiness(project); if(this.valid(epoch,project)) this.readiness=status.data; }
         catch(_) { if(this.valid(epoch,project)) this.error='撤销已保存，但就绪状态刷新失败，请重新检查。'; }
@@ -448,6 +525,9 @@ export default {
 .toolbar {display:flex;gap:12px;align-items:center;margin:12px 0;}
 .editor {display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:16px;}
 .original,.correction {min-width:0;}
+.original {position:sticky;top:0;align-self:start;}
+.image-scroll {max-height:68vh;overflow:auto;}
+.zoom-controls {display:flex;gap:8px;align-items:center;margin-bottom:8px;}
 .image-frame {position:relative;line-height:0;}
 .image-frame img {width:100%;height:auto;}
 .image-frame pre {line-height:1.6;white-space:pre-wrap;overflow-wrap:anywhere;}
@@ -457,5 +537,5 @@ pre {white-space:pre-wrap;overflow-wrap:anywhere;max-height:200px;overflow:auto;
 .field-target {width:100%;max-width:420px;min-height:40px;margin:8px 8px 8px 0;padding:8px 12px;border:1px solid #dcdfe6;border-radius:4px;background:#fff;color:#606266;font:inherit;}
 .field-target:focus {outline:2px solid #409eff;outline-offset:1px;}
 input[type=number] {width:48px;margin:2px;}
-@media(max-width:900px) {.editor {grid-template-columns:1fr;}}
+@media(max-width:900px) {.editor {grid-template-columns:1fr;} .original {position:static;}}
 </style>

@@ -24,6 +24,9 @@ def source_issues(source, kind, chunks=()):
     issues = []
 
     def add(key, code, message, page=None, bbox=None, **extra):
+        excerpt = str(extra.get('text') or '')
+        if excerpt:
+            message = f'{message} · “{excerpt[:90]}”'
         issues.append({**base, 'issue_key': key, 'code': code, 'message': message,
                        'page': page, 'bbox_pdf': deepcopy(bbox or []), **extra})
 
@@ -35,7 +38,7 @@ def source_issues(source, kind, chunks=()):
     # 不代表汇总中的其他页/区域已经覆盖；只能逐条排除确切的副本。
     def evidence(error, page):
         detail = {k: deepcopy(v) for k, v in error.items()
-                  if k not in ('page', 'message', 'reason', 'coordinate_unit')}
+                  if k not in ('page', 'message', 'reason', 'coordinate_unit', 'summary')}
         # outcome为未声明阶段的页错误补上page和空异常类型，属于同一证据。
         detail.setdefault('stage', 'page')
         detail.setdefault('exception_type', '')
@@ -58,7 +61,10 @@ def source_issues(source, kind, chunks=()):
                           and error.get('code') == 'table_structure_unresolved' else {})
             add(f'chunk:{ci}:error:{ei}', error.get('code') or error.get('stage') or 'parse_unknown',
                 error.get('reason') or '页面存在未解决的解析问题', chunk.get('page'), error.get('bbox_pdf'),
-                chunk_index=ci, error_index=ei, **table_link)
+                chunk_index=ci, error_index=ei,
+                **{k: deepcopy(v) for k,v in error.items() if k not in
+                   ('code','stage','reason','message','page','bbox_pdf','chunk_index','error_index','table_index')},
+                **({'table_index': error['table_index']} if 'table_index' in error else table_link))
         if chunk.get('status') in ('failed', 'partial') and not chunk.get('errors'):
             add(f'chunk:{ci}:state', 'page_incomplete', '页面未完整解析，需核对原页。', chunk.get('page'),
                 chunk_index=ci)
@@ -71,7 +77,8 @@ def source_issues(source, kind, chunks=()):
             continue
         add(f'diagnostic:{ei}', error.get('code') or error.get('stage') or 'parse_unknown',
             error.get('message') or error.get('reason') or '资料存在未解决的解析问题',
-            error.get('page'), error.get('bbox_pdf'), diagnostic_index=ei)
+            error.get('page'), error.get('bbox_pdf'), diagnostic_index=ei,
+            **{k: deepcopy(v) for k,v in error.items() if k not in ('code','reason','message','page','bbox_pdf')})
     for field in ('missing_pages', 'failed_pages'):
         for page in diagnostics.get(field) or []:
             # missing 是独立的缺页证据；failed 则可由该页具体错误表达。
@@ -88,7 +95,7 @@ def source_issues(source, kind, chunks=()):
         ci = issue.get('chunk_index')
         if (kind == 'application_form' and type(ci) is int and 0 <= ci < len(chunks)
                 and type(chunks[ci].get('page')) is int and chunks[ci]['page'] > 1
-                and issue['code'] in ('ocr_quality', 'ocr_coverage', 'ocr_empty', 'text_assembly_unresolved', 'table_structure_unresolved', 'table_review_required', 'numeric_uncertain')):
+                and issue['code'] in ('ocr_quality', 'ocr_coverage', 'ocr_empty', 'ocr_candidate_conflict', 'ocr_overlay_conflict', 'ocr_score_unavailable', 'text_assembly_unresolved', 'table_structure_unresolved', 'table_review_required', 'numeric_uncertain')):
             from agent.agent_backend.utils.parser.drug_supplement_pdf_parser import ITEM_TITLES
             issue['continuation_field_options'] = [{'item_no': n, 'title': title} for n, title in ITEM_TITLES.items()]
         if issue['code'] == 'numeric_uncertain':
@@ -102,14 +109,25 @@ def source_issues(source, kind, chunks=()):
             error = chunks[ci]['errors'][issue['error_index']]
             candidates = [n for n in error.get('candidate_items', []) if type(n) is int and n in ITEM_TITLES]
             issue['field_options'] = [{'item_no': n, 'title': ITEM_TITLES[n]} for n in (candidates or ITEM_TITLES)]
-        if issue['code'] in ('text_assembly_unresolved', 'ocr_coverage', 'ocr_quality') and type(ci) is int:
+        if issue['code'] in ('text_assembly_unresolved', 'ocr_coverage', 'ocr_quality', 'ocr_empty', 'ocr_candidate_conflict', 'ocr_overlay_conflict', 'ocr_score_unavailable') and type(ci) is int:
             try:
                 issue.update(assembly_table_scope(chunks[ci], issue) or {})
             except (ValueError, KeyError, TypeError):
                 pass  # 缺少可靠几何证据时仍阻塞，不伪造编辑范围。
+    from agent.agent_backend.services.filing_review_targets import attach_edit_targets
+    attach_edit_targets(issues,source,kind,chunks)
+    from agent.agent_backend.services.filing_parse_resolution import text_repair_scope
+    for issue in issues:
+        ci=issue.get('chunk_index')
+        if not issue.get('edit_target_key') and not issue.get('repair_bbox_pdf') and type(ci) is int:
+            try:issue.update(text_repair_scope(chunks[ci],issue) or {})
+            except (ValueError,KeyError,TypeError):pass
     return issues
 
 
 def readiness_result(issues):
-    return {'ready': not bool(issues), 'blocking_count': len(issues), 'blocking_issues': issues,
-            'code': '' if not issues else 'parse_review_required'}
+    # 仅明确的工程观察可不阻塞；缺字、冲突、未知归属不能靠 blocking=False 放行。
+    observations = [i for i in issues if i.get('code') in ('layout_observation','ocr_runtime_observation')]
+    blocking = [i for i in issues if i not in observations]
+    return {'ready': not bool(blocking), 'blocking_count': len(blocking), 'blocking_issues': blocking,
+            'diagnostic_observations': observations, 'code': '' if not blocking else 'parse_review_required'}

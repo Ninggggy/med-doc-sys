@@ -342,7 +342,15 @@
             <el-button size="mini" type="primary" :loading="savingNumeric" :disabled="!numericDirty || !numericReview.source_attempt" @click="saveNumericConfirmations">保存人工确认</el-button>
             <span>{{ numericSaveError || (numericDirty ? '有未保存修改' : '已保存 / 未修改') }}</span>
           </template>
-          <div class="markdown-preview parsed-markdown-dialog" v-html="renderMarkdown(parsedMarkdownContent)"></div>
+          <el-tabs value="readable">
+            <el-tab-pane label="可读正文与字段" name="readable">
+              <template v-if="parsedReadableChunks.some(c=>c.readable_elements)">
+                <section v-for="(chunk,index) in parsedReadableChunks" :key="index"><h3>第 {{ chunk.page || index+1 }} 页</h3><ReadablePage :chunk="chunk" @locate="locateParsedRegion(chunk,$event)" /></section>
+              </template>
+              <div v-else class="markdown-preview parsed-markdown-dialog" v-html="renderMarkdown(parsedMarkdownContent)"></div>
+            </el-tab-pane>
+            <el-tab-pane label="原始识别结果" name="raw"><section v-for="(chunk,index) in parsedOriginalChunks" :key="index"><h3>第 {{ chunk.page || index+1 }} 页</h3><pre>{{ chunk.raw_text || chunk.text }}</pre></section></el-tab-pane>
+          </el-tabs>
         </el-dialog>
       </el-tab-pane>
 
@@ -780,13 +788,14 @@ import {
 import MarkdownIt from "markdown-it";
 import StabilityLimitDetails from "./StabilityLimitDetails.vue";
 import ParseReviewPanel from "./ParseReviewPanel.vue";
+import ReadablePage from "./ReadablePage.vue";
 import { getFilingParseReadiness } from '@/api/filingChangeReview';
 
 const md = new MarkdownIt({ html: false, linkify: true, breaks: true });
 
 export default {
   name: "FilingChangeReviewSession",
-  components: { StabilityLimitDetails, ParseReviewPanel },
+  components: { StabilityLimitDetails, ParseReviewPanel, ReadablePage },
   data() {
     return {
       activeTab: "form",
@@ -833,6 +842,8 @@ export default {
       numericSourceName: '', downloadingNumericSource: false,
       savingNumeric: false, numericSaveError: '',
       parsedMarkdownContent: "",
+      parsedReadableChunks: [],
+      parsedOriginalChunks: [],
       parsedRevisionWarning: "",
       parsedMarkdownTitle: "",
       parsedMarkdownRequestToken: 0,
@@ -1862,6 +1873,12 @@ export default {
         this.comparingSubmissions = false;
       }
     },
+    async locateParsedRegion(chunk, box) {
+      const panel=this.$refs.parseReviewPanel;
+      await panel.openSource('submission',this.numericDocId);
+      const target=panel.allIssues.find(issue=>issue.page===chunk.page);
+      if(target) { await panel.selectIssue(target.issue_key);panel.evidenceFocus=box; }
+    },
     async viewParsedMarkdown(row) {
       if ((this.numericDirty || this.savingNumeric) && !await this.confirmDiscardForm()) return;
       const projectId = String(this.projectId || "").trim();
@@ -1879,6 +1896,8 @@ export default {
         const data = (res && res.data) || {};
         this.parsedMarkdownTitle = `解析结果 - ${row.file_name || docId}`;
         this.parsedMarkdownContent = data.markdown || "";
+        this.parsedReadableChunks = data.parsed_chunks || [];
+        this.parsedOriginalChunks = data.original_chunks || data.parsed_chunks || [];
         this.parsedRevisionWarning = data.revision_warning || "";
         this.numericReview = data.numeric_review || {};
         const saved = Object.fromEntries((this.numericReview.items || []).map(x => [x.key, x]));
@@ -1941,6 +1960,8 @@ export default {
           } else {
             // 仅刷新已保存的正文视图，保存期间继续填写的草稿不得被重置。
             this.parsedMarkdownContent = data.markdown || '';
+            this.parsedReadableChunks = data.parsed_chunks || [];
+            this.parsedOriginalChunks = data.original_chunks || data.parsed_chunks || [];
             this.parsedRevisionWarning = data.revision_warning || '';
           }
         } catch (_) {

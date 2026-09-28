@@ -572,6 +572,18 @@ class ResolutionTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             apply_resolutions(self.chunks, [issue], [{'issue_key': 'e', 'action': 'correct_text', 'text': 'new', 'reason': 'checked'}])
 
+    def test_expanded_text_scope_requires_explicit_exact_confirmation(self):
+        from agent.agent_backend.services.filing_parse_resolution import text_repair_scope
+        issue = {**self.issues[0], 'bbox_pdf': [2, 2, 10, 10]}
+        scope=text_repair_scope(self.chunks[0],issue)['repair_text_bbox_pdf']
+        item={'issue_key':'e','action':'correct_text','text':'new','reason':'known synthetic text',
+              'complete_text_scope_verified':True,'reviewed_text_bbox_pdf':scope}
+        updated,_,_=apply_resolutions(self.chunks,[issue],[item])
+        self.assertIn('new',updated[0]['text']);self.assertIn('outside',updated[0]['text'])
+        for changes in ({'complete_text_scope_verified':False},{'reviewed_text_bbox_pdf':[2,2,10,10]}):
+            with self.subTest(changes=changes),self.assertRaises(ValueError):
+                apply_resolutions(self.chunks,[issue],[{**item,**changes}])
+
     def test_unmatched_line_outside_correction_is_preserved(self):
         self.chunks[0]['lines'] = [{'text': 'outside EXTRA FOOTNOTE', 'bbox': [20, 0, 40, 5]}]
         updated, _, _ = apply_resolutions(self.chunks, self.issues, [
